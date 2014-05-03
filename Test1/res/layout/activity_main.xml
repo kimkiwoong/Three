@@ -1,0 +1,49 @@
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/FrameLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="182dp"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+    	
+
+ <Button
+            android:id="@+id/loginbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login" />
+         
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:orientation="vertical" >
+
+         <Button
+             android:id="@+id/gamestart"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="gamestart"
+             android:visibility="invisible" />
+
+         <Button
+             android:id="@+id/logoutbutton"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="Logout"
+             android:visibility="invisible" />
+
+         <ImageView
+             android:id="@+id/userImage"
+             android:layout_width="100dp"
+             android:layout_height="100dp"
+             android:layout_weight="1.03"
+             android:visibility="invisible"
+             />
+     </LinearLayout>
+       
+     </FrameLayout>
