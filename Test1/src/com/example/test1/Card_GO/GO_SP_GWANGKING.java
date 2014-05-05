@@ -1,18 +1,7 @@
 package com.example.test1.Card_GO;
 
-import android.content.res.Resources;
-
-
-
-
-
-import android.util.Log;
-
-//import com.exmaple.R;
-
-
-import com.example.gameframework.CardInfo;
 import com.example.gameframework.CardInterface;
+//import com.exmaple.R;
 
 public class GO_SP_GWANGKING extends CardInterface{
 

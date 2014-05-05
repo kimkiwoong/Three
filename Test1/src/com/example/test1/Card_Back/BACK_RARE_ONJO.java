@@ -11,7 +11,7 @@ import android.util.Log;
 //import com.exmaple.R;
 
 
-import com.example.gameframework.CardInfo;
+
 import com.example.gameframework.CardInterface;
 
 public class BACK_RARE_ONJO extends CardInterface {

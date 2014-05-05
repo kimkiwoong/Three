@@ -1,7 +1,7 @@
 package com.example.test1;
 
 import com.example.gameframework.CardFactory;
-import com.example.gameframework.CardInfo;
+
 import com.example.gameframework.CardInterface;
 
 public class Player {
