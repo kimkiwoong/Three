@@ -160,11 +160,14 @@ public class Game extends Activity {
 			Log.i(m_User.myCardname[ranNumber.get(j)],m_User.myCardname[ranNumber.get(j)]);
 			UserimageNum[j] =AppManager.getInstance().getmResources().getIdentifier(m_User.myCardname[ranNumber.get(j)],	"drawable", "com.example.test1");
 			m_UserCardImage[j] = AppManager.getInstance().getBitmap(UserimageNum[j]);
+			
 			EnemyimageNum[j] = AppManager.getInstance().getmResources().getIdentifier(m_Enemy.myCardname[ranNumber.get(j)],"drawable", "com.example.test1");
 			m_EnemyCardImage[j] = AppManager.getInstance().getBitmap(EnemyimageNum[j]);
+			
 			myCard.add(m_User.myCard[ranNumber.get(j)]);
 			enemyCard.add(m_Enemy.myCard[ranNumber.get(j)]);
-			
+			m_UserCardImage[j].recycle();
+			m_EnemyCardImage[j].recycle();
 			
 		}
 		
@@ -187,9 +190,8 @@ public class Game extends Activity {
 		bt4.setBackgroundResource(EnemyimageNum[0]);
 		bt5.setBackgroundResource(EnemyimageNum[1]);
 		bt6.setBackgroundResource(EnemyimageNum[2]);
-
+		
 	}
-
 	public void GamePlay() {
 		while (GM.GameEnd) {
 			if (GM.GetTurn() == 1) {
