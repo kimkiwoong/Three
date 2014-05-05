@@ -1,6 +1,6 @@
 package com.example.gameframework;
 
-import com.example.test1.GameView;
+
 import com.example.test1.Startview;
 
 import android.content.res.Resources;
@@ -9,19 +9,14 @@ import android.graphics.BitmapFactory;
 
 public class AppManager {
 	
-	private GameView mGameView;
+	
 	private Resources mResources;
 	private Startview mStartview;
 	
 	
 	
-	public GameView getmGameView() {
-		return mGameView;
-	}
-
-	public void setGameView(GameView gameView) {
-		this.mGameView = gameView;
-	}
+	
+	
 	public Startview getmStartview() {
 		return mStartview;
 	}

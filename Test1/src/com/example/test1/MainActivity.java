@@ -94,9 +94,9 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 					Intent i = new Intent(MainActivity.this,SocketIOActivity.class);
 					startActivity(i);
 					
-					LM.logout();/*
+					//LM.logout();/*
 					Toast.makeText(getApplicationContext(), LM.getId(),
-							Toast.LENGTH_SHORT).show();*/
+							Toast.LENGTH_SHORT).show();
 					v.setVisibility(View.INVISIBLE);
 					button_GameStart.setVisibility(View.INVISIBLE);
 					button_Login.setVisibility(View.VISIBLE);
