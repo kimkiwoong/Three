@@ -8,7 +8,7 @@ public class GO_RARE_YUNGAE extends CardInterface{
 	
 	public GO_RARE_YUNGAE(){
 		this.SetHp(1);
-		this.SetId("Card_1");
+		this.SetId("card_8");
 		this.SetmPower(1);
 		this.SetNara(0);
 		this.SetMagic(true);

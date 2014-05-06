@@ -178,7 +178,7 @@ public class Game extends Activity {
 	public void GameStart() {
 	
 
-		// 1~10까지의 정수를 랜덤하게 출력
+		
 		String a = Integer.toString(UserimageNum[0]);
 
 		GM.setTurn(1);

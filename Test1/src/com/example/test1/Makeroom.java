@@ -5,116 +5,129 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public class Makeroom extends Activity {
-	public ImageView user;
-	public ImageView enemy;
-	public URL userImg;
-	public URL e_Img;
+	public ImageView owner;
+	public ImageView joiner;
+	public URL ownerImg;
+	public URL joinerImg;
 	public Bitmap bitmap;
 	public Bitmap bitmap1;
 	public Boolean connect;
+	public Button roomout;
+	public static Boolean isOwner=false;
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.waitrooms);
-		user = (ImageView)findViewById(R.id.imageView1);
-		enemy = (ImageView)findViewById(R.id.imageView2);
+		owner = (ImageView)findViewById(R.id.imageView1);
+		joiner = (ImageView)findViewById(R.id.imageView2);
 		connect=true;
-		TextView user_id = (TextView)findViewById(R.id.Myid);
-		TextView user_name = (TextView)findViewById(R.id.myname);
-		TextView user_win = (TextView)findViewById(R.id.Mywin);
-		TextView user_lose = (TextView)findViewById(R.id.Mylose);
-		TextView enemy_id = (TextView)findViewById(R.id.e_id);
-		TextView enemy_name = (TextView)findViewById(R.id.e_name);
-		TextView enemy_win = (TextView)findViewById(R.id.EWin);
-		TextView enemy_lose = (TextView)findViewById(R.id.Elose);
 		
+		GameManager.makerooms = this;
 		
+		roomout = (Button)findViewById(R.id.outbutton);
+		roomout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+				GameManager.socket.emit("out_room", LoginManager.id);
+				//GameManager.socket.disconnect();
+				//GameManager.socket = null;
+				Log.i("sss","disconnect");
+				Intent i = new Intent(Makeroom.this,SocketIOActivity.class);
+				startActivity(i);
+				
+				
+			}
+			
+		});
+	}
+	
+	
+	public void setUsersInfo() {/////////////////////////  event  :  connect Joiner
+		System.out.println("called Makeroom.setUsersInfo()");
 		try {
-			userImg = new URL(SocketIOActivity.user1_url);
-			//e_Img = new URL(SocketIOActivity.user2_url);
+			ownerImg = new URL(GameManager.user1_url);
+			joinerImg = new URL(GameManager.user2_url);
 		
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		System.out.println("Makeroom.setUsersInfo() - set URLs");
 		
 		try {
-			bitmap = BitmapFactory.decodeStream(userImg.openStream());
-			//bitmap1 = BitmapFactory.decodeStream(e_Img.openStream());
+			bitmap = BitmapFactory.decodeStream(ownerImg.openStream());
+			bitmap1 = BitmapFactory.decodeStream(joinerImg.openStream());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		user.setImageBitmap(bitmap);
-		//enemy.setImageBitmap(bitmap1);
+		owner.setImageBitmap(bitmap);
+		joiner.setImageBitmap(bitmap1);
+		System.out.println("Makeroom.setUsersInfo() - End");
 		
 		
+		Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(Makeroom.this,Game.class);
+				startActivity(i);
+				
+			}
+		}, 2000);
+	}
+	
+	
+	public void setEnemyOutInfo(){///////////////////////// event :  JoinerOut;
 		
-		  new Thread(new Runnable() {            
+		joiner.setImageResource(R.drawable.ic_launcher);
+		bitmap1.recycle();
+		joinerImg=null;
+		
+		
+		System.out.println("Outroom.setEnemyInfo() - End");
+	}
+	public Boolean getIsOwner() {
+		return isOwner;
+	}
+	public void setIsOwner(Boolean isOwner){
+		Makeroom.isOwner= isOwner;
 
-	            public void run() {        
+		try {
+			bitmap = BitmapFactory.decodeStream(LoginManager.imageUrl.openStream());
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		owner.setImageBitmap(bitmap);
+		
+	}
+	public void changeUserInfo(){/////////////////////////  event :  ownerOut
+		System.out.println("called Insertroom.changeUsersInfo()");
 
-	                
-
-	                while (true) {
-
-	                    if(SocketIOActivity.user2_id!=null){
-	                    	Log.i("okok","okok");
-	                    	try {
-	        					
-	        					e_Img = new URL(SocketIOActivity.user2_url);
-	        					Log.i(userImg.toString(), e_Img.toString());
-	        				} catch (MalformedURLException e) {
-	        					// TODO Auto-generated catch block
-	        					e.printStackTrace();
-	        				}
-	        				
-	        				
-	        				try {
-	        					
-	        					bitmap1 = BitmapFactory.decodeStream(e_Img.openStream());
-	        				} catch (IOException e) {
-	        					// TODO Auto-generated catch block
-	        					e.printStackTrace();
-	        				}
-	        				
-	        				enemy.setImageBitmap(bitmap1);
-	        				
-	        				
-	        				
-
-	                    }else{                    
-	                    try {
-
-	                        Thread.sleep(5000);                     
-	                        	Log.i("ss", "ss");
-	                        	onRestart();
-	                        			
-	                       
-
-	                    } catch (InterruptedException ie) {
-
-	                        ie.printStackTrace();
-
-	                    	}
-	                    }
-	                }
-
-	            }
-
-	        }).start();        
-
-	    }    
-
+		
+		joiner.setImageResource(R.drawable.ic_launcher);
+		System.out.println("Insertroom.changeUsersInfo() - End");
+		setIsOwner(true);
+	}
 
 		
 }

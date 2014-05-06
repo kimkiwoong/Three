@@ -27,6 +27,7 @@ public class LoginManager {
     public static String email;
     public static String name;
     public static final String TAG = "FACEBOOK";
+    public static URL imageUrl;
     public Activity activity;
     private static Session.StatusCallback statusCallback;
     protected LoginManager() {

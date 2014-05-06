@@ -91,6 +91,8 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 					break;
 					
 				case R.id.logoutbutton:
+					
+					GameManager.Init();
 					Intent i = new Intent(MainActivity.this,SocketIOActivity.class);
 					startActivity(i);
 					
@@ -151,12 +153,12 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 								button_Login.setVisibility(View.INVISIBLE);
 								userImage.setVisibility(View.VISIBLE);
 								try {
-									URL Imageurl = new URL(
+									LoginManager.imageUrl= new URL(
 											"https://graph.facebook.com/"
 													+ LM.getId() + "/picture?");
 
 									Bitmap bitmap = BitmapFactory
-											.decodeStream(Imageurl.openStream());
+											.decodeStream(LoginManager.imageUrl.openStream());
 									userImage.setImageBitmap(bitmap);
 
 									// URL url = new

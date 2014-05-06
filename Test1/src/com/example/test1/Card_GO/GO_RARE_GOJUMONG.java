@@ -8,7 +8,7 @@ public class GO_RARE_GOJUMONG extends CardInterface{
 	
 	public GO_RARE_GOJUMONG(){
 		this.SetHp(1);
-		this.SetId("Card_1");
+		this.SetId("card_7");
 		this.SetmPower(1);
 		this.SetNara(0);
 		this.SetMagic(true);

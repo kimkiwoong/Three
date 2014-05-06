@@ -7,13 +7,13 @@ public class GO_NORMAL_ULJIMUN extends CardInterface{
 
 	
 	public GO_NORMAL_ULJIMUN(){
-		
-		this.mID="Card_1";
-		this.mnara=0;
-		this.mhp=1;
-		this.mPower=1;
-		this.mMagicName=null;
-		this.mCState=0;
+		this.SetHp(1);
+		this.SetId("card_4");
+		this.SetmPower(1);
+		this.SetNara(0);
+		this.SetMagic(true);
+		this.SetCState(0);
+		this.SetMagicName(null);
 		
 	}
 		

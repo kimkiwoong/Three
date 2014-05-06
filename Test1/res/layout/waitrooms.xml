@@ -47,13 +47,13 @@
         android:text="패" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/outbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/imageView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="64dp"
-        android:text="Ready" />
+        android:text="Out" />
 
     <TextView
         android:id="@+id/Mywin"

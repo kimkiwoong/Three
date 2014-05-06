@@ -8,7 +8,7 @@ public class SIN_SP_KIMYOUSIN extends CardInterface{
 	
 	public SIN_SP_KIMYOUSIN(){
 		this.SetHp(1);
-		this.SetId("Card_1");
+		this.SetId("card_19");
 		this.SetmPower(1);
 		this.SetNara(0);
 		this.SetMagic(true);

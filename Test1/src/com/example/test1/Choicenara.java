@@ -44,7 +44,7 @@ public class Choicenara extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				Intent i = new Intent(Choicenara.this, GameActivity.class);
+				Intent i = new Intent(Choicenara.this, Makeroom.class);
 				//startActivity(i);
 				
 				startActivityForResult(i, 1); 

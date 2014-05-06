@@ -57,7 +57,7 @@ public  class CardInterface {
 	public static final int SIN_RARE_KIMCHCH	=	109;//신라 김춘추
 	public static final int SIN_SP_KIMYOUSIN	= 	110;//신라 김유신
 	
-	 public String mName;
+	 public String mName;//
 	 public String mID;//카드번호
 	 public int mPower;//카드 파워
 	 public int mnara;

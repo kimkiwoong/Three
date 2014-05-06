@@ -8,7 +8,7 @@ public class GO_NORMAL_XX extends CardInterface{
 	
 	public GO_NORMAL_XX(){
 		this.SetHp(1);
-		this.SetId("Card_1");
+		this.SetId("card_5");
 		this.SetmPower(1);
 		this.SetNara(0);
 		this.SetMagic(true);
