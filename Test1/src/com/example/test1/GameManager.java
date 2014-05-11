@@ -33,9 +33,15 @@ public class GameManager {
 	public static JSONObject user2;
 	public static String turns;
 	public static String attackdata;
+	public static String dependata;
+	public static int e_att_i;
+	public static int e_hp_i;
 	public static int att_i;
 	public static int hp_i;
+	public static String e_cardID;
 	public static String m_cardID;
+	public static int e_mybutton;
+	public static int e_youbutton;
 	public static int mybutton;
 	public static int youbutton;
 	public static String gameStarted;
@@ -80,17 +86,9 @@ public class GameManager {
 	        return Game_instance;
 	    }
 	
-		public void setTurn(int turn) {
-			
-			
-			GameManager.turn=turn;
-			
-		}
+	
 		public void Gameover(){
 			this.GameEnd=false;
-		}
-		public int GetTurn(){
-			return GameManager.turn;
 		}
 		
 		public static void Init() {
@@ -200,13 +198,15 @@ public class GameManager {
 								@Override
 								public void run() {
 									// TODO Auto-generated method stub
-									Games.turntoast(turns);
+									if(turns.equals("1")){
+										GameManager.turn=1;
+									}
 								}
 							});
 							return;
 							
 						}
-						////////////turnchanged/////////////
+						////////////event : turn changed/////////////
 						if(event.equals("turnchanged")){
 							try {
 								JSONObject jbj = new JSONObject(temp);
@@ -247,8 +247,8 @@ public class GameManager {
 								JSONObject jj = new JSONObject(attackdata);
 								att_i = jj.getInt("att");
 								hp_i = jj.getInt("hp");
-								mybutton = jj.getInt("myButtonID");
-								youbutton = jj.getInt("yourButtonID");
+								mybutton = jj.getInt("yourButtonID");
+								youbutton = jj.getInt("myButtonID");
 								m_cardID = jj.getString("cardID");
 								Log.i("sssss", "sssss");
 							} catch (JSONException e) {
@@ -261,7 +261,43 @@ public class GameManager {
 								public void run() {
 									// TODO Auto-generated method stub
 									Log.i("sssss", "sssss");
-									Games.attack();
+									Games.attack(youbutton);
+								}
+							});
+							return;
+						}
+						///////////////////////depense////////////////////
+						if(event.equals("depensed")){
+							try {
+								JSONObject jbj = new JSONObject(temp);
+								
+								String joiner_id = jbj.getString("joiner");
+								String owner_id = jbj.getString("owner");
+								
+								
+								
+								if(joiner_id.equals(LoginManager.id)==false && owner_id.equals(LoginManager.id)==false) {
+									return;
+								}
+								dependata = jbj.getString("data");
+								JSONObject jj = new JSONObject(dependata);
+								e_att_i = jj.getInt("att");
+								e_hp_i = jj.getInt("hp");
+								e_mybutton = jj.getInt("yourButtonID");
+								e_youbutton = jj.getInt("myButtonID");
+								e_cardID = jj.getString("cardID");
+								Log.i("sssss", "sssss");
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							handler.post(new Runnable() {
+								
+								@Override
+								public void run() {
+									// TODO Auto-generated method stub
+									Log.i("sssss", "sssss");
+									Games.depense(e_mybutton);
 								}
 							});
 							return;

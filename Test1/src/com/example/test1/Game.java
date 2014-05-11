@@ -35,6 +35,8 @@ public class Game extends Activity {
 	Animation mmove;
 	ArrayList<Integer> ranNumber;
 	ArrayList<CardInterface> myCard;
+	ArrayList<CardInterface> attackCard;
+	ArrayList<CardInterface> handsCard;
 	ArrayList<CardInterface> enemyCard;
 	public boolean choiceMycard_1 = false;
 	public boolean choiceMycard_2 = false;
@@ -65,6 +67,8 @@ public class Game extends Activity {
 						handcard_1,	handcard_2,handcard_3,handcard_4,handcard_5,handcard_6,handcard_7;
 	////////////////turnend////////////
 	public static Button turnend;
+	///////////////////////////////
+	
 	//////////////
 	int index = 0;
 	View.OnClickListener choicecard = new View.OnClickListener() {
@@ -223,6 +227,8 @@ public class Game extends Activity {
 		
 		ranNumber = new ArrayList<Integer>();
 		myCard = new ArrayList<CardInterface>();
+		attackCard = new ArrayList<CardInterface>();
+		handsCard = new ArrayList<CardInterface>();
 		enemyCard = new ArrayList<CardInterface>();
 		for (int i = 0; i < 10; i++) {
 
@@ -241,17 +247,19 @@ public class Game extends Activity {
 		for (int j = 0; j <=ranNumber.size()-1; j++) {
 			Log.i(m_User.myCardname[ranNumber.get(j)],m_User.myCardname[ranNumber.get(j)]);
 			UserimageNum[j] =AppManager.getInstance().getmResources().getIdentifier(m_User.myCardname[ranNumber.get(j)],	"drawable", "com.example.test1");
-			//m_UserCardImage[j] = AppManager.getInstance().getBitmap(UserimageNum[j]);
-			
-			//EnemyimageNum[j] = AppManager.getInstance().getmResources().getIdentifier("backcard","drawable", "com.example.test1");
-			//m_EnemyCardImage[j] = AppManager.getInstance().getBitmap(EnemyimageNum[j]);
-			
 			myCard.add(m_User.myCard[ranNumber.get(j)]);
-			enemyCard.add(m_Enemy.myCard[ranNumber.get(j)]);
-			//m_UserCardImage[j].recycle();
-			//m_EnemyCardImage[j].recycle();
-			
+					
 		}
+		attackCard.add(myCard.get(0));
+		attackCard.add(myCard.get(1));
+		attackCard.add(myCard.get(2));
+		handsCard.add(myCard.get(3));
+		handsCard.add(myCard.get(4));
+		handsCard.add(myCard.get(5));
+		handsCard.add(myCard.get(6));
+		handsCard.add(myCard.get(7));
+		handsCard.add(myCard.get(8));
+		handsCard.add(myCard.get(9));
 		
 		
 	}
@@ -264,6 +272,9 @@ public void turntoast(String text){
 
 		
 		String a = Integer.toString(UserimageNum[0]);
+		
+		
+		
 	
 		fightmycard_1.setBackgroundResource(UserimageNum[0]);
 		fightmycard_2.setBackgroundResource(UserimageNum[1]);
@@ -284,22 +295,60 @@ public void turntoast(String text){
 		
 		
 	}
-	public void attack(){
+	public void attack(int buttonid){
 
-		
-				EnemyimageNum[0] =AppManager.getInstance().getmResources().getIdentifier(GameManager.m_cardID,	"drawable", "com.example.test1");
-				//m_EnemyCardImage[0] = AppManager.getInstance().getBitmap(EnemyimageNum[0]);
-				Log.i("sss", GameManager.m_cardID);
-				fightyoucard_1.setBackgroundResource(EnemyimageNum[0]);
-	
+					if(buttonid==1){
+						EnemyimageNum[0] =AppManager.getInstance().getmResources().getIdentifier(GameManager.m_cardID,	"drawable", "com.example.test1");
+				
+						Log.i("sss", GameManager.m_cardID);
+						fightyoucard_1.setBackgroundResource(EnemyimageNum[0]);
+						
+						JSONObject depense = new JSONObject();
+						try {
+							depense.put("userID", LoginManager.id);
+							depense.put("att", handsCard.get(buttonid-1).mPower);
+							depense.put("hp",  handsCard.get(buttonid-1).mhp);
+							depense.put("cardID", handsCard.get(buttonid-1).mID);
+							depense.put("myButtonID",1);
+							depense.put("yourButtonID",1);
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						
+						/*attackCard.get(0).SetHp(attackCard.get(0).GetHp()-GameManager.att_i);
+						if(attackCard.get(0).GetHp()<=0){
+							attackCard.set(0, null);
+										
+						}*/
+						GameManager.socket.emit("depense", depense);
+						
+				} else if( buttonid==2 ){
+					EnemyimageNum[1] =AppManager.getInstance().getmResources().getIdentifier(GameManager.m_cardID,	"drawable", "com.example.test1");
+					
+					Log.i("sss", GameManager.m_cardID);
+					fightyoucard_2.setBackgroundResource(EnemyimageNum[1]);
+				} else if( buttonid==3 ){
+					EnemyimageNum[2] =AppManager.getInstance().getmResources().getIdentifier(GameManager.m_cardID,	"drawable", "com.example.test1");
+					
+					Log.i("sss", GameManager.m_cardID);
+					fightyoucard_3.setBackgroundResource(EnemyimageNum[2]);
+				}
 			
 		
 	}
+	public void depense(int buttonid){
+		//Toast.makeText(getApplicationContext(),GameManager.e_att_i, Toast.LENGTH_SHORT).show();
+		
+		
+	}
+	
 	public void GamePlay() {
 		while (GameManager.GameEnd) {
-			if (GameManager.turns.equals("owner")) {
+			if (GameManager.turn==GameManager.Userturn) {
 				this.Myturn();
-			} else if (GM.GetTurn() == 2) {
+			} else if (GameManager.turn==GameManager.Enemyturn) {
 				this.EnemyTurn();
 			}
 			if (m_User.getRemain_Card() == 0 || m_Enemy.getRemain_Card() == 0) {
@@ -311,13 +360,13 @@ public void turntoast(String text){
 	public void Myturn() {
 		// TODO Auto-generated method stub
 
-		GM.setTurn(GameManager.Enemyturn);
+		GameManager.turn=GameManager.Enemyturn;
 
 	}
 
 	public void EnemyTurn() {
 
-		GM.setTurn(GameManager.Userturn);
+		GameManager.turn = GameManager.Userturn;
 
 	}
 

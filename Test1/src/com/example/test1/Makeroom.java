@@ -15,42 +15,40 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class Makeroom extends Activity {
 	public ImageView owner;
 	public ImageView joiner;
-	public int count;
 	public URL ownerImg;
 	public URL joinerImg;
 	public Bitmap bitmap;
 	public Bitmap bitmap1;
 	public Boolean connect;
-	public Button roomout,ready;
-	public Boolean m_rt=true;
-	
+	public Button roomout;
+	public Button ready;
+	public Button cancle;
+	public LinearLayout linearready;
+	public LinearLayout linearcancle;
 	
 	public static Boolean isOwner=false;
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.waitrooms);
+		
 		owner = (ImageView)findViewById(R.id.imageView1);
 		joiner = (ImageView)findViewById(R.id.imageView2);
-		
 		connect=true;
 		
 		GameManager.makerooms = this;
 		
 		roomout = (Button)findViewById(R.id.outbutton);
-		ready = (Button)findViewById(R.id.ready);
-		ready.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				GameManager.socket.emit("ready", LoginManager.id);
-			}
-		});
+		ready = (Button)findViewById(R.id.readybutton);
+		cancle = (Button)findViewById(R.id.canclebutton);
+		linearready = (LinearLayout)findViewById(R.id.linearready);
+		linearcancle = (LinearLayout)findViewById(R.id.linearcancle);
+		
 		roomout.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -60,11 +58,39 @@ public class Makeroom extends Activity {
 				GameManager.socket.emit("out_room", LoginManager.id);
 				//GameManager.socket.disconnect();
 				//GameManager.socket = null;
-				m_rt=false;
-				
-				finish();
-				
-				
+				Log.i("sss","disconnect");
+				Intent i = new Intent(Makeroom.this,SocketIOActivity.class);
+				startActivity(i);				
+			}
+			
+		});
+		
+		
+		ready.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				GameManager.socket.emit("ready", LoginManager.id);
+				roomout.setVisibility(View.INVISIBLE);
+				ready.setVisibility(View.INVISIBLE);
+				linearready.setVisibility(View.INVISIBLE);
+				cancle.setVisibility(View.VISIBLE);
+				linearcancle.setVisibility(View.VISIBLE);
+			}
+			
+		});
+		
+		cancle.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				roomout.setVisibility(View.VISIBLE);
+				ready.setVisibility(View.VISIBLE);
+				linearready.setVisibility(View.VISIBLE);
+				cancle.setVisibility(View.INVISIBLE);
+				linearcancle.setVisibility(View.INVISIBLE);
 			}
 			
 		});
@@ -83,12 +109,10 @@ public class Makeroom extends Activity {
 				startActivity(i);
 				
 			}
-		}, 7000);
+		}, 5000);
 	}
 	}
-	
 	public void setUsersInfo() {/////////////////////////  event  :  connect Joiner
-		count+=1;
 		System.out.println("called Makeroom.setUsersInfo()");
 		try {
 			ownerImg = new URL(GameManager.user1_url);
@@ -111,8 +135,6 @@ public class Makeroom extends Activity {
 		joiner.setImageBitmap(bitmap1);
 		System.out.println("Makeroom.setUsersInfo() - End");
 		
-		
-		
 	}
 	
 	
@@ -120,10 +142,10 @@ public class Makeroom extends Activity {
 		
 		joiner.setImageResource(R.drawable.ic_launcher);
 		bitmap1.recycle();
-		
 		joinerImg=null;
+		
+		
 		System.out.println("Outroom.setEnemyInfo() - End");
-		count-=1;
 	}
 	public Boolean getIsOwner() {
 		return isOwner;
@@ -148,7 +170,6 @@ public class Makeroom extends Activity {
 		joiner.setImageResource(R.drawable.ic_launcher);
 		System.out.println("Insertroom.changeUsersInfo() - End");
 		setIsOwner(true);
-		
 	}
 
 		

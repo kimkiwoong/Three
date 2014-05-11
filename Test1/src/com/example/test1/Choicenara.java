@@ -17,6 +17,10 @@ public class Choicenara extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
+		ImageView ch1;
+		ImageView ch2;
+		ImageView ch3;
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		name = getPackageName();
@@ -24,9 +28,9 @@ public class Choicenara extends Activity {
 		// finish();
 		setContentView(R.layout.activity_cardchois);
 
-		ImageView ch1 = (ImageView) findViewById(R.id.imageView4);
-		ImageView ch2 = (ImageView) findViewById(R.id.imageView5);
-		ImageView ch3 = (ImageView) findViewById(R.id.imageView6);
+		ch1 = (ImageView) findViewById(R.id.go_back);
+		ch2 = (ImageView) findViewById(R.id.back_back);
+		ch3 = (ImageView) findViewById(R.id.sin_back);
 
 		ch1.setOnClickListener(new OnClickListener() {
 

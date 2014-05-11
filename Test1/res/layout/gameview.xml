@@ -12,111 +12,109 @@
     android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
     tools:context=".MainActivity" >
     
-
-   
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/e_handcard_1"
             android:layout_width="60dp"
             android:layout_height="70dp"
+            android:layout_weight="1"
            
-            android:textColor="#FFFFFF"
-            android:text="A:\nD:"
-            android:textStyle="italic"
             android:paddingRight="40dp"
             android:paddingTop="30dp"
-            />
+            android:text="A:\nD:"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/e_handcard_2"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            
-            android:textColor="#FFFFFF"
-            android:text="A:\nD:"
-            android:textStyle="italic"
-            android:paddingRight="40dp"
-            android:paddingTop="30dp" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="60dp"
-            android:layout_height="70dp"
-           
-            android:textColor="#FFFFFF"
-            android:text="A:\nD:"
-            android:textStyle="italic"
-            android:paddingRight="40dp"
-            android:paddingTop="30dp" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="60dp"
-            android:layout_height="70dp"
-           
-            android:textColor="#FFFFFF"
-            android:text="A:\nD:"
-            android:textStyle="italic"
-            android:paddingRight="40dp"
-            android:paddingTop="30dp" />
-
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="60dp"
-            android:layout_height="70dp"
-           
-            android:textColor="#FFFFFF"
-            android:text="A:\nD:"
-            android:textStyle="italic"
-            android:paddingRight="40dp"
-            android:paddingTop="30dp" />
-
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="60dp"
-            android:layout_height="70dp"
-           
-            android:textColor="#FFFFFF"
-            android:text="A:\nD:"
-            android:textStyle="italic"
-            android:paddingRight="40dp"
-            android:paddingTop="30dp" />
-
-        <Button
-            android:id="@+id/button7"
-            android:layout_width="60dp"
-            android:layout_height="70dp"
-            
-            android:textColor="#FFFFFF"
-            android:text="A:\nD:"
-            android:textStyle="italic"
-            android:paddingRight="40dp"
-            android:paddingTop="30dp" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_launcher" />
-    </LinearLayout>
+           
+            android:paddingRight="40dp"
+            android:paddingTop="30dp"
+            android:text="A:\nD:"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
 
-    
+        <Button
+            android:id="@+id/e_handcard_3"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            
+            android:paddingRight="40dp"
+            android:paddingTop="30dp"
+            android:text="A:\nD:"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/e_handcard_4"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            
+            android:paddingRight="40dp"
+            android:paddingTop="30dp"
+            android:text="A:\nD:"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/e_handcard_5"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+           
+            android:paddingRight="40dp"
+            android:paddingTop="30dp"
+            android:text="A:\nD:"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/e_handcard_6"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+           
+            android:paddingRight="40dp"
+            android:paddingTop="30dp"
+            android:text="A:\nD:"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/e_handcard_7"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+           
+            android:paddingRight="40dp"
+            android:paddingTop="30dp"
+            android:text="A:\nD:"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:layout_weight="0.3"
-        android:layout_gravity="center">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1" >
 		
         <Button
             android:id="@+id/fycard_1"
             android:layout_width="75dp"
             android:layout_height="95dp"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:adjustViewBounds="true"
            
             android:paddingRight="40dp"
@@ -131,8 +129,9 @@
             android:layout_width="75dp"
             android:layout_height="95dp"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:adjustViewBounds="true"
-            
+           
             android:paddingRight="40dp"
             android:paddingTop="50dp"
             android:scaleType="fitXY"
@@ -145,176 +144,179 @@
             android:layout_width="75dp"
             android:layout_height="95dp"
             android:layout_gravity="center"
-            
+            android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:textColor="#FFFFFF"
-            android:text="A:\nD:"
-            android:textStyle="italic"
+            
             android:paddingRight="40dp"
             android:paddingTop="50dp"
-             />
+            android:scaleType="fitXY"
+            android:text="A:\nD:"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:layout_weight="0.3"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="@drawable/layout_bg"
+        android:gravity="right"
+        android:orientation="vertical"
+        android:padding="6dp" >
+
+        <Button
+            android:id="@+id/turnend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_gb2"
+            android:padding="10dp"
+            android:text="Turn" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        >
+        android:layout_weight="1" >
 
         <Button
             android:id="@+id/fmcard_1"
             android:layout_width="75dp"
             android:layout_height="95dp"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:adjustViewBounds="true"
            
-            android:scaleType="fitXY"
-            android:textColor="#FFFFFF"
-            android:text="A:\nD:"
-            android:textStyle="italic"
             android:paddingRight="40dp"
             android:paddingTop="50dp"
-             />
+            android:scaleType="fitXY"
+            android:text="A:\nD:"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
 
         <Button
             android:id="@+id/fmcard_2"
             android:layout_width="75dp"
             android:layout_height="95dp"
             android:layout_gravity="center"
-           
+            android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:textColor="#FFFFFF"
-            android:text="A:\nD:"
-            android:textStyle="italic"
+          
             android:paddingRight="40dp"
             android:paddingTop="50dp"
-             />
+            android:scaleType="fitXY"
+            android:text="A:\nD:"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
 
         <Button
             android:id="@+id/fmcard_3"
             android:layout_width="75dp"
             android:layout_height="95dp"
             android:layout_gravity="center"
-            
+            android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:textColor="#FFFFFF"
-            android:text="A:\nD:"
-            android:textStyle="italic"
+           
             android:paddingRight="40dp"
             android:paddingTop="50dp"
-             />
-
-        <Button
-            android:id="@+id/turnend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="turnend" />
+            android:scaleType="fitXY"
+            android:text="A:\nD:"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/ic_launcher" />
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5" >
 
         <Button
             android:id="@+id/handcard_1"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            
-            android:textColor="#FFFFFF"
-            android:text="A:\nD:"
-            android:textStyle="italic"
+            android:layout_weight="1"
+           
             android:paddingRight="40dp"
             android:paddingTop="30dp"
-            
-             />
+            android:text="A:\nD:"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
 
         <Button
             android:id="@+id/handcard_2"
             android:layout_width="60dp"
             android:layout_height="70dp"
-          
-            android:textColor="#FFFFFF"
-            android:text="A:\nD:"
-            android:textStyle="italic"
+            android:layout_weight="1"
+           
             android:paddingRight="40dp"
             android:paddingTop="30dp"
-             />
+            android:text="A:\nD:"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
 
         <Button
             android:id="@+id/handcard_3"
             android:layout_width="60dp"
             android:layout_height="70dp"
+            android:layout_weight="1"
            
-            android:textColor="#FFFFFF"
-            android:text="A:\nD:"
-            android:textStyle="italic"
             android:paddingRight="40dp"
             android:paddingTop="30dp"
-             />
+            android:text="A:\nD:"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
 
         <Button
             android:id="@+id/handcard_4"
             android:layout_width="60dp"
             android:layout_height="70dp"
-           
-            android:textColor="#FFFFFF"
-            android:text="A:\nD:"
-            android:textStyle="italic"
+            android:layout_weight="1"
+            
             android:paddingRight="40dp"
             android:paddingTop="30dp"
-             />
+            android:text="A:\nD:"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
 
         <Button
             android:id="@+id/handcard_5"
             android:layout_width="60dp"
             android:layout_height="70dp"
+            android:layout_weight="1"
             
-            android:textColor="#FFFFFF"
-            android:text="A:\nD:"
-            android:textStyle="italic"
             android:paddingRight="40dp"
             android:paddingTop="30dp"
-             />
+            android:text="A:\nD:"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
 
         <Button
             android:id="@+id/handcard_6"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            
-            android:textColor="#FFFFFF"
-            android:text="A:\nD:"
-            android:textStyle="italic"
+            android:layout_weight="1"
+           
             android:paddingRight="40dp"
             android:paddingTop="30dp"
-             />
+            android:text="A:\nD:"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
 
         <Button
             android:id="@+id/handcard_7"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            
-            android:textColor="#FFFFFF"
-            android:text="A:\nD:"
-            android:textStyle="italic"
+            android:layout_weight="1"
+           
             android:paddingRight="40dp"
             android:paddingTop="30dp"
-             />
-    </LinearLayout>
-    
-   
+            android:text="A:\nD:"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
 
-    
+    </LinearLayout>
     
 </LinearLayout>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,12 +28,14 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.model.GraphUser;
 
+
 public class MainActivity extends Activity implements Session.StatusCallback {
 
 	public Button button_Login;
 	public Button button_Logout;
 	public Button button_GameStart;
 	public ImageView userImage;
+	public LinearLayout ll;
 	Handler mHandler = null;
 	private String TAG = "MainActivity";
 	LoginManager LM;
@@ -41,6 +45,7 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 	// @Override
 
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
 				.permitNetwork().build());
@@ -56,6 +61,8 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 		button_GameStart = (Button) findViewById(R.id.gamestart);
 		button_Logout = (Button) findViewById(R.id.logoutbutton);
 		userImage = (ImageView) findViewById(R.id.userImage);
+		ll= (LinearLayout) findViewById(R.id.loginLayout);
+		
 		View.OnClickListener Click = new OnClickListener() {
 
 			@Override
@@ -68,7 +75,14 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 
 					break;
 				case R.id.gamestart:
-					Toast.makeText(getApplicationContext(), "ok", 10).show();
+					//Toast.makeText(getApplicationContext(), "ok", 10).show();
+					// Intent i = new
+					// Intent(MainActivity.this,Choicenara.class);
+					// overridePendingTransition(R.anim.anim_in,
+					// R.anim.anim_out);
+					// startActivity(i);
+					//Toast.makeText(MainActivity.this, msg[0] + msg[1],	Toast.LENGTH_LONG).show();
+					
 					
 					if (msg[0].equals("ERR")) {
 						Toast.makeText(MainActivity.this, msg[1],
@@ -86,16 +100,14 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 					
 				case R.id.logoutbutton:
 					
-					
-					
-					
-					
+									
 					LM.logout();
 				
 					v.setVisibility(View.INVISIBLE);
 					button_GameStart.setVisibility(View.INVISIBLE);
 					button_Login.setVisibility(View.VISIBLE);
 					userImage.setVisibility(View.INVISIBLE);
+					ll.setVisibility(View.INVISIBLE);
 
 					break;
 				default:
@@ -120,7 +132,6 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 
 		// Log.i(TAG, state.toString());
 		if (session.isOpened()) {
-			Log.i("a", "a");
 			Request.executeMeRequestAsync(session,
 					new Request.GraphUserCallback() {
 						public void onCompleted(GraphUser user,
@@ -137,14 +148,14 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 									Toast.makeText(getApplicationContext(),
 											"fail", 0).show();
 								} else {
-									Toast.makeText(getApplicationContext(),
-											LM.getId(), 0).show();
+									//Toast.makeText(getApplicationContext(),	LM.getId(), 0).show();
 								}
 								// v.invalidate();
 								button_GameStart.setVisibility(View.VISIBLE);
 								button_Logout.setVisibility(View.VISIBLE);
 								button_Login.setVisibility(View.INVISIBLE);
 								userImage.setVisibility(View.VISIBLE);
+								ll.setVisibility(View.VISIBLE);
 								try {
 									LoginManager.imageUrl= new URL(
 											"https://graph.facebook.com/"
@@ -169,12 +180,10 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 													+ "&m_name="
 													+ LoginManager.name);
 									result = result.trim();
-									Toast.makeText(MainActivity.this, result, 0)
-											.show();		
+									//Toast.makeText(MainActivity.this, result, 0).show();		
 									Log.d(TAG, result);
 									msg = result.split("iamspliter");
-									Toast.makeText(MainActivity.this, msg[0] + msg[1],
-											Toast.LENGTH_LONG).show();
+									//Toast.makeText(MainActivity.this, msg[0] + msg[1],Toast.LENGTH_LONG).show();
 									Log.d(TAG, msg[0] +"//"+ msg[1] +" length " +msg.length);
 									
 								} catch (MalformedURLException e) {
