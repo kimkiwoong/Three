@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:largeHeap="true"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -54,6 +55,10 @@
         </activity>
          <activity
             android:name="com.example.test1.Makeroom"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.test1.CoreActivity"
             android:label="@string/app_name" >
         </activity>
         <!--  -->

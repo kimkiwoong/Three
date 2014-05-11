@@ -22,7 +22,7 @@
             android:id="@+id/button1"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            android:background="@drawable/m_4"
+           
             android:textColor="#FFFFFF"
             android:text="A:\nD:"
             android:textStyle="italic"
@@ -34,7 +34,7 @@
             android:id="@+id/button2"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            android:background="@drawable/m_4"
+            
             android:textColor="#FFFFFF"
             android:text="A:\nD:"
             android:textStyle="italic"
@@ -45,7 +45,7 @@
             android:id="@+id/button3"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            android:background="@drawable/m_4"
+           
             android:textColor="#FFFFFF"
             android:text="A:\nD:"
             android:textStyle="italic"
@@ -56,7 +56,7 @@
             android:id="@+id/button4"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            android:background="@drawable/m_4"
+           
             android:textColor="#FFFFFF"
             android:text="A:\nD:"
             android:textStyle="italic"
@@ -67,7 +67,7 @@
             android:id="@+id/button5"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            android:background="@drawable/m_4"
+           
             android:textColor="#FFFFFF"
             android:text="A:\nD:"
             android:textStyle="italic"
@@ -78,7 +78,7 @@
             android:id="@+id/button6"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            android:background="@drawable/m_4"
+           
             android:textColor="#FFFFFF"
             android:text="A:\nD:"
             android:textStyle="italic"
@@ -89,7 +89,7 @@
             android:id="@+id/button7"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            android:background="@drawable/m_4"
+            
             android:textColor="#FFFFFF"
             android:text="A:\nD:"
             android:textStyle="italic"
@@ -113,12 +113,12 @@
         android:layout_gravity="center">
 		
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/fycard_1"
             android:layout_width="75dp"
             android:layout_height="95dp"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
-            android:background="@drawable/m_4"
+           
             android:paddingRight="40dp"
             android:paddingTop="50dp"
             android:scaleType="fitXY"
@@ -127,12 +127,12 @@
             android:textStyle="italic" />
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/fycard_2"
             android:layout_width="75dp"
             android:layout_height="95dp"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
-            android:background="@drawable/m_5"
+            
             android:paddingRight="40dp"
             android:paddingTop="50dp"
             android:scaleType="fitXY"
@@ -141,11 +141,11 @@
             android:textStyle="italic" />
 
         <Button
-            android:id="@+id/button10"
+            android:id="@+id/fycard_3"
             android:layout_width="75dp"
             android:layout_height="95dp"
             android:layout_gravity="center"
-            android:background="@drawable/m_6"
+            
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:textColor="#FFFFFF"
@@ -164,12 +164,12 @@
         >
 
         <Button
-            android:id="@+id/button11"
+            android:id="@+id/fmcard_1"
             android:layout_width="75dp"
             android:layout_height="95dp"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
-            android:background="@drawable/m_1"
+           
             android:scaleType="fitXY"
             android:textColor="#FFFFFF"
             android:text="A:\nD:"
@@ -179,11 +179,11 @@
              />
 
         <Button
-            android:id="@+id/button12"
+            android:id="@+id/fmcard_2"
             android:layout_width="75dp"
             android:layout_height="95dp"
             android:layout_gravity="center"
-            android:background="@drawable/m_2"
+           
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:textColor="#FFFFFF"
@@ -194,11 +194,11 @@
              />
 
         <Button
-            android:id="@+id/button13"
+            android:id="@+id/fmcard_3"
             android:layout_width="75dp"
             android:layout_height="95dp"
             android:layout_gravity="center"
-            android:background="@drawable/m_3"
+            
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:textColor="#FFFFFF"
@@ -207,6 +207,13 @@
             android:paddingRight="40dp"
             android:paddingTop="50dp"
              />
+
+        <Button
+            android:id="@+id/turnend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="turnend" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -221,10 +228,10 @@
             android:src="@drawable/ic_launcher" />
 
         <Button
-            android:id="@+id/button14"
+            android:id="@+id/handcard_1"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            android:background="@drawable/m_4"
+            
             android:textColor="#FFFFFF"
             android:text="A:\nD:"
             android:textStyle="italic"
@@ -234,10 +241,10 @@
              />
 
         <Button
-            android:id="@+id/button15"
+            android:id="@+id/handcard_2"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            android:background="@drawable/m_4"
+          
             android:textColor="#FFFFFF"
             android:text="A:\nD:"
             android:textStyle="italic"
@@ -246,10 +253,10 @@
              />
 
         <Button
-            android:id="@+id/button16"
+            android:id="@+id/handcard_3"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            android:background="@drawable/m_4"
+           
             android:textColor="#FFFFFF"
             android:text="A:\nD:"
             android:textStyle="italic"
@@ -258,10 +265,10 @@
              />
 
         <Button
-            android:id="@+id/button17"
+            android:id="@+id/handcard_4"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            android:background="@drawable/m_4"
+           
             android:textColor="#FFFFFF"
             android:text="A:\nD:"
             android:textStyle="italic"
@@ -270,10 +277,10 @@
              />
 
         <Button
-            android:id="@+id/button18"
+            android:id="@+id/handcard_5"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            android:background="@drawable/m_4"
+            
             android:textColor="#FFFFFF"
             android:text="A:\nD:"
             android:textStyle="italic"
@@ -282,10 +289,10 @@
              />
 
         <Button
-            android:id="@+id/button19"
+            android:id="@+id/handcard_6"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            android:background="@drawable/m_4"
+            
             android:textColor="#FFFFFF"
             android:text="A:\nD:"
             android:textStyle="italic"
@@ -294,10 +301,10 @@
              />
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/handcard_7"
             android:layout_width="60dp"
             android:layout_height="70dp"
-            android:background="@drawable/m_4"
+            
             android:textColor="#FFFFFF"
             android:text="A:\nD:"
             android:textStyle="italic"

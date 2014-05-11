@@ -31,6 +31,14 @@ public class GameManager {
 	public static JSONObject user;
 	public static JSONObject user1;
 	public static JSONObject user2;
+	public static String turns;
+	public static String attackdata;
+	public static int att_i;
+	public static int hp_i;
+	public static String m_cardID;
+	public static int mybutton;
+	public static int youbutton;
+	public static String gameStarted;
 	public static String user1_id;
 	public static String user1_url;
 	public static String user1_name;
@@ -43,7 +51,9 @@ public class GameManager {
 	public static String user2_losecount;
 	public static SocketIOActivity activitySocket;
 	public static Makeroom makerooms;
+	public static Game Games;
 	public static View.OnClickListener Click;
+	
 
 	public static Handler handler;
 	private static Boolean flagTimer;
@@ -60,7 +70,7 @@ public class GameManager {
 	
 	public static int turn;
 	
-	public boolean GameEnd = true;
+	public static boolean GameEnd = true;
 	 public static GameManager getInstance() {
 
 	        if (Game_instance == null) {
@@ -147,7 +157,116 @@ public class GameManager {
 
 						Object[] arguments = args;
 						String temp = arguments[0].toString();
-						Log.i("sss", temp);
+						//Log.i("sss", temp);
+						if(event.equals("readyed")){
+							try {
+								JSONObject jbj = new JSONObject(temp);
+								String owner_id = jbj.getString("ownerID");
+								String joiner_id = jbj.getString("joinerID");
+								
+								gameStarted = jbj.getString("Data");
+								if(owner_id.equals(LoginManager.id)== false && joiner_id.equals(LoginManager.id)== false) {
+									return;
+								}
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							handler.post(new Runnable() {
+								
+								@Override
+								public void run() {
+									// TODO Auto-generated method stub
+									makerooms.gameStart();
+								}
+							});
+							return;
+						}
+						////////////game start owner turn
+						if(event.equals("start_data")){
+							try {
+								JSONObject jbj = new JSONObject(temp);
+								String user_id = jbj.getString("userID");
+								turns = jbj.getString("Data");
+								if(user_id.equals(LoginManager.id)== false) {
+									return;
+								}
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							handler.post(new Runnable() {
+								
+								@Override
+								public void run() {
+									// TODO Auto-generated method stub
+									Games.turntoast(turns);
+								}
+							});
+							return;
+							
+						}
+						////////////turnchanged/////////////
+						if(event.equals("turnchanged")){
+							try {
+								JSONObject jbj = new JSONObject(temp);
+								String user_id = jbj.getString("userID");
+								turns = jbj.getString("Data");
+								if(user_id.equals(LoginManager.id)== false) {
+									return;
+								}
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							handler.post(new Runnable() {
+								
+								@Override
+								public void run() {
+									// TODO Auto-generated method stub
+									Games.turntoast(turns);
+								}
+							});
+							return;
+							
+						}
+						///////////////////////////attack///////
+						if(event.equals("attacked")){
+							try {
+								JSONObject jbj = new JSONObject(temp);
+								
+								String joiner_id = jbj.getString("joiner");
+								String owner_id = jbj.getString("owner");
+								
+								
+								
+								if(joiner_id.equals(LoginManager.id)==false && owner_id.equals(LoginManager.id)==false) {
+									return;
+								}
+								attackdata = jbj.getString("data");
+								JSONObject jj = new JSONObject(attackdata);
+								att_i = jj.getInt("att");
+								hp_i = jj.getInt("hp");
+								mybutton = jj.getInt("myButtonID");
+								youbutton = jj.getInt("yourButtonID");
+								m_cardID = jj.getString("cardID");
+								Log.i("sssss", "sssss");
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							handler.post(new Runnable() {
+								
+								@Override
+								public void run() {
+									// TODO Auto-generated method stub
+									Log.i("sssss", "sssss");
+									Games.attack();
+								}
+							});
+							return;
+						}
+						/////////////////////event : out_roomed///////////
 						if (event.equals("out_roomed")) {
 
 							try {

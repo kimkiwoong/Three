@@ -69,12 +69,6 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 					break;
 				case R.id.gamestart:
 					Toast.makeText(getApplicationContext(), "ok", 10).show();
-					// Intent i = new
-					// Intent(MainActivity.this,Choicenara.class);
-					// overridePendingTransition(R.anim.anim_in,
-					// R.anim.anim_out);
-					// startActivity(i);
-					//Toast.makeText(MainActivity.this, msg[0] + msg[1],	Toast.LENGTH_LONG).show();
 					
 					if (msg[0].equals("ERR")) {
 						Toast.makeText(MainActivity.this, msg[1],
@@ -84,7 +78,7 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 							Intent i = new Intent(MainActivity.this,Choicenara.class);
 							startActivity(i);
 						} else if (msg[1].equals("EXIST")) {
-							Intent i = new Intent(MainActivity.this,Game.class);
+							Intent i = new Intent(MainActivity.this,CoreActivity.class);
 							startActivity(i);
 						}
 					}
@@ -92,13 +86,12 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 					
 				case R.id.logoutbutton:
 					
-					GameManager.Init();
-					Intent i = new Intent(MainActivity.this,SocketIOActivity.class);
-					startActivity(i);
 					
-					//LM.logout();/*
-					Toast.makeText(getApplicationContext(), LM.getId(),
-							Toast.LENGTH_SHORT).show();
+					
+					
+					
+					LM.logout();
+				
 					v.setVisibility(View.INVISIBLE);
 					button_GameStart.setVisibility(View.INVISIBLE);
 					button_Login.setVisibility(View.VISIBLE);

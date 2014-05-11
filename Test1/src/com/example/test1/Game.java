@@ -1,11 +1,10 @@
 package com.example.test1;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import com.example.gameframework.AppManager;
-import com.example.gameframework.CardInterface;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -14,10 +13,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.example.gameframework.AppManager;
+import com.example.gameframework.CardInterface;
 
 public class Game extends Activity {
 	public Player m_User;
@@ -32,7 +36,12 @@ public class Game extends Activity {
 	ArrayList<Integer> ranNumber;
 	ArrayList<CardInterface> myCard;
 	ArrayList<CardInterface> enemyCard;
-	boolean choice = false;
+	public boolean choiceMycard_1 = false;
+	public boolean choiceMycard_2 = false;
+	public boolean choiceMycard_3 = false;
+	public boolean choiceMycard_4 = false;
+	public boolean choiceMycard_5 = false;
+	public boolean choiceMycard_6 = false;
 	public final int myDialogCardID1 = 0;
 	public final int myDialogCardID2 = 1;
 	public final int myDialogCardID3 = 2;
@@ -51,8 +60,52 @@ public class Game extends Activity {
 
 	// public
 
-	public static Button bt1, bt2, bt3, bt4, bt5, bt6;
+	public static Button fightmycard_1, fightmycard_2, fightmycard_3,
+						fightyoucard_1, fightyoucard_2, fightyoucard_3,
+						handcard_1,	handcard_2,handcard_3,handcard_4,handcard_5,handcard_6,handcard_7;
+	////////////////turnend////////////
+	public static Button turnend;
+	//////////////
 	int index = 0;
+	View.OnClickListener choicecard = new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			switch(v.getId()){
+			case R.id.fmcard_1:
+				choiceMycard_1=true;
+				choiceMycard_2=false;
+				choiceMycard_3=false;
+				break;
+			case R.id.fycard_1:
+				if(choiceMycard_1==true || choiceMycard_2==true || choiceMycard_3==true){
+					JSONObject attacks = new JSONObject();
+					try {
+						attacks.put("userID", LoginManager.id);
+						attacks.put("att", myCard.get(0).mPower);
+						attacks.put("hp", myCard.get(0).mhp);
+						attacks.put("cardID", myCard.get(0).mID);
+						attacks.put("myButtonID",1);
+						attacks.put("yourButtonID",1);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+					GameManager.socket.emit("attack", attacks);
+				}
+				break;
+			
+				
+				
+				
+				
+			}
+			
+		}
+	};
 	View.OnLongClickListener Click = new View.OnLongClickListener() {
 		
 		@Override
@@ -60,27 +113,27 @@ public class Game extends Activity {
 			
 			// TODO Auto-generated method stub
 			switch(v.getId()){
-			case R.id.button8:
+			case R.id.fycard_1:
 				Game.this.onCreateDialog(E_CardID1);
 				showDialog(E_CardID1);
 				break;
-			case R.id.button9:
+			case R.id.fycard_2:
 				Game.this.onCreateDialog(E_CardID2);
 				showDialog(E_CardID2);
 				break;
-			case R.id.button10:
+			case R.id.fycard_3:
 				Game.this.onCreateDialog(E_CardID3);
 				showDialog(E_CardID3);
 				break;
-			case R.id.button11:
+			case R.id.fmcard_1:
 				Game.this.onCreateDialog(MYCardID1);
 				showDialog(MYCardID1);
 				break;
-			case R.id.button12:
+			case R.id.fmcard_2:
 				Game.this.onCreateDialog(MYCardID2);
 				showDialog(MYCardID2);
 				break;
-			case R.id.button13:
+			case R.id.fmcard_3:
 				Game.this.onCreateDialog(MYCardID3);
 				showDialog(MYCardID3);
 				break;
@@ -99,27 +152,55 @@ public class Game extends Activity {
 		GM=GameManager.getInstance();
 		//myCard= new ArrayList<CardInterface>();
 		//enemyCard = new ArrayList<CardInterface>();
-		bt1 = (Button) findViewById(R.id.button11);
-		bt2 = (Button) findViewById(R.id.button12);
-		bt3 = (Button) findViewById(R.id.button13);
-
-		bt4 = (Button) findViewById(R.id.button8);
-		bt5 = (Button) findViewById(R.id.button9);
-		bt6 = (Button) findViewById(R.id.button10);
-		bt1.setOnLongClickListener(Click);
-		bt2.setOnLongClickListener(Click);
-		bt3.setOnLongClickListener(Click);
-		bt4.setOnLongClickListener(Click);
-		bt5.setOnLongClickListener(Click);
-		bt6.setOnLongClickListener(Click);
+	//////myattackcard///////
+		fightmycard_1 = (Button) findViewById(R.id.fmcard_1);
+		fightmycard_2 = (Button) findViewById(R.id.fmcard_2);
+		fightmycard_3 = (Button) findViewById(R.id.fmcard_3);
+	/////youattackcard//////
+		fightyoucard_1 = (Button) findViewById(R.id.fycard_1);
+		fightyoucard_2 = (Button) findViewById(R.id.fycard_2);
+		fightyoucard_3 = (Button) findViewById(R.id.fycard_3);
+		/////myhandcard/////
+		handcard_1 = (Button)findViewById(R.id.handcard_1);
+		handcard_2 = (Button)findViewById(R.id.handcard_2);
+		handcard_3 = (Button)findViewById(R.id.handcard_3);
+		handcard_4 = (Button)findViewById(R.id.handcard_4);
+		handcard_5 = (Button)findViewById(R.id.handcard_5);
+		handcard_6 = (Button)findViewById(R.id.handcard_6);
+		handcard_7 = (Button)findViewById(R.id.handcard_7);
+		
+		turnend = (Button)findViewById(R.id.turnend);
+		turnend.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				GameManager.socket.emit("turnchange", LoginManager.id);
+				
+			}
+		});
+		
+		fightmycard_1.setOnClickListener(choicecard);
+		fightyoucard_1.setOnClickListener(choicecard);
+		fightmycard_1.setOnLongClickListener(Click);
+		fightmycard_2.setOnLongClickListener(Click);
+		fightmycard_3.setOnLongClickListener(Click);
+		fightyoucard_1.setOnLongClickListener(Click);
+		fightyoucard_2.setOnLongClickListener(Click);
+		fightyoucard_3.setOnLongClickListener(Click);
+		
 		mtranslate = AnimationUtils.loadAnimation(this, R.anim.ani);
 		mmove = AnimationUtils.loadAnimation(this, R.anim.moveani);
+		GameManager.Games = this;
 		
 		//GM = GameManager.getInstance();
 		// TODO Auto-generated constructor stub
 		this.init();
 		this.GameStart();
-
+		GameManager.socket.emit("start", LoginManager.id);
+		
+		
+		
 		
 
 	
@@ -138,6 +219,7 @@ public class Game extends Activity {
 		 EnemyimageNum = new int[10];
 		 m_UserCardImage = new Bitmap[10];
 		 m_EnemyCardImage = new Bitmap[10];
+		 
 		
 		ranNumber = new ArrayList<Integer>();
 		myCard = new ArrayList<CardInterface>();
@@ -159,42 +241,63 @@ public class Game extends Activity {
 		for (int j = 0; j <=ranNumber.size()-1; j++) {
 			Log.i(m_User.myCardname[ranNumber.get(j)],m_User.myCardname[ranNumber.get(j)]);
 			UserimageNum[j] =AppManager.getInstance().getmResources().getIdentifier(m_User.myCardname[ranNumber.get(j)],	"drawable", "com.example.test1");
-			m_UserCardImage[j] = AppManager.getInstance().getBitmap(UserimageNum[j]);
+			//m_UserCardImage[j] = AppManager.getInstance().getBitmap(UserimageNum[j]);
 			
-			EnemyimageNum[j] = AppManager.getInstance().getmResources().getIdentifier(m_Enemy.myCardname[ranNumber.get(j)],"drawable", "com.example.test1");
-			m_EnemyCardImage[j] = AppManager.getInstance().getBitmap(EnemyimageNum[j]);
+			//EnemyimageNum[j] = AppManager.getInstance().getmResources().getIdentifier("backcard","drawable", "com.example.test1");
+			//m_EnemyCardImage[j] = AppManager.getInstance().getBitmap(EnemyimageNum[j]);
 			
 			myCard.add(m_User.myCard[ranNumber.get(j)]);
 			enemyCard.add(m_Enemy.myCard[ranNumber.get(j)]);
-			m_UserCardImage[j].recycle();
-			m_EnemyCardImage[j].recycle();
+			//m_UserCardImage[j].recycle();
+			//m_EnemyCardImage[j].recycle();
 			
 		}
 		
 		
 	}
-
+public void turntoast(String text){
+	Toast.makeText(getApplicationContext(), text , Toast.LENGTH_SHORT).show();
+}
 
 	public void GameStart() {
 	
 
 		
 		String a = Integer.toString(UserimageNum[0]);
-
-		GM.setTurn(1);
-		Log.i(a,a);
-		bt1.setBackgroundResource(UserimageNum[0]);
-		bt2.setBackgroundResource(UserimageNum[1]);
-		bt3.setBackgroundResource(UserimageNum[2]);
+	
+		fightmycard_1.setBackgroundResource(UserimageNum[0]);
+		fightmycard_2.setBackgroundResource(UserimageNum[1]);
+		fightmycard_3.setBackgroundResource(UserimageNum[2]);
 		
-		bt4.setBackgroundResource(EnemyimageNum[0]);
-		bt5.setBackgroundResource(EnemyimageNum[1]);
-		bt6.setBackgroundResource(EnemyimageNum[2]);
+		
+		fightyoucard_1.setBackgroundResource(R.drawable.backcard);
+		fightyoucard_2.setBackgroundResource(R.drawable.backcard);
+		fightyoucard_3.setBackgroundResource(R.drawable.backcard);
+		
+		handcard_1.setBackgroundResource(UserimageNum[3]);
+		handcard_2.setBackgroundResource(UserimageNum[4]);
+		handcard_3.setBackgroundResource(UserimageNum[5]);
+		handcard_4.setBackgroundResource(UserimageNum[6]);
+		handcard_5.setBackgroundResource(UserimageNum[7]);
+		handcard_6.setBackgroundResource(UserimageNum[8]);
+		handcard_7.setBackgroundResource(UserimageNum[9]);
+		
+		
+	}
+	public void attack(){
+
+		
+				EnemyimageNum[0] =AppManager.getInstance().getmResources().getIdentifier(GameManager.m_cardID,	"drawable", "com.example.test1");
+				//m_EnemyCardImage[0] = AppManager.getInstance().getBitmap(EnemyimageNum[0]);
+				Log.i("sss", GameManager.m_cardID);
+				fightyoucard_1.setBackgroundResource(EnemyimageNum[0]);
+	
+			
 		
 	}
 	public void GamePlay() {
-		while (GM.GameEnd) {
-			if (GM.GetTurn() == 1) {
+		while (GameManager.GameEnd) {
+			if (GameManager.turns.equals("owner")) {
 				this.Myturn();
 			} else if (GM.GetTurn() == 2) {
 				this.EnemyTurn();

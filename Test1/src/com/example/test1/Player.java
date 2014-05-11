@@ -47,8 +47,8 @@ public class Player {
 			myCard[1] = CardFactory.create("GO_NORMAL_POJOL1");
 			myCard[2] = CardFactory.create("GO_NORMAL_POJOL2");
 			myCard[3] = CardFactory.create("GO_NORMAL_JOISUNIN");
-			myCard[4] = CardFactory.create("GO_NORMAL_JOISUNIN1");
-			myCard[5] = CardFactory.create("GO_NORMAL_JOISUNIN2");
+			myCard[4] = CardFactory.create("GO_NORMAL_XX");
+			myCard[5] = CardFactory.create("GO_NORMAL_XXX");
 			myCard[6] = CardFactory.create("GO_NORMAL_ULJIMUN");
 			myCard[7] = CardFactory.create("GO_RARE_GOJUMONG");
 			myCard[8] = CardFactory.create("GO_RARE_YUNGAE");
@@ -70,8 +70,8 @@ public class Player {
 			myCard[1] = CardFactory.create("SIN_NORMAL_POJOL1");
 			myCard[2] = CardFactory.create("SIN_NORMAL_POJOL2");
 			myCard[3] = CardFactory.create("SIN_NORMAL_HWALANG");
-			myCard[4] = CardFactory.create("SIN_NORMAL_HWALANG1");
-			myCard[5] = CardFactory.create("SIN_RARE_JANGBOGO");
+			myCard[4] = CardFactory.create("SIN_NORMAL_X");
+			myCard[5] = CardFactory.create("SIN_NORMAL_XX");
 			myCard[6] = CardFactory.create("SIN_RARE_KIMCHCH");
 			myCard[7] = CardFactory.create("SIN_RARE_GOJUMONG");
 			myCard[8] = CardFactory.create("SIN_RARE_WANHYO");
