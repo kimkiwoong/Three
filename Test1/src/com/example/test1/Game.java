@@ -64,7 +64,9 @@ public class Game extends Activity {
 
 	public static Button fightmycard_1, fightmycard_2, fightmycard_3,
 						fightyoucard_1, fightyoucard_2, fightyoucard_3,
-						handcard_1,	handcard_2,handcard_3,handcard_4,handcard_5,handcard_6,handcard_7;
+						handcard_1,	handcard_2,handcard_3,handcard_4,handcard_5,handcard_6,handcard_7,
+						e_handcard_1,e_handcard_2,e_handcard_3,e_handcard_4,e_handcard_5,e_handcard_6,e_handcard_7;
+	
 	////////////////turnend////////////
 	public static Button turnend;
 	///////////////////////////////
@@ -76,21 +78,36 @@ public class Game extends Activity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			switch(v.getId()){
-			case R.id.fmcard_1:
+			if(v.getId()==R.id.fmcard_1){
 				choiceMycard_1=true;
 				choiceMycard_2=false;
 				choiceMycard_3=false;
-				break;
-			case R.id.fycard_1:
+				
+			} else if(v.getId()==R.id.fmcard_2){
+				choiceMycard_1=false;
+				choiceMycard_2=true;
+				choiceMycard_3=false;
+				
+			} else if(v.getId()==R.id.fmcard_3){
+				choiceMycard_1=false;
+				choiceMycard_2=false;
+				choiceMycard_3=true;
+				
+			} else if(v.getId()==R.id.fycard_1){
 				if(choiceMycard_1==true || choiceMycard_2==true || choiceMycard_3==true){
 					JSONObject attacks = new JSONObject();
 					try {
 						attacks.put("userID", LoginManager.id);
-						attacks.put("att", myCard.get(0).mPower);
-						attacks.put("hp", myCard.get(0).mhp);
-						attacks.put("cardID", myCard.get(0).mID);
-						attacks.put("myButtonID",1);
+						attacks.put("att", attackCard.get(0).mPower);
+						attacks.put("hp", attackCard.get(0).mhp);
+						attacks.put("cardID", attackCard.get(0).mID);
+						if(choiceMycard_1==true){
+							attacks.put("myButtonID",1);
+						} else if(choiceMycard_2==true){
+							attacks.put("myButtonID",2);
+						} else if(choiceMycard_3==true){
+							attacks.put("myButtonID",3);
+						}
 						attacks.put("yourButtonID",1);
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
@@ -99,14 +116,70 @@ public class Game extends Activity {
 					
 					
 					GameManager.socket.emit("attack", attacks);
+					choiceMycard_1=false;
+					choiceMycard_2=false;
+					choiceMycard_3=false;
+					 
 				}
-				break;
-			
-				
-				
-				
-				
+			} else if(v.getId()==R.id.fycard_2){
+				if(choiceMycard_1==true || choiceMycard_2==true || choiceMycard_3==true){
+					JSONObject attacks = new JSONObject();
+					try {
+						attacks.put("userID", LoginManager.id);
+						attacks.put("att", attackCard.get(1).mPower);
+						attacks.put("hp", attackCard.get(1).mhp);
+						attacks.put("cardID", attackCard.get(1).mID);
+						if(choiceMycard_1==true){
+							attacks.put("myButtonID",1);
+						} else if(choiceMycard_2==true){
+							attacks.put("myButtonID",2);
+						} else if(choiceMycard_3==true){
+							attacks.put("myButtonID",3);
+						}
+						attacks.put("yourButtonID",2);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+					GameManager.socket.emit("attack", attacks);
+					choiceMycard_1=false;
+					choiceMycard_2=false;
+					choiceMycard_3=false;
+					
+				}
+			} else if(v.getId()==R.id.fycard_3){
+				if(choiceMycard_1==true || choiceMycard_2==true || choiceMycard_3==true){
+					JSONObject attacks = new JSONObject();
+					try {
+						attacks.put("userID", LoginManager.id);
+						attacks.put("att", attackCard.get(2).mPower);
+						attacks.put("hp", attackCard.get(2).mhp);
+						attacks.put("cardID", attackCard.get(2).mID);
+						if(choiceMycard_1==true){
+							attacks.put("myButtonID",1);
+						} else if(choiceMycard_2==true){
+							attacks.put("myButtonID",2);
+						} else if(choiceMycard_3==true){
+							attacks.put("myButtonID",3);
+						}
+						attacks.put("yourButtonID",3);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+					GameManager.socket.emit("attack", attacks);
+					choiceMycard_1=false;
+					choiceMycard_2=false;
+					choiceMycard_3=false;
+					
+				}
 			}
+			
+			return;
 			
 		}
 	};
@@ -172,6 +245,14 @@ public class Game extends Activity {
 		handcard_5 = (Button)findViewById(R.id.handcard_5);
 		handcard_6 = (Button)findViewById(R.id.handcard_6);
 		handcard_7 = (Button)findViewById(R.id.handcard_7);
+		/////////enemy handcard/////////////////////////
+		e_handcard_1 = (Button)findViewById(R.id.e_handcard_1);
+		e_handcard_2 = (Button)findViewById(R.id.e_handcard_2);
+		e_handcard_3 = (Button)findViewById(R.id.e_handcard_3);
+		e_handcard_4 = (Button)findViewById(R.id.e_handcard_4);
+		e_handcard_5 = (Button)findViewById(R.id.e_handcard_5);
+		e_handcard_6 = (Button)findViewById(R.id.e_handcard_6);
+		e_handcard_7 = (Button)findViewById(R.id.e_handcard_7);
 		
 		turnend = (Button)findViewById(R.id.turnend);
 		turnend.setOnClickListener(new OnClickListener() {
@@ -185,7 +266,14 @@ public class Game extends Activity {
 		});
 		
 		fightmycard_1.setOnClickListener(choicecard);
+		fightmycard_2.setOnClickListener(choicecard);
+		fightmycard_3.setOnClickListener(choicecard);
+		
 		fightyoucard_1.setOnClickListener(choicecard);
+		fightyoucard_2.setOnClickListener(choicecard);
+		fightyoucard_3.setOnClickListener(choicecard);
+		
+		
 		fightmycard_1.setOnLongClickListener(Click);
 		fightmycard_2.setOnLongClickListener(Click);
 		fightmycard_3.setOnLongClickListener(Click);
@@ -271,7 +359,7 @@ public void turntoast(String text){
 	
 
 		
-		String a = Integer.toString(UserimageNum[0]);
+		//String a = Integer.toString(UserimageNum[0]);
 		
 		
 		
@@ -293,6 +381,13 @@ public void turntoast(String text){
 		handcard_6.setBackgroundResource(UserimageNum[8]);
 		handcard_7.setBackgroundResource(UserimageNum[9]);
 		
+		e_handcard_1.setBackgroundResource(R.drawable.backcard);
+		e_handcard_2.setBackgroundResource(R.drawable.backcard);
+		e_handcard_3.setBackgroundResource(R.drawable.backcard);
+		e_handcard_4.setBackgroundResource(R.drawable.backcard);
+		e_handcard_5.setBackgroundResource(R.drawable.backcard);
+		e_handcard_6.setBackgroundResource(R.drawable.backcard);
+		e_handcard_7.setBackgroundResource(R.drawable.backcard);
 		
 	}
 	public void attack(int buttonid){
@@ -306,11 +401,11 @@ public void turntoast(String text){
 						JSONObject depense = new JSONObject();
 						try {
 							depense.put("userID", LoginManager.id);
-							depense.put("att", handsCard.get(buttonid-1).mPower);
-							depense.put("hp",  handsCard.get(buttonid-1).mhp);
-							depense.put("cardID", handsCard.get(buttonid-1).mID);
-							depense.put("myButtonID",1);
-							depense.put("yourButtonID",1);
+							depense.put("att", attackCard.get(buttonid-1).mPower);
+							depense.put("hp",  attackCard.get(buttonid-1).mhp);
+							depense.put("cardID", attackCard.get(buttonid-1).mID);
+							depense.put("myButtonID",buttonid);
+							//depense.put("yourButtonID",1);
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -324,22 +419,69 @@ public void turntoast(String text){
 						}*/
 						GameManager.socket.emit("depense", depense);
 						
+						
 				} else if( buttonid==2 ){
 					EnemyimageNum[1] =AppManager.getInstance().getmResources().getIdentifier(GameManager.m_cardID,	"drawable", "com.example.test1");
 					
-					Log.i("sss", GameManager.m_cardID);
+					
 					fightyoucard_2.setBackgroundResource(EnemyimageNum[1]);
+
+					JSONObject depense = new JSONObject();
+					try {
+						depense.put("userID", LoginManager.id);
+						depense.put("att", attackCard.get(buttonid-1).mPower);
+						depense.put("hp",  attackCard.get(buttonid-1).mhp);
+						depense.put("cardID", attackCard.get(buttonid-1).mID);
+						depense.put("myButtonID",buttonid);
+						//depense.put("yourButtonID",buttonid);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+					/*attackCard.get(0).SetHp(attackCard.get(0).GetHp()-GameManager.att_i);
+					if(attackCard.get(0).GetHp()<=0){
+						attackCard.set(0, null);
+									
+					}*/
+					GameManager.socket.emit("depense", depense);
+					
 				} else if( buttonid==3 ){
 					EnemyimageNum[2] =AppManager.getInstance().getmResources().getIdentifier(GameManager.m_cardID,	"drawable", "com.example.test1");
 					
-					Log.i("sss", GameManager.m_cardID);
+					
 					fightyoucard_3.setBackgroundResource(EnemyimageNum[2]);
+
+					JSONObject depense = new JSONObject();
+					try {
+						depense.put("userID", LoginManager.id);
+						depense.put("att", attackCard.get(buttonid-1).mPower);
+						depense.put("hp",  attackCard.get(buttonid-1).mhp);
+						depense.put("cardID", attackCard.get(buttonid-1).mID);
+						depense.put("myButtonID",buttonid);
+						
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+					/*attackCard.get(0).SetHp(attackCard.get(0).GetHp()-GameManager.att_i);
+					if(attackCard.get(0).GetHp()<=0){
+						attackCard.set(0, null);
+									
+					}*/
+					GameManager.socket.emit("depense", depense);
+					
 				}
 			
 		
 	}
 	public void depense(int buttonid){
-		//Toast.makeText(getApplicationContext(),GameManager.e_att_i, Toast.LENGTH_SHORT).show();
+		if(buttonid==1){
+			Log.i("sss", GameManager.e_cardID);
+		}
 		
 		
 	}

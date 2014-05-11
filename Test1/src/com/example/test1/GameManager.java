@@ -261,7 +261,7 @@ public class GameManager {
 								public void run() {
 									// TODO Auto-generated method stub
 									Log.i("sssss", "sssss");
-									Games.attack(youbutton);
+									Games.attack(mybutton);
 								}
 							});
 							return;
@@ -286,6 +286,7 @@ public class GameManager {
 								e_mybutton = jj.getInt("yourButtonID");
 								e_youbutton = jj.getInt("myButtonID");
 								e_cardID = jj.getString("cardID");
+								Log.i("sssss",GameManager.e_cardID);
 								Log.i("sssss", "sssss");
 							} catch (JSONException e) {
 								// TODO Auto-generated catch block
@@ -297,7 +298,7 @@ public class GameManager {
 								public void run() {
 									// TODO Auto-generated method stub
 									Log.i("sssss", "sssss");
-									Games.depense(e_mybutton);
+									Games.depense(e_youbutton);
 								}
 							});
 							return;
