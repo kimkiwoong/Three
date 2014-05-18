@@ -150,6 +150,7 @@ public class GameManager {
 					@Override
 					public void on(String event, IOAcknowledge ack,
 							Object... args) {
+						/////////// 소켓서버 에서 받았을때 event 값으로 처리 한다.///////
 						System.out.println("[make] Server triggered event '"
 								+ event + "'");
 
@@ -247,8 +248,8 @@ public class GameManager {
 								JSONObject jj = new JSONObject(attackdata);
 								att_i = jj.getInt("att");
 								hp_i = jj.getInt("hp");
-								mybutton = jj.getInt("yourButtonID");
-								youbutton = jj.getInt("myButtonID");
+								youbutton = jj.getInt("yourButtonID");
+								mybutton = jj.getInt("myButtonID");
 								m_cardID = jj.getString("cardID");
 								Log.i("sssss", "sssss");
 							} catch (JSONException e) {
@@ -261,7 +262,7 @@ public class GameManager {
 								public void run() {
 									// TODO Auto-generated method stub
 									Log.i("sssss", "sssss");
-									Games.attack(mybutton);
+									Games.attack(mybutton,youbutton);
 								}
 							});
 							return;
@@ -283,8 +284,8 @@ public class GameManager {
 								JSONObject jj = new JSONObject(dependata);
 								e_att_i = jj.getInt("att");
 								e_hp_i = jj.getInt("hp");
-								e_mybutton = jj.getInt("yourButtonID");
-								e_youbutton = jj.getInt("myButtonID");
+								e_youbutton = jj.getInt("yourButtonID");
+								e_mybutton = jj.getInt("myButtonID");
 								e_cardID = jj.getString("cardID");
 								Log.i("sssss",GameManager.e_cardID);
 								Log.i("sssss", "sssss");
