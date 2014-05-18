@@ -7,7 +7,7 @@ public class GO_NORMAL_POJOL2 extends CardInterface{
 
 	
 	public GO_NORMAL_POJOL2(){
-		this.SetHp(1);
+		this.SetHp(3);
 		this.SetId("card_2");
 		this.SetmPower(1);
 		this.SetNara(0);
