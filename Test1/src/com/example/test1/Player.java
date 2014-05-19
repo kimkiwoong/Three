@@ -49,7 +49,7 @@ public class Player {
 			myCard[3] = CardFactory.create("GO_NORMAL_JOISUNIN");
 			myCard[4] = CardFactory.create("GO_NORMAL_XX");
 			myCard[5] = CardFactory.create("GO_NORMAL_XXX");
-			myCard[6] = CardFactory.create("GO_NORMAL_ULJIMUN");
+			myCard[6] = CardFactory.create("GO_RARE_ULJIMUN");
 			myCard[7] = CardFactory.create("GO_RARE_GOJUMONG");
 			myCard[8] = CardFactory.create("GO_RARE_YUNGAE");
 			myCard[9] = CardFactory.create("GO_SP_GWANGKING");

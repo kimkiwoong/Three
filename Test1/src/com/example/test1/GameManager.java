@@ -25,6 +25,11 @@ import android.widget.Toast;
 
 
 public class GameManager {
+	
+	private static String TAG = "GameManager";
+	private static String TAG_attack = "GameManager_attack";
+	private static String TAG_depense = "GameManager_depense";
+	
 	static public int socketCnt = 0;
 	public static SocketIO socket;
 	LoginManager LM;
@@ -75,9 +80,10 @@ public class GameManager {
 	public static final int Enemyturn=2;
 	
 	public static int turn;
+	public static int myTurn;
 	
 	public static boolean GameEnd = true;
-	 public static GameManager getInstance() {
+	public static GameManager getInstance() {
 
 	        if (Game_instance == null) {
 	        	Game_instance = new GameManager();
@@ -201,6 +207,12 @@ public class GameManager {
 									// TODO Auto-generated method stub
 									if(turns.equals("1")){
 										GameManager.turn=1;
+										//0 ÀÌ me 1 ÀÌ enemy
+										GameManager.myTurn = 1;
+										
+									}
+									else if(turns.equals("0")){
+										GameManager.myTurn = 0;
 									}
 								}
 							});
@@ -225,7 +237,11 @@ public class GameManager {
 								@Override
 								public void run() {
 									// TODO Auto-generated method stub
+									GameManager.myTurn = 0;
 									Games.turntoast(turns);
+									Game.selectMycard_1 = true;
+									Game.selectMycard_2 = true;
+									Game.selectMycard_3 = true;
 								}
 							});
 							return;
@@ -234,6 +250,7 @@ public class GameManager {
 						///////////////////////////attack///////
 						if(event.equals("attacked")){
 							try {
+								Log.d(TAG_depense, "attacked event ");
 								JSONObject jbj = new JSONObject(temp);
 								
 								String joiner_id = jbj.getString("joiner");
@@ -242,6 +259,7 @@ public class GameManager {
 								
 								
 								if(joiner_id.equals(LoginManager.id)==false && owner_id.equals(LoginManager.id)==false) {
+									Log.d(TAG_depense, "attacked out ");
 									return;
 								}
 								attackdata = jbj.getString("data");
@@ -261,7 +279,7 @@ public class GameManager {
 								@Override
 								public void run() {
 									// TODO Auto-generated method stub
-									Log.i("sssss", "sssss");
+									Log.d(TAG_depense, "depense functiong go ");
 									Games.attack(mybutton,youbutton);
 								}
 							});
@@ -270,6 +288,8 @@ public class GameManager {
 						///////////////////////depense////////////////////
 						if(event.equals("depensed")){
 							try {
+								
+								Log.d(TAG_depense, "depensed event ");
 								JSONObject jbj = new JSONObject(temp);
 								
 								String joiner_id = jbj.getString("joiner");
@@ -278,6 +298,7 @@ public class GameManager {
 								
 								
 								if(joiner_id.equals(LoginManager.id)==false && owner_id.equals(LoginManager.id)==false) {
+									Log.d(TAG_depense, "depensed out ");
 									return;
 								}
 								dependata = jbj.getString("data");
@@ -298,7 +319,7 @@ public class GameManager {
 								@Override
 								public void run() {
 									// TODO Auto-generated method stub
-									Log.i("sssss", "sssss");
+									Log.d(TAG_depense, "depense functiong go button : " + e_youbutton+"," + e_mybutton);
 									Games.depense(e_youbutton);
 								}
 							});
