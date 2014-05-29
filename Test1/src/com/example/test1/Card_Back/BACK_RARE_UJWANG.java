@@ -19,12 +19,12 @@ public class BACK_RARE_UJWANG extends CardInterface{
 	
 	public BACK_RARE_UJWANG(){
 		this.SetHp(1);
-		this.SetId("card_27");
+		this.SetId("card_18");
 		this.SetmPower(1);
 		this.SetNara(0);
-		this.SetMagic(true);
+		this.SetMagic(false);
 		this.SetCState(0);
-		this.SetMagicName(null);
+		this.SetMagicName(0);
 		
 	}
 		

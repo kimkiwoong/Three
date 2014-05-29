@@ -37,21 +37,23 @@ public class Choicenara extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Toast.makeText(Choicenara.this, "go", 0).show();
+				//Toast.makeText(Choicenara.this, "go", 0).show();
 
 				try {
-					result = Util.DownloadText("http://hansung.hamt.co.kr/api/set_kind?m_fb_id="+ LoginManager.id + "&kind="+ "GO");
-					Log.i(result,result);
-					Toast.makeText(Choicenara.this, result, 10).show();
+					result = Util.DownloadText("http://hsbug.hamt.co.kr/api/set_kind?m_fb_id="+ LoginManager.id + "&kind="+ "GO");
+					//Log.i(result,result);
+					//Toast.makeText(Choicenara.this, result, 10).show();
 					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				Intent i = new Intent(Choicenara.this, Makeroom.class);
-				//startActivity(i);
+				Game.myType = 1;
+				Intent i = new Intent(Choicenara.this, SocketIOActivity.class);
+				startActivity(i);
 				
-				startActivityForResult(i, 1); 
+				
+				//startActivityForResult(i, 1); 
 				// setContentView(new GameView(Choicenara.this));
 
 			}
@@ -63,12 +65,18 @@ public class Choicenara extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				try {
-					result = Util.DownloadText("http://hansung.hamt.co.kr/api/set_kind?m_fb_id="+ LoginManager.id + "&kind="+ "BACK");
+					result = Util.DownloadText("http://hsbug.hamt.co.kr/api/set_kind?m_fb_id="+ LoginManager.id + "&kind="+ "BACK");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				Toast.makeText(Choicenara.this, "back", 0).show();
+				Toast.makeText(getApplicationContext(), "back", 0).show();
+				//Toast.makeText(, "back", 0).show();
+				Game.myType = 2;
+				Intent i = new Intent(Choicenara.this, SocketIOActivity.class);
+				startActivity(i);
+				
+				//startActivityForResult(i, 2);
 			}
 		});
 
@@ -78,12 +86,17 @@ public class Choicenara extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				try {
-					result = Util.DownloadText("http://hansung.hamt.co.kr/api/set_kind?m_fb_id="+ LoginManager.id + "&kind="+ "SIN");
+					result = Util.DownloadText("http://hsbug.hamt.co.kr/api/set_kind?m_fb_id="+ LoginManager.id + "&kind="+ "SIN");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				Toast.makeText(Choicenara.this, "sin", 0).show();
+				Game.myType = 3;
+				
+				Intent i = new Intent(Choicenara.this, SocketIOActivity.class);
+				startActivity(i);
+				
+				//startActivityForResult(i, 3);
 			}
 		});
 

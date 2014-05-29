@@ -13,7 +13,7 @@ public class GO_SP_GWANGKING extends CardInterface{
 		this.SetNara(0);
 		this.SetMagic(true);
 		this.SetCState(0);
-		this.SetMagicName(null);
+		this.SetMagicName(1000);
 		
 	}
 		

@@ -21,11 +21,12 @@ public class SocketIOActivity extends Activity {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		Log.i("sss", "sss");
+		//Log.i("sss", "sss");
 		super.onCreate(savedInstanceState);
-
+		GameManager.Init();
+		
 		setContentView(R.layout.roomtext);
-		Log.i("sss", "sss2");
+		//Log.i("sss", "sss2");
 		GameManager.activitySocket = this;
 		make = (Button) findViewById(R.id.makeroom);
 		in = (Button) findViewById(R.id.inroom);
@@ -33,12 +34,6 @@ public class SocketIOActivity extends Activity {
 		make.setOnClickListener(GameManager.Click);
 		in.setOnClickListener(GameManager.Click);
 		
-		
-		
-		
-		
-		
-
 	}
 	
 	public void openMakeroom(){

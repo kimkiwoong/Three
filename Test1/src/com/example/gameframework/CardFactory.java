@@ -36,8 +36,8 @@ public class CardFactory {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 					}
-			}else if(Nara.matches(".*SIN.")){
-				Class c = Class.forName("com.example.test1.Card_SIN."+Nara);
+			}else if(Nara.matches(".*SIN.*")){
+				Class c = Class.forName("com.example.test1.Card_Sin."+Nara);
 				
 				try {
 					CardInterface c1 = (CardInterface)c.newInstance();

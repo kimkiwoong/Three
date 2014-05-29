@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
@@ -39,6 +40,7 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 	Handler mHandler = null;
 	private String TAG = "MainActivity";
 	LoginManager LM;
+	SoundManager SM;
 	public String result;
 	public String msg[];
 
@@ -51,10 +53,19 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 				.permitNetwork().build());
 		setContentView(R.layout.activity_main);
 		// setContentView(new Startview(this));
+		
+		//m_ParticleSystem.doDraw(canvas);
 		mHandler = new Handler();
 
 		LM = LoginManager.getInstance();
 		LM.initialize(getApplicationContext(), this);
+		SM = SoundManager.getInstance();
+		SM.Init(this);
+		SM.Initsound();
+		SM.gamebackgroundVolume(0.3f, 0.3f);
+		SM.backgroundPlaySound();
+		
+		
 		// LM.login(this);
 
 		button_Login = (Button) findViewById(R.id.loginbutton);
@@ -71,10 +82,12 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 				// TODO Auto-generated method stub
 				switch (v.getId()) {
 				case R.id.loginbutton:
+					SM.play("touch");
 					LM.login(MainActivity.this);
 
 					break;
 				case R.id.gamestart:
+					SM.play("touch");
 					//Toast.makeText(getApplicationContext(), "ok", 10).show();
 					// Intent i = new
 					// Intent(MainActivity.this,Choicenara.class);
@@ -89,17 +102,21 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 								Toast.LENGTH_LONG).show();
 					} else if (msg[0].equals("SUC")) {
 						if (msg[1].equals("FIRST")) {
-							Intent i = new Intent(MainActivity.this,Choicenara.class);
-							startActivity(i);
-						} else if (msg[1].equals("EXIST")) {
-							Intent i = new Intent(MainActivity.this,CoreActivity.class);
+							Intent i = new Intent(MainActivity.this, Choicenara.class);
 							startActivity(i);
 						}
+						/*
+						else if (msg[1].equals("EXIST")) {
+							GameManager.Init();
+							Intent i = new Intent(MainActivity.this,SocketIOActivity.class);
+							startActivity(i);
+						}
+						*/
 					}
 					break;
 					
 				case R.id.logoutbutton:
-					
+					SM.play("touch");
 									
 					LM.logout();
 				
@@ -172,13 +189,15 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 									// LoginManager.name);
 									
 									Log.d(TAG, "ID " + LoginManager.id	+ " // Name = " + LoginManager.name	+ " // Email = "+ LoginManager.email);
+									
 									result = Util
-											.DownloadText("http://hansung.hamt.co.kr/api/is_exist_member?m_fb_id="
+											.DownloadText("http://hsbug.hamt.co.kr/api/is_exist_member?m_fb_id="
 													+ LoginManager.id
 													+ "&m_email="
 													+ LoginManager.email
 													+ "&m_name="
 													+ LoginManager.name);
+									
 									result = result.trim();
 									//Toast.makeText(MainActivity.this, result, 0).show();		
 									Log.d(TAG, result);

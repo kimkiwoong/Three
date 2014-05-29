@@ -1,6 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#333333"
@@ -12,43 +11,78 @@
     tools:context=".MainActivity" >
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/LinearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@drawable/layout_bg2"
         android:gravity="center"
-        android:orientation="vertical" 
-        android:background ="@drawable/layout_bg2"
-        android:padding="6dp">
+        android:orientation="vertical"
+        android:padding="6dp" >
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background ="@drawable/layout_bg"
-            android:padding="6dp"
-            android:src="@drawable/ic_launcher" />
-
-        <TextView
-            android:id="@+id/myname"
-            style="@style/ButtonText"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Myname" />
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/Mywin"
-            style="@style/ButtonText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="승" />
+            <ImageView
+                android:id="@+id/UserImage1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/layout_bg"
+                android:padding="6dp"
+                />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/Mylose"
-            style="@style/ButtonText"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="패" />
+            android:layout_weight="1" >
+            
+            <TextView
+                android:id="@+id/UserNation1"
+                style="@style/ButtonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/UserName1"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                android:text="nation1" />
+
+            <TextView
+                android:id="@+id/UserName1"
+                style="@style/ButtonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                android:text="Myname" />
+
+            <TextView
+                android:id="@+id/UserLose1"
+                style="@style/ButtonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/UserName1"
+                android:layout_below="@+id/UserNation1"
+                android:layout_weight="1"
+                android:text="패" />
+
+            <TextView
+                android:id="@+id/UserWin1"
+                style="@style/ButtonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/UserLose1"
+                android:layout_alignBottom="@+id/UserLose1"
+                android:layout_alignLeft="@+id/UserName1"
+                android:layout_weight="1"
+                android:text="승" />
+           
+        </RelativeLayout>
     </LinearLayout>
 
     <FrameLayout
@@ -61,7 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal" >
 
             <LinearLayout
                 android:id="@+id/linearready"
@@ -90,14 +124,13 @@
                     android:padding="10dp"
                     android:text="Out" />
             </LinearLayout>
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal" >
 
             <LinearLayout
                 android:id="@+id/linearcancle"
@@ -118,51 +151,83 @@
                     android:padding="10dp"
                     android:text="cancle"
                     android:visibility="invisible" />
-
             </LinearLayout>
-       
         </LinearLayout>
     </FrameLayout>
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@drawable/layout_bg2"
         android:gravity="center"
         android:orientation="vertical"
-        android:background ="@drawable/layout_bg2"
         android:padding="6dp" >
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_launcher" 
-            android:background ="@drawable/layout_bg"
-            android:padding="6dp"/>
-
-        <TextView
-            android:id="@+id/e_name"
-            style="@style/ButtonText"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="E_name" />
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
 
+            <ImageView
+                android:id="@+id/UserImage2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/layout_bg"
+                android:padding="6dp" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/EWin"
-            style="@style/ButtonText"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="승" />
+            android:layout_weight="1" >
 
-        <TextView
-            android:id="@+id/Elose"
-            style="@style/ButtonText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="패" />
+            <TextView
+                android:id="@+id/UserName2"
+                style="@style/ButtonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                android:text="Myname" />
+            
+            <TextView
+                android:id="@+id/UserNation2"
+                style="@style/ButtonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/UserName2"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                android:text="nation2" />
+
+            <TextView
+                android:id="@+id/UserWin2"
+                style="@style/ButtonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/UserLose2"
+                android:layout_alignBottom="@+id/UserLose2"
+                android:layout_alignLeft="@+id/UserName2"
+                android:layout_weight="1"
+                android:text="승" />
+
+            <TextView
+                android:id="@+id/UserLose2"
+                style="@style/ButtonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/UserName2"
+                android:layout_below="@+id/UserNation2"
+                android:layout_weight="1"
+                android:text="패" />
+
+        </RelativeLayout>
+
     </LinearLayout>
 
 </LinearLayout>

@@ -1,23 +1,23 @@
 package com.example.test1;
 
+import io.socket.IOAcknowledge;
+import io.socket.IOCallback;
+import io.socket.SocketIO;
+import io.socket.SocketIOException;
+
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import io.socket.IOAcknowledge;
-import io.socket.IOCallback;
-import io.socket.SocketIO;
-import io.socket.SocketIOException;
-import android.content.Intent;
-import android.graphics.Canvas;
 import android.os.Handler;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -29,10 +29,12 @@ public class GameManager {
 	private static String TAG = "GameManager";
 	private static String TAG_attack = "GameManager_attack";
 	private static String TAG_depense = "GameManager_depense";
+	private static String TAG_Total = "total";
 	
 	static public int socketCnt = 0;
 	public static SocketIO socket;
 	LoginManager LM;
+	static SoundManager SM;
 	public static JSONObject user;
 	public static JSONObject user1;
 	public static JSONObject user2;
@@ -45,6 +47,7 @@ public class GameManager {
 	public static int hp_i;
 	public static String e_cardID;
 	public static String m_cardID;
+	public static int magic_num;
 	public static int e_mybutton;
 	public static int e_youbutton;
 	public static int mybutton;
@@ -55,6 +58,7 @@ public class GameManager {
 	public static String user1_name;
 	public static String user1_wincount;
 	public static String user1_losecount;
+	
 	public static String user2_id;
 	public static String user2_url;
 	public static String user2_name;
@@ -68,21 +72,22 @@ public class GameManager {
 
 	public static Handler handler;
 	private static Boolean flagTimer;
-	private static Boolean isInit = false;
-	
-	
-	
-	
-	
+	public static Boolean isInit = false;
 	
 	private static GameManager Game_instance;
 	public static final int Userturn=1; 
 	public static final int Enemyturn=2;
 	
 	public static int turn;
+	public static int myFirstTurn;
 	public static int myTurn;
+	public static boolean isBlockAttack;
 	
 	public static boolean GameEnd = true;
+	
+	//win lose
+	public static String result;
+	
 	public static GameManager getInstance() {
 
 	        if (Game_instance == null) {
@@ -108,7 +113,8 @@ public class GameManager {
 		private static void init(){
 			Log.i("sss","init");
 			try {
-				socket = new SocketIO("http://113.198.87.193:3000");
+				isBlockAttack = false;
+				socket = new SocketIO("http://115.71.239.139:3000");
 				socket.connect(new IOCallback() {
 					@Override
 					public void onMessage(JSONObject json, IOAcknowledge ack) {
@@ -131,7 +137,7 @@ public class GameManager {
 						try {
 							if (socketCnt < 10) {
 								socket = new SocketIO(
-										"http://113.198.87.193:3000");
+										"http://115.71.239.139:3000");
 								socket.connect(this);
 								socketCnt++;
 							}
@@ -209,10 +215,15 @@ public class GameManager {
 										GameManager.turn=1;
 										//0 이 me 1 이 enemy
 										GameManager.myTurn = 1;
-										
+										GameManager.myFirstTurn=1;
+										Games.turnend.setVisibility(View.INVISIBLE);
+										Games.turnedlayout.setVisibility(View.INVISIBLE);										
 									}
 									else if(turns.equals("0")){
 										GameManager.myTurn = 0;
+										GameManager.myFirstTurn=0;
+										Games.turnend.setVisibility(View.VISIBLE);
+										Games.turnedlayout.setVisibility(View.VISIBLE);
 									}
 								}
 							});
@@ -228,6 +239,7 @@ public class GameManager {
 								if(user_id.equals(LoginManager.id)== false) {
 									return;
 								}
+								Games.Enemy_handcard_count = jbj.getInt("handcount");
 							} catch (JSONException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -238,7 +250,10 @@ public class GameManager {
 								public void run() {
 									// TODO Auto-generated method stub
 									GameManager.myTurn = 0;
+									Games.turnend.setVisibility(View.VISIBLE);
+									Games.turnedlayout.setVisibility(View.VISIBLE);
 									Games.turntoast(turns);
+									Games.turned_img();
 									Game.selectMycard_1 = true;
 									Game.selectMycard_2 = true;
 									Game.selectMycard_3 = true;
@@ -247,29 +262,72 @@ public class GameManager {
 							return;
 							
 						}
-						///////////////////////////attack///////
-						if(event.equals("attacked")){
+						////////////////////////////////////////
+						if(event.equals("deathcard")){
 							try {
-								Log.d(TAG_depense, "attacked event ");
 								JSONObject jbj = new JSONObject(temp);
-								
-								String joiner_id = jbj.getString("joiner");
-								String owner_id = jbj.getString("owner");
-								
-								
-								
-								if(joiner_id.equals(LoginManager.id)==false && owner_id.equals(LoginManager.id)==false) {
-									Log.d(TAG_depense, "attacked out ");
+								String user_id = jbj.getString("userID");
+								//if(Games.Death_danger.size() >= 3){
+									//Log.d("Add", "Games.Death_danger.size() : " + Games.Death_danger.size() );
+								//}
+								//Log.d(TAG, "GameManager json 받아온 값 " + jbj.getInt("deathcard"));
+								if(user_id.equals(LoginManager.id)== false) {
 									return;
 								}
-								attackdata = jbj.getString("data");
-								JSONObject jj = new JSONObject(attackdata);
-								att_i = jj.getInt("att");
-								hp_i = jj.getInt("hp");
-								youbutton = jj.getInt("yourButtonID");
-								mybutton = jj.getInt("myButtonID");
-								m_cardID = jj.getString("cardID");
-								Log.i("sssss", "sssss");
+								
+								Games.Death_danger.add(jbj.getInt("deathcard"));
+								Games.Death_danger1.add(jbj.getInt("deathcard"));
+								Log.d("turn",Games.Death_danger.size()+"");
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+							return;
+							
+						}
+						///////////////////////////////////////////////
+						///////////////////////////////////////////////
+						if(event.equals("nodeathcarded")){
+							try {
+								JSONObject jbj = new JSONObject(temp);
+								String user_id = jbj.getString("userID");
+								//if(Games.Death_danger.size() >= 3){
+									//Log.d("Add", "Games.Death_danger.size() : " + Games.Death_danger.size() );
+								//}
+								//Log.d(TAG, "GameManager json 받아온 값 " + jbj.getInt("deathcard"));
+								if(user_id.equals(LoginManager.id)== false) {
+									return;
+								}
+								for(int i=0;i<Games.Death_danger.size();i++){
+									if(Games.Death_danger.get(i)==jbj.getInt("deathcard")){
+										Games.Death_danger.remove(i);
+									}
+								}
+								
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+							return;
+							
+						}
+						//////////////////////////magic////////////////
+						if(event.equals("magiced")){
+							
+							try {
+								JSONObject jbj = new JSONObject(temp);
+								String user_id = jbj.getString("userID");
+								magic_num = jbj.getInt("magic");
+								//if(Games.Death_danger.size() >= 3){
+									//Log.d("Add", "Games.Death_danger.size() : " + Games.Death_danger.size() );
+								//}
+								//Log.d(TAG, "GameManager json 받아온 값 " + jbj.getInt("deathcard"));
+								if(user_id.equals(LoginManager.id)== false) {
+									return;
+								}
+															
 							} catch (JSONException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -279,7 +337,73 @@ public class GameManager {
 								@Override
 								public void run() {
 									// TODO Auto-generated method stub
-									Log.d(TAG_depense, "depense functiong go ");
+									Games.EnemymagicEffect(magic_num);
+								}
+							});
+							
+							return;
+							
+						}
+						///////////////////////////////////////////////count//////////////////
+						if(event.equals("totalcount")){
+							try {
+								JSONObject jbj = new JSONObject(temp);
+								String user_id = jbj.getString("userID");
+								//Log.d(TAG_Total, "1 UserTotalCount " + Game.UserTotalCount + " EnemyTotalCount " + Game.EnemyTotalCount);
+								if(user_id.equals(LoginManager.id)== false) {
+									return;
+								}
+								Game.EnemyTotalCount = jbj.getInt("Totalcount");
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							if(Game.EnemyTotalCount == 0){
+								handler.post((new Runnable() {
+									
+									@Override
+									public void run() {
+										// TODO Auto-generated method stub
+										Games.EnemyGameover();
+									}
+								}));
+							}
+							return;
+							
+						}
+						///////////////////////////attack///////
+						if(event.equals("attacked")){
+							try {
+								//Log.d(TAG_depense, "attacked event ");
+								JSONObject jbj = new JSONObject(temp);
+								
+								String joiner_id = jbj.getString("joiner");
+								String owner_id = jbj.getString("owner");
+								
+								
+								
+								if(joiner_id.equals(LoginManager.id)==false && owner_id.equals(LoginManager.id)==false) {
+									//Log.d(TAG_depense, "attacked out ");
+									return;
+								}
+								attackdata = jbj.getString("data");
+								JSONObject jj = new JSONObject(attackdata);
+								att_i = jj.getInt("att");
+								hp_i = jj.getInt("hp");
+								youbutton = jj.getInt("yourButtonID");
+								mybutton = jj.getInt("myButtonID");
+								m_cardID = jj.getString("cardID");
+								//Log.i("sssss", "sssss");
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							handler.post(new Runnable() {
+								
+								@Override
+								public void run() {
+									// TODO Auto-generated method stub
+									//Log.d(TAG_depense, "depense functiong go ");
 									Games.attack(mybutton,youbutton);
 								}
 							});
@@ -289,7 +413,9 @@ public class GameManager {
 						if(event.equals("depensed")){
 							try {
 								
-								Log.d(TAG_depense, "depensed event ");
+								GameManager.isBlockAttack = false;
+							
+								//Log.d(TAG_depense, "depensed event ");
 								JSONObject jbj = new JSONObject(temp);
 								
 								String joiner_id = jbj.getString("joiner");
@@ -298,7 +424,7 @@ public class GameManager {
 								
 								
 								if(joiner_id.equals(LoginManager.id)==false && owner_id.equals(LoginManager.id)==false) {
-									Log.d(TAG_depense, "depensed out ");
+									//Log.d(TAG_depense, "depensed out ");
 									return;
 								}
 								dependata = jbj.getString("data");
@@ -319,7 +445,7 @@ public class GameManager {
 								@Override
 								public void run() {
 									// TODO Auto-generated method stub
-									Log.d(TAG_depense, "depense functiong go button : " + e_youbutton+"," + e_mybutton);
+									//Log.d(TAG_depense, "depense functiong go button : " + e_youbutton+"," + e_mybutton);
 									Games.depense(e_youbutton);
 								}
 							});
@@ -359,6 +485,7 @@ public class GameManager {
 								}
 
 							});
+							
 							return;
 
 						}
@@ -370,28 +497,61 @@ public class GameManager {
 							},100);
 							return;
 						}
+						if(event.equals("enemy_disconnect")){
+							try {
+								Log.d(TAG, "event enemy_disconnect ");
+								JSONObject jbj = new JSONObject(temp);
+								String user_id = jbj.getString("userID");
+								turns = jbj.getString("Data");
+								GameManager.isInit=false;
+								if(user_id.equals(LoginManager.id)== false) {
+									return;
+								}
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							handler.post(new Runnable() {
 
+								@Override
+								public void run() {
+									Log.d(TAG, "run enemy_disconnect  Game.MyId : " + Game.MyId + " Game.EnemyId : " + Game.EnemyId);
+									Games.EnemyGameover();
+								}	
+							});
+							return;
+							
+						}
 						// event : inserted_room
 
 						// /event inserted_room
-						Log.i("sss","Line99");
+						//Log.i("sss","Line99");
 						if (Makeroom.isOwner ==false && flagTimer == false){
-							Log.i("sss","flag Timer = false");
+							//Log.i("sss","flag Timer = false");
 							return;
 						}
-						Log.i("sss","Line100");
+						//Log.i("sss","Line100");
 
 						try {
-							Log.i("sss","Line101");
+							//Log.i("sss","Line101");
 							user = new JSONObject(temp);
 							user1 = user.getJSONObject("user1");
 							user2 = user.getJSONObject("user2");
 							user1_id = user1.getString("userID");
 							user2_id = user2.getString("userID");
-							Log.i("sss","Line102");
+							
+							if(LoginManager.id == user1_id){
+								Game.MyId = user1_id;
+								Game.EnemyId = user2_id;
+							}
+							else{
+								Game.MyId = user2_id;						
+								Game.EnemyId = user1_id;
+							}
+							//Log.i("sss","Line102");
 							//if(user1_id.equ)
 							if(user1_id.equals(LoginManager.id)==false && user2_id.equals(LoginManager.id)==false){
-								Log.i("sss", "not member!");
+								//Log.i("sss", "not member!");
 								return;
 							}
 							user1_url = user1.getString("userImgUrl");
@@ -403,7 +563,7 @@ public class GameManager {
 							user2_name = user2.getString("userName");
 							user2_wincount = user2.getString("userWinCount");
 							user2_losecount = user2.getString("userLostCount");
-							Log.i("sss","Line1");
+							//Log.i("sss","Line1");
 							if (Makeroom.isOwner){
 								Log.i("sss","Line2");
 								handler.post(new Runnable() {
@@ -456,6 +616,7 @@ public class GameManager {
 				e1.printStackTrace();
 			}
 			handler = new Handler();
+			SM = SoundManager.getInstance();
 			Click = new OnClickListener() {
 
 				@Override
@@ -473,6 +634,7 @@ public class GameManager {
 					try {
 						if(btnType.getId()==R.id.makeroom){
 							Makeroom.isOwner=true;
+							SM.play("touch");
 							activitySocket.openMakeroom();
 							JSONObject jobj = new JSONObject();
 		
@@ -491,6 +653,7 @@ public class GameManager {
 							
 						}
 						if(btnType.getId()==R.id.inroom){
+							SM.play("touch");
 							JSONObject jobj = new JSONObject();
 							try {
 								Makeroom.isOwner=false;

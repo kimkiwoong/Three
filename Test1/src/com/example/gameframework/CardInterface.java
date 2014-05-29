@@ -57,6 +57,10 @@ public  class CardInterface {
 	public static final int SIN_RARE_KIMCHCH	=	109;//신라 김춘추
 	public static final int SIN_SP_KIMYOUSIN	= 	110;//신라 김유신
 	
+	public static final int GO_MAGIC1 = 1000;
+	public static final int SIN_MAGIC1 = 2000;
+	public static final int BACK_MAGIC1 = 3000;
+	
 	 public String mName;//
 	 public String mID;//카드번호
 	 public int mPower;//카드 파워
@@ -64,7 +68,7 @@ public  class CardInterface {
 	 public int mhp;//카드 피
 	 public int mCState;//카드 상태
 	 public boolean mMagic;// 마법 유무 상태
-	 public String mMagicName;
+	 public int mMagicName;
 
 	//public Bitmap mImage;
 	
@@ -109,7 +113,7 @@ public  class CardInterface {
 		
 		
 	}
-	public void SetMagicName(String magicName){
+	public void SetMagicName(int magicName){
 		this.mMagicName = magicName;
 		
 		
