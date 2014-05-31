@@ -16,7 +16,7 @@ public class SoundManager {
 	private AudioManager m_AudioManager;
 	private Context m_Activity;
 	private static SoundManager m_instance;
-	
+	public static int progressnum=0;
 public void Init(Context context){
 	m_soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
 	m_MediaPlayer = new MediaPlayer();
@@ -32,6 +32,12 @@ SoundPool.OnLoadCompleteListener mListener = new SoundPool.OnLoadCompleteListene
 		// TODO Auto-generated method stub
 		if(status==0){
 			Log.d("Sound", " "+sampleId);
+			progressnum+=1;
+			loadingActivity.progressBar1.setProgress(progressnum);
+			loadingActivity.textview2.setText(progressnum+"%");
+			if(progressnum==100){
+				loadingActivity.textview1.setText("게임을 시작합니다.");
+			}
 		}
 	}
 };
@@ -40,9 +46,11 @@ public void addSound(String name, int soundID){
 	int id = m_soundPool.load(m_Activity, soundID, 1);
 	m_soundpoolmap.put(name, id);
 	
+	
 }
 public void backgroundAddSound(int id){
 	m_MediaPlayer=MediaPlayer.create(m_Activity, id);
+	
 	
 }
 public void backgroundPlaySound(){
@@ -191,7 +199,11 @@ public void Initsound(){
 	this.addSound("card_29_come",R.raw.card_29_come);
 	this.addSound("card_29_die",R.raw.card_29_die);
 	this.addSound("card_29_magic", R.raw.card_29_magic);
-	
+	this.addSound("card_30_magic", R.raw.card_30_magic);
+	this.addSound("card_31_magic", R.raw.card_31_magic);
+	this.addSound("card_32_magic", R.raw.card_32_magic);
+	this.addSound("card_33_magic", R.raw.card_33_magic);
+	this.addSound("card_34_magic", R.raw.card_34_magic);
 	
 	
 }

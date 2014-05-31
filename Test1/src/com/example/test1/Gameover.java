@@ -1,5 +1,7 @@
 package com.example.test1;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Intent;
@@ -10,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class Gameover extends Activity {
 
@@ -19,6 +22,9 @@ public class Gameover extends Activity {
 	ImageView win_image;
 	ImageView lose_image;
 	Button game_button;
+	public String result;
+	public String msg[];
+	public TextView UserName, UserNation, UserWinLose;
 	//Button finish_button;
 	
 	@Override
@@ -33,6 +39,11 @@ public class Gameover extends Activity {
 		
 		win_image = (ImageView)findViewById(R.id.winimage);
 		lose_image = (ImageView)findViewById(R.id.loseimage);
+		
+		UserName = (TextView)findViewById(R.id.UserName);
+		//UserNation = (TextView)findViewById(R.id.UserNation);
+		UserWinLose = (TextView)findViewById(R.id.UserWinLose);
+		
 		Handler handler = new Handler();
 		handler.postDelayed(new Runnable() {
 			
@@ -78,6 +89,26 @@ public class Gameover extends Activity {
 			lose_image.setVisibility(View.INVISIBLE);
 		}		
 		
+		try {
+			result = Util
+					.DownloadText("http://hsbug.hamt.co.kr/api/get_member_info?m_fb_id="
+							+ LoginManager.id);
+		} catch (IOException e) {  
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		result = result.trim();
+		//Toast.makeText(MainActivity.this, result, 0).show();		
+		Log.d(TAG, result);
+		msg = result.split("iamspliter");
+		Log.d(TAG, msg[0] + " "  + msg[1] + " " + msg[2]);
+				
+		if(msg[0].equals("SUC")){
+			UserName.setText(msg[1]);
+			UserWinLose.setText(msg[2] + "½Â  " + msg[3]+ "ÆÐ");		
+		}
+		
+				
 		game_button = (Button)findViewById(R.id.game);
 		game_button.setOnClickListener(new View.OnClickListener() {
 			

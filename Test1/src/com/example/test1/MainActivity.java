@@ -60,8 +60,7 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 		LM = LoginManager.getInstance();
 		LM.initialize(getApplicationContext(), this);
 		SM = SoundManager.getInstance();
-		SM.Init(this);
-		SM.Initsound();
+		
 		SM.gamebackgroundVolume(0.3f, 0.3f);
 		SM.backgroundPlaySound();
 		

@@ -7,9 +7,9 @@ public class SIN_NORMAL_HWALANG extends CardInterface{
 
 	
 	public SIN_NORMAL_HWALANG(){
-		this.SetHp(1);
+		this.SetHp(11);
 		this.SetId("card_23");
-		this.SetmPower(1);
+		this.SetmPower(10);
 		this.SetNara(0);
 		this.SetMagic(false);
 		this.SetCState(0);

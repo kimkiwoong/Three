@@ -18,7 +18,7 @@ public class BACK_NORMAL_POJOL1 extends CardInterface {
 
 	
 	public BACK_NORMAL_POJOL1(){
-		this.SetHp(1);
+		this.SetHp(10);
 		this.SetId("card_11");
 		this.SetmPower(1);
 		this.SetNara(0);

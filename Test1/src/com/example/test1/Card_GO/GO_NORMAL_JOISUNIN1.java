@@ -7,9 +7,9 @@ public class GO_NORMAL_JOISUNIN1 extends CardInterface{
 
 	
 	public GO_NORMAL_JOISUNIN1(){
-		this.SetHp(4);
+		this.SetHp(5);
 		this.SetId("card_4");
-		this.SetmPower(6);
+		this.SetmPower(16);
 		this.SetNara(0);
 		this.SetMagic(false);
 		this.SetCState(0);

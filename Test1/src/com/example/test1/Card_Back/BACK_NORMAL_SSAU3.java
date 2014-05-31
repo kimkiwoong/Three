@@ -18,9 +18,9 @@ public class BACK_NORMAL_SSAU3 extends CardInterface{
 
 	
 	public BACK_NORMAL_SSAU3(){
-		this.SetHp(1);
+		this.SetHp(14);
 		this.SetId("card_16");
-		this.SetmPower(1);
+		this.SetmPower(7);
 		this.SetNara(0);
 		this.SetMagic(false);
 		this.SetCState(0);

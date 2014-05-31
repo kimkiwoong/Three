@@ -38,8 +38,8 @@ public class Makeroom extends Activity {
 	public String msg1[];
 	public String msg2[];
 	
-	public TextView UserName1, UserNation1, UserWin1, UserLose1;
-	public TextView UserName2, UserNation2, UserWin2, UserLose2;
+	public TextView UserName1, UserNation1, UserWinLose1;
+	public TextView UserName2, UserNation2, UserWinLose2;
 	
 	SoundManager SM;
 	
@@ -64,13 +64,11 @@ public class Makeroom extends Activity {
 		
 		UserName1 = (TextView)findViewById(R.id.UserName1);
 		UserNation1 = (TextView)findViewById(R.id.UserNation1);
-		UserWin1 = (TextView)findViewById(R.id.UserWin1);
-		UserLose1 = (TextView)findViewById(R.id.UserLose1);
+		UserWinLose1 = (TextView)findViewById(R.id.UserWinlose1);
 		
 		UserName2 = (TextView)findViewById(R.id.UserName2);
 		UserNation2 = (TextView)findViewById(R.id.UserNation2);
-		UserWin2 = (TextView)findViewById(R.id.UserWin2);
-		UserLose2 = (TextView)findViewById(R.id.UserLose2);
+		UserWinLose2 = (TextView)findViewById(R.id.UserWinlose2);
 		
 		try {
 			result = Util
@@ -87,10 +85,18 @@ public class Makeroom extends Activity {
 		Log.d(TAG, msg1[0] + " "  + msg1[1] + " " + msg1[2]);
 		if(msg1[0].equals("SUC")){
 			UserName1.setText(msg1[1]);
-			UserWin1.setText(msg1[2] + "승");
-			UserLose1.setText(msg1[3]+ "패");
+			UserWinLose1.setText(msg1[2] + "승  " + msg1[3]+ "패");
 			
-			//UserNation1.setText();
+			if(msg1[4].equals("1")){
+				UserNation1.setText("고구려");
+			}
+			else if(msg1[4].equals("2")){
+				UserNation1.setText("백제");
+			}
+			else if(msg1[4].equals("3")){
+				UserNation1.setText("신라");
+			}
+			
 		}
 		try {
 			result = Util
@@ -107,10 +113,18 @@ public class Makeroom extends Activity {
 		
 		if(msg2[0] == "SUC"){
 			UserName2.setText(msg2[1]);
-			UserWin2.setText(msg2[2] + "승");
-			UserLose2.setText(msg2[3]+ "패");
+			UserWinLose2.setText(msg2[2] + "승  " + msg2[3]+ "패");
 			
-			//UserNation2.setText();
+			if(msg2[4].equals("1")){
+				UserNation2.setText("고구려");
+			}
+			else if(msg2[4].equals("2")){
+				UserNation2.setText("백제");
+			}
+			else if(msg2[4].equals("3")){
+				UserNation2.setText("신라");
+			}
+			
 		}
 		
 		roomout.setOnClickListener(new OnClickListener() {
@@ -189,7 +203,7 @@ public class Makeroom extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Makeroom.setUsersInfo() - set URLs");
+		//System.out.println("Makeroom.setUsersInfo() - set URLs");
 		
 		try {
 			bitmap = BitmapFactory.decodeStream(ownerImg.openStream());
@@ -217,12 +231,20 @@ public class Makeroom extends Activity {
 		
 		if(msg2[0].equals("SUC")){
 			UserName2.setText(msg2[1]);
-			UserWin2.setText(msg2[2] + "승");
-			UserLose2.setText(msg2[3]+ "패");
+			UserWinLose2.setText(msg2[2] + "승  " + msg2[3]+ "패");
 			
-			//UserNation2.setText();
+			if(msg2[4].equals("1")){
+				UserNation2.setText("고구려");
+			}
+			else if(msg2[4].equals("2")){
+				UserNation2.setText("백제");
+			}
+			else if(msg2[4].equals("3")){
+				UserNation2.setText("신라");
+			}
+			
 		}
-		System.out.println("Makeroom.setUsersInfo() - End");
+		//System.out.println("Makeroom.setUsersInfo() - End");
 		
 	}
 	

@@ -7,13 +7,13 @@ public class GO_SP_GWANGKING extends CardInterface{
 
 	
 	public GO_SP_GWANGKING(){
-		this.SetHp(6);
+		this.SetHp(16);
 		this.SetId("card_9");
-		this.SetmPower(8);
+		this.SetmPower(19);
 		this.SetNara(0);
 		this.SetMagic(true);
 		this.SetCState(0);
-		this.SetMagicName(1000);
+		this.SetMagicName(CardInterface.GO_MAGIC1);
 		
 	}
 		

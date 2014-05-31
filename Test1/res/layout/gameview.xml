@@ -109,9 +109,8 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="98dp"
             android:layout_gravity="center"
-            android:layout_weight="0.05"
             android:orientation="horizontal" >
 
             <FrameLayout
@@ -136,9 +135,8 @@
                     android:id="@+id/enemyexplosion1"
                     android:layout_width="80dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/explosion2" 
-                    android:visibility="invisible"/>
-
+                    android:src="@drawable/explosion2"
+                    android:visibility="invisible" />
             </FrameLayout>
 
             <FrameLayout
@@ -165,7 +163,6 @@
                     android:layout_height="100dp"
                     android:src="@drawable/explosion2"
                     android:visibility="invisible" />
-
             </FrameLayout>
 
             <FrameLayout
@@ -190,59 +187,171 @@
                     android:id="@+id/enemyexplosion3"
                     android:layout_width="80dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/explosion2" 
-                    android:visibility="invisible"/>
-
+                    android:src="@drawable/explosion2"
+                    android:visibility="invisible" />
             </FrameLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/turnendlayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:background="@drawable/layout_bg"
-            android:gravity="right"
-            android:orientation="vertical"
-            android:padding="6dp" >
-
-            <Button
-                android:id="@+id/turnend"
-                style="@style/ButtonText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_gb2"
-                android:padding="10dp"
-                android:text="Turn" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/magiclayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:background="@drawable/layout_bg"
-            android:gravity="right"
-            android:orientation="vertical"
-            android:visibility="invisible"
-            android:padding="6dp" >
-
-            <Button
-                android:id="@+id/magicon"
-                style="@style/ButtonText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_gb2"
-                android:padding="10dp"
-                android:visibility="invisible"
-                android:text="Magic" />
-        </LinearLayout>
-        
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
+            android:layout_weight="0.05"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:id="@+id/EnemyCard1Layout"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="#000000"
+                android:padding="6dp" >
+
+                <TextView
+                    android:id="@+id/e1_att"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="win"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/e1_def"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/e1_win"
+                    android:layout_alignBottom="@+id/e1_win"
+                    android:layout_marginLeft="50dp"
+                    android:text="lose"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/EnemyCard2Layout"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="#000000"
+                android:padding="6dp" >
+
+                <TextView
+                    android:id="@+id/e2_att"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:text="win"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+                
+                <TextView
+                    android:id="@+id/e2_def"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/e2_win"
+                    android:layout_alignBottom="@+id/e2_win"
+                    android:layout_marginLeft="14dp"
+                    android:layout_toRightOf="@+id/e2_win"
+                    android:layout_alignParentRight="true"
+                    android:text="lose"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+                
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/EnemyCard3Layout"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="#000000"
+                android:padding="6dp" >
+
+                <TextView
+                    android:id="@+id/e3_att"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp"
+                    android:text="win" />
+
+                <TextView
+                    android:id="@+id/e3_def"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/e3_win"
+                    android:layout_alignBottom="@+id/e3_win"
+                    android:layout_marginLeft="14dp"
+                    android:layout_toRightOf="@+id/e3_win"
+                    android:layout_alignParentRight="true"
+                    android:text="lose"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6" >
+
+            <LinearLayout
+                android:id="@+id/turnendlayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/layout_bg"
+                android:gravity="right"
+                android:orientation="vertical"
+                android:padding="6dp" >
+
+                <Button
+                    android:id="@+id/turnend"
+                    style="@style/ButtonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_gb2"
+                    android:padding="10dp"
+                    android:text="Turn" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/magiclayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/layout_bg"
+                android:gravity="left"
+                android:orientation="vertical"
+                android:padding="6dp"
+                android:visibility="invisible" >
+
+                <Button
+                    android:id="@+id/magicon"
+                    style="@style/ButtonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_gb2"
+                    android:padding="10dp"
+                    android:text="Magic"
+                    android:visibility="invisible" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="101dp"
+            android:layout_gravity="center"
             android:orientation="horizontal" >
 
             <FrameLayout
@@ -293,8 +402,8 @@
                     android:id="@+id/myexplosion2"
                     android:layout_width="80dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/explosion2" 
-                    android:visibility="invisible"/>
+                    android:src="@drawable/explosion2"
+                    android:visibility="invisible" />
             </FrameLayout>
 
             <FrameLayout
@@ -325,11 +434,111 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.05"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:id="@+id/Mycard1Layout"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="#000000"
+                android:padding="6dp" >
+
+                <TextView
+                    android:id="@+id/m1_att"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="win"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/m1_def"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/m1_win"
+                    android:layout_alignBottom="@+id/m1_win"
+                    android:layout_marginLeft="50dp"
+                    android:text="lose"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/Mycard2Layout"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="#000000"
+                android:padding="6dp" >
+
+                <TextView
+                    android:id="@+id/m2_def"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/m2_att"
+                    android:layout_alignBottom="@+id/m2_att"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="14dp"
+                    android:text="lose"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/m2_att"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="14dp"
+                    android:text="win"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/Mycard3Layout"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="#000000"
+                android:padding="6dp" >
+
+                <TextView
+                    android:id="@+id/m3_att"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="win"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/m3_def"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/m3_att"
+                    android:layout_alignBottom="@+id/m3_att"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="lose"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5" >
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/handcard_1"
                 android:layout_width="60dp"
                 android:layout_height="70dp"
@@ -409,7 +618,7 @@
     </LinearLayout>
 
     <FrameLayout
-        android:id="@+id/LinearLayout2"
+        android:id="@+id/FrameLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -421,14 +630,15 @@
             android:layout_height="wrap_content"
             android:src="@drawable/text"
             android:visibility="invisible" />
-  		<ImageView
+
+        <ImageView
             android:id="@+id/magicImg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/text"
             android:visibility="invisible" />
-      
-
     </FrameLayout>
+    
+    
 
 </FrameLayout>

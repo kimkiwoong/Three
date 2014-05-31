@@ -7,13 +7,17 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.internal.RealSystem;
 
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -21,7 +25,6 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -29,7 +32,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gameframework.AppManager;
@@ -130,8 +134,27 @@ public class Game extends Activity {
 	public Button magicon;
 	// /////////////////////////////
 	public int search_handcard;
-	// ////////////
-
+	// //////////////////////////////////////////
+	public RelativeLayout m1_layout;
+	public RelativeLayout m2_layout;
+	public RelativeLayout m3_layout;
+	public RelativeLayout e1_layout;
+	public RelativeLayout e2_layout;
+	public RelativeLayout e3_layout;
+		
+	public TextView m1_att;
+	public TextView m1_def;
+	public TextView m2_att;
+	public TextView m2_def;
+	public TextView m3_att;
+	public TextView m3_def;
+	public TextView e1_att;
+	public TextView e1_def;
+	public TextView e2_att;
+	public TextView e2_def;
+	public TextView e3_att;
+	public TextView e3_def;
+	//////////////////////////////////////////////////
 	// effect
 	public FrameLayout myCardEffect1;
 	public FrameLayout myCardEffect2;
@@ -180,7 +203,7 @@ public class Game extends Activity {
 
 			// TODO Auto-generated method stub
 			if (v.getId() == R.id.fmcard_1 && selectMycard_1 == true
-					&& !fightmycard_1.getText().equals("")) { // 첫번째 내 공격카드 선택시
+					&& !m1_att.getText().equals("")) { // 첫번째 내 공격카드 선택시
 				if(attackCard.get(0).mMagic==true){
 					magicon.setVisibility(View.VISIBLE);
 					magiclayout.setVisibility(View.VISIBLE);
@@ -196,7 +219,7 @@ public class Game extends Activity {
 				myCardEffect3.setBackgroundColor(0);
 
 			} else if (v.getId() == R.id.fmcard_2 && selectMycard_2 == true
-					&& !fightmycard_2.getText().equals("")) {// 두번째 내 공격카드 선택시
+					&& !m2_att.getText().equals("")) {// 두번째 내 공격카드 선택시
 				if(attackCard.get(1).mMagic==true){
 					magicon.setVisibility(View.VISIBLE);
 					magiclayout.setVisibility(View.VISIBLE);
@@ -212,7 +235,7 @@ public class Game extends Activity {
 				myCardEffect3.setBackgroundColor(0);
 
 			} else if (v.getId() == R.id.fmcard_3 && selectMycard_3 == true
-					&& !fightmycard_3.getText().equals("")) {// 세번째 내 공격카드 선택시
+					&& !m3_att.getText().equals("")) {// 세번째 내 공격카드 선택시
 				if(attackCard.get(2).mMagic==true){
 					magicon.setVisibility(View.VISIBLE);
 					magiclayout.setVisibility(View.VISIBLE);
@@ -334,26 +357,26 @@ public class Game extends Activity {
 			// TODO Auto-generated method stub
 			switch (v.getId()) {
 			case R.id.fycard_1:
-				if (!fightyoucard_1.getText().equals("")) {
+				if (!e1_att.getText().equals("")) {
 					Game.this.onCreateDialog(E_CardID1);
 					showDialog(E_CardID1);
 				}
 				break;
 			case R.id.fycard_2:
-				if (!fightyoucard_2.getText().equals("")) {
+				if (!e2_att.getText().equals("")) {
 					Game.this.onCreateDialog(E_CardID2);
 					showDialog(E_CardID2);
 				}
 				break;
 			case R.id.fycard_3:
-				if (!fightyoucard_3.getText().equals("")) {
+				if (!e3_att.getText().equals("")) {
 					Game.this.onCreateDialog(E_CardID3);
 					showDialog(E_CardID3);
 				}
 				break;
 			case R.id.fmcard_1:
 				// death_card 이면
-				if (fightmycard_1.getText().equals("")) {
+				if (m1_att.getText().equals("")) {
 					// 내 차례 이면
 					if (GameManager.myTurn == 0 && My_handcard_count > 0) {
 						// Log.d(TAG, " fmcard_1 - if");
@@ -371,7 +394,7 @@ public class Game extends Activity {
 				break;
 			case R.id.fmcard_2:
 				// death_card 이면
-				if (fightmycard_2.getText().equals("")) {
+				if (m2_att.getText().equals("")) {
 					// 내 차례 이면
 					if (GameManager.myTurn == 0 && My_handcard_count > 0) {
 						// Log.d(TAG, " fmcard_2 - if");
@@ -389,7 +412,7 @@ public class Game extends Activity {
 				break;
 			case R.id.fmcard_3:
 				// death_card 이면
-				if (fightmycard_3.getText().equals("")) {
+				if (m3_att.getText().equals("")) {
 					// 내 차례 이면
 					if (GameManager.myTurn == 0 && My_handcard_count > 0) {
 						// Log.d(TAG, " fmcard_3 - if");
@@ -455,7 +478,30 @@ public class Game extends Activity {
 		e_handcard[4] = (Button) findViewById(R.id.e_handcard_5);
 		e_handcard[5] = (Button) findViewById(R.id.e_handcard_6);
 		e_handcard[6] = (Button) findViewById(R.id.e_handcard_7);
-		// ////
+		// ///////////////////////////////////////////////////
+		m1_layout = (RelativeLayout)findViewById(R.id.Mycard1Layout);
+		m2_layout = (RelativeLayout)findViewById(R.id.Mycard2Layout);
+		m3_layout = (RelativeLayout)findViewById(R.id.Mycard3Layout);
+		
+		e1_layout = (RelativeLayout)findViewById(R.id.EnemyCard1Layout);
+		e2_layout = (RelativeLayout)findViewById(R.id.EnemyCard2Layout);
+		e3_layout = (RelativeLayout)findViewById(R.id.EnemyCard3Layout);
+		///////////////////////////////////////////////////////////
+		m1_att = (TextView)findViewById(R.id.m1_att);
+		m1_def = (TextView)findViewById(R.id.m1_def);
+		m2_att = (TextView)findViewById(R.id.m2_att);
+		m2_def = (TextView)findViewById(R.id.m2_def);
+		m3_att = (TextView)findViewById(R.id.m3_att);
+		m3_def = (TextView)findViewById(R.id.m3_def);
+		
+		e1_att = (TextView)findViewById(R.id.e1_att);
+		e1_def = (TextView)findViewById(R.id.e1_def);
+		e2_att = (TextView)findViewById(R.id.e2_att);
+		e2_def = (TextView)findViewById(R.id.e2_def);
+		e3_att = (TextView)findViewById(R.id.e3_att);
+		e3_def = (TextView)findViewById(R.id.e3_def);
+		///////////////////////////////////////////////////////////
+		
 
 		myCardEffect1 = (FrameLayout) findViewById(R.id.my_effect1);
 		myCardEffect2 = (FrameLayout) findViewById(R.id.my_effect2);
@@ -540,7 +586,8 @@ public class Game extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-
+				magicon.setVisibility(View.INVISIBLE);
+				magiclayout.setVisibility(View.INVISIBLE);
 				// 상대방 Turn
 				if (GameManager.myTurn == 1) {
 					Toast.makeText(getApplicationContext(), "상대방 Turn 입니다 ", 0)
@@ -549,18 +596,19 @@ public class Game extends Activity {
 				}
 
 				if (UserTotalCount >= 3) {
+					
 					// Death Card 존재
-					if (fightmycard_1.getText().equals("")
-							|| fightmycard_2.getText().equals("")
-							|| fightmycard_3.getText().equals("")) {
+					if (m1_att.getText().equals("")
+							|| m2_att.getText().equals("")
+							|| m3_att.getText().equals("")) {
 						Toast.makeText(getApplicationContext(),
 								"Death Card가 존재 합니다 ", 0).show();
 						return;
 					}
 				} else {
-					if (fightmycard_1.getText().equals("")
-							&& fightmycard_2.getText().equals("")
-							&& fightmycard_3.getText().equals("")) {
+					if (m1_att.getText().equals("")
+							&& m2_att.getText().equals("")
+							&& m3_att.getText().equals("")) {
 						Toast.makeText(getApplicationContext(),
 								"한장이상의 Card가 존재 합니다 ", 0).show();
 						return;
@@ -737,14 +785,14 @@ public class Game extends Activity {
 		// String a = Integer.toString(UserimageNum[0]);
 
 		fightmycard_1.setBackgroundResource(UserimageNum[0]);
-		fightmycard_1.setText("A: " + attackCard.get(0).mPower + "\n" + "D: "
-				+ attackCard.get(0).mhp);
+		m1_att.setText("A:"+attackCard.get(0).mPower);
+		m1_def.setText("D:"+attackCard.get(0).mhp);
 		fightmycard_2.setBackgroundResource(UserimageNum[1]);
-		fightmycard_2.setText("A: " + attackCard.get(1).mPower + "\n" + "D: "
-				+ attackCard.get(1).mhp);
+		m2_att.setText("A:"+attackCard.get(1).mPower);
+		m2_def.setText("D:"+attackCard.get(1).mhp);
 		fightmycard_3.setBackgroundResource(UserimageNum[2]);
-		fightmycard_3.setText("A: " + attackCard.get(2).mPower + "\n" + "D: "
-				+ attackCard.get(2).mhp);
+		m3_att.setText("A:"+attackCard.get(2).mPower);
+		m3_def.setText("D:"+attackCard.get(2).mhp);
 
 		fightyoucard_1.setBackgroundResource(R.drawable.backcard);
 		fightyoucard_2.setBackgroundResource(R.drawable.backcard);
@@ -780,20 +828,20 @@ public class Game extends Activity {
 				Log.d("turn", " turned_img 받아온 값 " + Death_danger.get(i));
 				if (Death_danger.get(i) == 2 ) {
 					
-					if(fightyoucard_1.getText().equals("")){
+					if(e1_att.getText().equals("")){
 						fightyoucard_1.setBackgroundResource(R.drawable.backcard);
 						fightyoucard_1.setText("");
 					}
 					
 				} else if (Death_danger.get(i) == 1 ) {
 					
-					if(fightyoucard_2.getText().equals("")){
+					if(e2_att.getText().equals("")){
 						fightyoucard_2.setBackgroundResource(R.drawable.backcard);
 						fightyoucard_2.setText("");
 					};
 				} else if (Death_danger.get(i) == 0) {
 					
-					if(fightyoucard_3.getText().equals("")){
+					if(e3_att.getText().equals("")){
 						fightyoucard_3.setBackgroundResource(R.drawable.backcard);
 						fightyoucard_3.setText("");
 					}
@@ -900,8 +948,8 @@ public class Game extends Activity {
 					.getIdentifier(attackCard.get(0).mID, "drawable",
 							"com.example.test1");
 			fightmycard_1.setBackgroundResource(search_handcard);
-			fightmycard_1.setText("A: " + attackCard.get(0).mPower + "\n"
-					+ "D: " + attackCard.get(0).mhp);
+			m1_att.setText("A:"+attackCard.get(0).mPower);
+			m1_def.setText("D:"+attackCard.get(0).mhp);
 			SM.play(attackCard.get(0).mID + "_come");
 		} else if (deathcard == 1) {
 			search_handcard = AppManager
@@ -910,8 +958,8 @@ public class Game extends Activity {
 					.getIdentifier(attackCard.get(1).mID, "drawable",
 							"com.example.test1");
 			fightmycard_2.setBackgroundResource(search_handcard);
-			fightmycard_2.setText("A: " + attackCard.get(1).mPower + "\n"
-					+ "D: " + attackCard.get(1).mhp);
+			m2_att.setText("A:"+attackCard.get(1).mPower);
+			m2_def.setText("D:"+attackCard.get(1).mhp);
 			SM.play(attackCard.get(1).mID + "_come");
 		} else if (deathcard == 2) {
 			search_handcard = AppManager
@@ -920,8 +968,8 @@ public class Game extends Activity {
 					.getIdentifier(attackCard.get(2).mID, "drawable",
 							"com.example.test1");
 			fightmycard_3.setBackgroundResource(search_handcard);
-			fightmycard_3.setText("A: " + attackCard.get(2).mPower + "\n"
-					+ "D: " + attackCard.get(2).mhp);
+			m3_att.setText("A:"+attackCard.get(2).mPower);
+			m3_def.setText("D:"+attackCard.get(2).mhp);
 			SM.play(attackCard.get(2).mID + "_come");
 		}
 
@@ -1097,6 +1145,9 @@ public class Game extends Activity {
 
 		if (attackCard.get(index).GetHp() <= 0) {
 			explosionStart(b);
+			attackCard.get(index).mMagic=false;
+			magicon.setVisibility(View.INVISIBLE);
+			magiclayout.setVisibility(View.INVISIBLE);
 			
 		}
 		Handler handler = new Handler();
@@ -1105,9 +1156,17 @@ public class Game extends Activity {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-
-				b.setText("A: " + attackCard.get(index).mPower + "\n" + "D: "
-						+ attackCard.get(index).mhp);
+				if (b.getId() == R.id.fmcard_1) {
+					m1_att.setText("A:"+attackCard.get(index).mPower);
+					m1_def.setText("D:"+attackCard.get(index).mhp);
+				} else if (b.getId() == R.id.fmcard_2) {
+					m2_att.setText("A:"+attackCard.get(index).mPower);
+					m2_def.setText("D:"+attackCard.get(index).mhp);
+				} else if (b.getId() == R.id.fmcard_3) {
+					m3_att.setText("A:"+attackCard.get(index).mPower);
+					m3_def.setText("D:"+attackCard.get(index).mhp);
+				}
+				
 
 				if (attackCard.get(index).GetHp() <= 0) {
 
@@ -1115,7 +1174,17 @@ public class Game extends Activity {
 					explosionEnd(b);
 
 					b.setBackgroundResource(R.drawable.card_death);
-					b.setText("");
+					if (b.getId() == R.id.fmcard_1) {
+						m1_att.setText("");
+						m1_def.setText("");
+					} else if (b.getId() == R.id.fmcard_2) {
+						m2_att.setText("");
+						m2_def.setText("");
+					} else if (b.getId() == R.id.fmcard_3) {
+						m3_att.setText("");
+						m3_def.setText("");
+					}
+					
 					UserTotalCount--;
 
 					JSONObject jobj = new JSONObject();
@@ -1145,6 +1214,7 @@ public class Game extends Activity {
 								startActivity(i);
 								activitychange = true;
 								// System.exit(0);
+								
 								onDestroy();
 
 							}
@@ -1171,6 +1241,9 @@ public class Game extends Activity {
 
 		if (attackCard.get(index).GetHp() <= 0) {
 			explosionStart(b);
+			attackCard.get(index).mMagic=false;
+			magicon.setVisibility(View.INVISIBLE);
+			magiclayout.setVisibility(View.INVISIBLE);
 		}
 			JSONObject jobj = new JSONObject();
 			try {
@@ -1197,15 +1270,32 @@ public class Game extends Activity {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				b.setText("A: " + attackCard.get(index).mPower + "\n" + "D: "
-						+ attackCard.get(index).mhp);
+				if (b.getId() == R.id.fmcard_1) {
+					m1_att.setText("A:"+attackCard.get(index).mPower);
+					m1_def.setText("D:"+attackCard.get(index).mhp);
+				} else if (b.getId() == R.id.fmcard_2) {
+					m2_att.setText("A:"+attackCard.get(index).mPower);
+					m2_def.setText("D:"+attackCard.get(index).mhp);
+				} else if (b.getId() == R.id.fmcard_3) {
+					m3_att.setText("A:"+attackCard.get(index).mPower);
+					m3_def.setText("D:"+attackCard.get(index).mhp);
+				}
 
 				if (attackCard.get(index).GetHp() <= 0) {
 					SM.play(attackCard.get(index).mID + "_die");
 					explosionEnd(b);
 
 					b.setBackgroundResource(R.drawable.card_death);
-					b.setText("");
+					if (b.getId() == R.id.fmcard_1) {
+						m1_att.setText("");
+						m1_def.setText("");
+					} else if (b.getId() == R.id.fmcard_2) {
+						m2_att.setText("");
+						m2_def.setText("");
+					} else if (b.getId() == R.id.fmcard_3) {
+						m3_att.setText("");
+						m3_def.setText("");
+					}
 					UserTotalCount--;
 
 					// Log.d(TAG_Total, "3 UserTotalCount " + UserTotalCount +
@@ -1238,6 +1328,7 @@ public class Game extends Activity {
 								startActivity(i);
 								activitychange = true;
 								// System.exit(0);
+								
 								onDestroy();
 
 							}
@@ -1258,21 +1349,27 @@ public class Game extends Activity {
 			enemyCardEffect1.setBackgroundColor(Color.RED);
 			enemyCardEffect2.setBackgroundColor(0);
 			enemyCardEffect3.setBackgroundColor(0);
+			e1_att.setText("A:"+GameManager.att_i);
+			e1_def.setText("D:"+GameManager.hp_i);
 		} else if (b.getId() == R.id.fycard_2) {
 			enemyCardEffect1.setBackgroundColor(0);
 			enemyCardEffect2.setBackgroundColor(Color.RED);
 			enemyCardEffect3.setBackgroundColor(0);
+			e2_att.setText("A:"+GameManager.att_i);
+			e2_def.setText("D:"+GameManager.hp_i);
 		} else if (b.getId() == R.id.fycard_3) {
 			enemyCardEffect1.setBackgroundColor(0);
 			enemyCardEffect2.setBackgroundColor(0);
 			enemyCardEffect3.setBackgroundColor(Color.RED);
+			e3_att.setText("A:"+GameManager.att_i);
+			e3_def.setText("D:"+GameManager.hp_i);
 		}
 
 		if (GameManager.hp_i - attackCard.get(index).mPower <= 0) {
 			explosionStart(b);
 		}
 
-		b.setText("A: " + GameManager.att_i + "\n" + "D: " + GameManager.hp_i);
+		
 		// Log.d(TAG, "enemy attack : " + GameManager.att_i + "  enemy hp : "+
 		// GameManager.hp_i);
 		Handler handler = new Handler();
@@ -1281,20 +1378,38 @@ public class Game extends Activity {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
+				if (b.getId() == R.id.fycard_1) {
+		
+					e1_att.setText("A:"+GameManager.att_i);
+					e1_def.setText("D:"+(GameManager.hp_i - attackCard.get(index).mPower));
+				} else if (b.getId() == R.id.fycard_2) {
+				
+					e2_att.setText("A:"+GameManager.att_i);
+					e2_def.setText("D:"+(GameManager.hp_i - attackCard.get(index).mPower));
+				} else if (b.getId() == R.id.fycard_3) {
+				
+					e3_att.setText("A:"+GameManager.att_i);
+					e3_def.setText("D:"+(GameManager.hp_i - attackCard.get(index).mPower));
+				}
 
-				b.setText("A: " + GameManager.att_i + "\n" + "D: "
-						+ (GameManager.hp_i - attackCard.get(index).mPower));
+				
 				if (GameManager.hp_i - attackCard.get(index).mPower <= 0) {
 
 					explosionEnd(b);
 					b.setBackgroundResource(R.drawable.card_death);
-					b.setText("");
+					
 
 					if (b.getId() == R.id.fycard_1) {
+						e1_att.setText("");
+						e1_def.setText("");
 						Enemy_Deathcard1 = true;
 					} else if (b.getId() == R.id.fycard_2) {
+						e2_att.setText("");
+						e2_def.setText("");
 						Enemy_Deathcard2 = true;
 					} else if (b.getId() == R.id.fycard_3) {
+						e3_att.setText("");
+						e3_def.setText("");
 						Enemy_Deathcard3 = true;
 					}
 
@@ -1318,8 +1433,20 @@ public class Game extends Activity {
 	// 내가 공격 했을 때 적 카드 데이터 갱신
 	public void des_changeEnemycardStat(final Button b, final int index) {
 
-		b.setText("A: " + GameManager.e_att_i + "\n" + "D: "
-				+ GameManager.e_hp_i);
+		if (b.getId() == R.id.fycard_1) {
+	
+			e1_att.setText("A:"+GameManager.e_att_i);
+			e1_def.setText("D:"+GameManager.e_hp_i);
+		} else if (b.getId() == R.id.fycard_2) {
+			
+			e2_att.setText("A:"+GameManager.e_att_i);
+			e2_def.setText("D:"+GameManager.e_hp_i);
+		} else if (b.getId() == R.id.fycard_3) {
+			
+			e3_att.setText("A:"+GameManager.e_att_i);
+			e3_def.setText("D:"+GameManager.e_hp_i);
+		}
+		
 		// Log.d(TAG, "enemy attack : " + GameManager.e_att_i + "  enemy hp : "+
 		// GameManager.e_hp_i);
 
@@ -1333,23 +1460,41 @@ public class Game extends Activity {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-
-				b.setText("A: " + GameManager.e_att_i + "\n" + "D: "
-						+ (GameManager.e_hp_i - attackCard.get(index).mPower));
+				if (b.getId() == R.id.fycard_1) {
+					
+					e1_att.setText("A:"+GameManager.e_att_i);
+					e1_def.setText("D:"+(GameManager.e_hp_i - attackCard.get(index).mPower));
+				} else if (b.getId() == R.id.fycard_2) {
+				
+					e2_att.setText("A:"+GameManager.e_att_i);
+					e2_def.setText("D:"+(GameManager.e_hp_i - attackCard.get(index).mPower));
+				} else if (b.getId() == R.id.fycard_3) {
+				
+					e3_att.setText("A:"+GameManager.e_att_i);
+					e3_def.setText("D:"+(GameManager.e_hp_i - attackCard.get(index).mPower));
+				}
+				
 				if (GameManager.e_hp_i - attackCard.get(index).mPower <= 0) {
 
 					explosionEnd(b);
 
 					b.setBackgroundResource(R.drawable.card_death);
-					b.setText("");
-
 					if (b.getId() == R.id.fycard_1) {
+						e1_att.setText("");
+						e1_def.setText("");
 						Enemy_Deathcard1 = true;
 					} else if (b.getId() == R.id.fycard_2) {
+						e2_att.setText("");
+						e2_def.setText("");
 						Enemy_Deathcard2 = true;
 					} else if (b.getId() == R.id.fycard_3) {
+						e3_att.setText("");
+						e3_def.setText("");
 						Enemy_Deathcard3 = true;
 					}
+					
+
+				
 
 					Log.d(TAG_Add, "b.getId : " + b.getId()
 							+ " Enemy_Deathcard1 : " + Enemy_Deathcard1
@@ -1403,8 +1548,9 @@ public class Game extends Activity {
 
 					Intent i = new Intent(Game.this, Gameover.class);
 					startActivity(i);
-
+					
 					// System.exit(0);
+					
 					onDestroy();
 				}
 			}, 3000);
@@ -1561,6 +1707,7 @@ public class Game extends Activity {
 						Hand_changeid = 0;
 						Death_Change(Death_changeid, Hand_changeid);
 						// dialog.dismiss();
+						
 						removeDialog(id);
 						break;
 					case R.id.handcardlist2:
@@ -1671,21 +1818,23 @@ public class Game extends Activity {
 					m_magicImg.setVisibility(View.INVISIBLE);
 				}
 			}, 2000);
-			if(!fightmycard_1.getText().equals("")){
+			if(!m1_att.getText().equals("")){
 			attackCard.get(0).SetmPower(attackCard.get(0).GetmPower()+3);
-			fightmycard_1.setText("A:" + attackCard.get(0).mPower + " " + "D: "
-					+ attackCard.get(0).mhp);
+			m1_att.setText("A: "+attackCard.get(0).mPower);
+			m1_def.setText("D: "+attackCard.get(0).mhp);
+			
 			}
-			if(!fightmycard_2.getText().equals("")){
-			attackCard.get(1).SetmPower(attackCard.get(1).GetmPower()+3);
-			fightmycard_2.setText("A:" + attackCard.get(1).mPower + " " + "D: "
-					+ attackCard.get(1).mhp);
+			if(!m2_att.getText().equals("")){
+				attackCard.get(1).SetmPower(attackCard.get(1).GetmPower()+3);
+				m2_att.setText("A: "+attackCard.get(1).mPower);
+				m2_def.setText("D: "+attackCard.get(1).mhp);
+				
 			}
-			if(!fightmycard_3.getText().equals("")){
-			attackCard.get(2).SetmPower(attackCard.get(2).GetmPower()+3);
-
-			fightmycard_3.setText("A:" + attackCard.get(2).mPower + " " + "D: "
-					+ attackCard.get(2).mhp);
+			if(!m3_att.getText().equals("")){
+				attackCard.get(2).SetmPower(attackCard.get(2).GetmPower()+3);
+				m3_att.setText("A: "+attackCard.get(2).mPower);
+				m3_def.setText("D: "+attackCard.get(2).mhp);
+				
 			}
 			
 			
@@ -1704,7 +1853,7 @@ public class Game extends Activity {
 				}
 			});
 			
-			SM.play("card_10_magic");
+			SM.play("card_19_magic");
 			
 			handler1.postDelayed(new Runnable() {
 				
@@ -1714,32 +1863,58 @@ public class Game extends Activity {
 					m_magicImg.setVisibility(View.INVISIBLE);
 				}
 			}, 2000);
-			if(!fightmycard_1.getText().equals("")){
-				attackCard.get(0).SetHp(attackCard.get(0).GetHp()+3);
-				fightmycard_1.setText("A:" + attackCard.get(0).mPower + " " + "D: "
-						+ attackCard.get(0).mhp);
-			}
-			if(!fightmycard_2.getText().equals("")){
-				attackCard.get(1).SetHp(attackCard.get(0).GetHp()+3);
-				fightmycard_2.setText("A:" + attackCard.get(1).mPower + " " + "D: "
-						+ attackCard.get(1).mhp);
-			}
-			
-			if(!fightmycard_3.getText().equals("")){
-				attackCard.get(2).SetHp(attackCard.get(0).GetHp()+3);
-				fightmycard_3.setText("A:" + attackCard.get(2).mPower + " " + "D: "
-						+ attackCard.get(2).mhp);
+			if(!m1_att.getText().equals("")){
+				attackCard.get(0).SetmPower(attackCard.get(0).GetHp()+3);
+				m1_att.setText("A: "+attackCard.get(0).mPower);
+				m1_def.setText("D: "+attackCard.get(0).mhp);
 				
-			}
+				}
+				if(!m2_att.getText().equals("")){
+					attackCard.get(1).SetmPower(attackCard.get(1).GetHp()+3);
+					m2_att.setText("A: "+attackCard.get(1).mPower);
+					m2_def.setText("D: "+attackCard.get(1).mhp);
+					
+				}
+				if(!m3_att.getText().equals("")){
+					attackCard.get(2).SetmPower(attackCard.get(2).GetHp()+3);
+					m3_att.setText("A: "+attackCard.get(2).mPower);
+					m3_def.setText("D: "+attackCard.get(2).mhp);
+					
+				}
 			
 				
 			
 			break;
 		case CardInterface.SIN_MAGIC1:
+			handler.post(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					m_magicImg = (ImageView)findViewById(R.id.magicImg);
+					m_magicImg.setImageResource(R.drawable.magic1);
+					m_magicImg.setVisibility(View.VISIBLE);
+				}
+			});
 			
+			SM.play("card_29_magic");
+			
+			handler1.postDelayed(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					m_magicImg.setVisibility(View.INVISIBLE);
+				}
+			}, 2000);
+		
+			
+				
+			
+			break;
 			
 	
-	break;
+
 
 		default:
 			break;
@@ -1771,8 +1946,82 @@ public class Game extends Activity {
 				public void run() {
 					// TODO Auto-generated method stub
 					m_magicImg.setVisibility(View.INVISIBLE);
+
+
 				}
 			}, 2000);
+		case CardInterface.BACK_MAGIC1:
+			handler.post(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					m_magicImg = (ImageView)findViewById(R.id.magicImg);
+					m_magicImg.setImageResource(R.drawable.magic1);
+					m_magicImg.setVisibility(View.VISIBLE);
+				}
+			});
+			
+			SM.play("card_19_magic");
+			
+			handler1.postDelayed(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					m_magicImg.setVisibility(View.INVISIBLE);
+
+
+				}
+			}, 2000);
+			break;
+		case CardInterface.SIN_MAGIC1:
+			handler.post(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					m_magicImg = (ImageView)findViewById(R.id.magicImg);
+					m_magicImg.setImageResource(R.drawable.magic1);
+					m_magicImg.setVisibility(View.VISIBLE);
+				}
+			});
+			
+			SM.play("card_29_magic");
+			
+			handler1.postDelayed(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					m_magicImg.setVisibility(View.INVISIBLE);
+
+
+				}
+			}, 2000);
+			if(!m1_att.getText().equals("")){
+				attackCard.get(0).SetHp(attackCard.get(0).GetmPower()/2);
+				attackCard.get(0).SetmPower(attackCard.get(0).GetHp()/2);
+				m1_att.setText("A: "+attackCard.get(0).mPower);
+				m1_def.setText("D: "+attackCard.get(0).mhp);
+			}
+			if(!m2_att.getText().equals("")){
+				attackCard.get(1).SetHp(attackCard.get(1).GetmPower()/2);
+				attackCard.get(1).SetmPower(attackCard.get(1).GetHp()/2);
+				m2_att.setText("A: "+attackCard.get(1).mPower);
+				m2_def.setText("D: "+attackCard.get(1).mhp);
+			}
+			
+			if(!m3_att.getText().equals("")){
+				attackCard.get(2).SetHp(attackCard.get(2).GetmPower()/2);
+				attackCard.get(2).SetmPower(attackCard.get(2).GetHp()/2);
+				m3_att.setText("A: "+attackCard.get(2).mPower);
+				m3_def.setText("D: "+attackCard.get(2).mhp);
+				
+			}
+			break;
+			default :
+				break;
 		}
 		
 	}
@@ -1791,5 +2040,48 @@ public class Game extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	public void recycle(){
+		Log.d("recycle","recycle" );
+		recycleBitmap1(fightmycard_1);
+		recycleBitmap1(fightmycard_2);
+		recycleBitmap1(fightmycard_3);
+		recycleBitmap1(fightyoucard_1);
+		recycleBitmap1(fightyoucard_2);
+		recycleBitmap1(fightyoucard_3);
+		recycleBitmap1(e_handcard[0]);
+		recycleBitmap1(e_handcard[1]);
+		recycleBitmap1(e_handcard[2]);
+		recycleBitmap1(e_handcard[3]);
+		recycleBitmap1(e_handcard[4]);
+		recycleBitmap1(e_handcard[5]);
+		recycleBitmap1(e_handcard[6]);
+		
+		
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		//this.recycle();
+		super.onDestroy();
+	}
+
+	private static void recycleBitmap(ImageView iv) {        
+			Drawable d = iv.getDrawable();      
+			if (d instanceof BitmapDrawable) {           
+				Bitmap b = ((BitmapDrawable)d).getBitmap();       
+				b.recycle();        
+				} 
+		d.setCallback(null);   
+		}
+	private static void recycleBitmap1(Button iv) {        
+		Drawable d = iv.getBackground();      
+		if (d instanceof BitmapDrawable) {           
+			Bitmap b = ((BitmapDrawable)d).getBitmap();       
+			b.recycle();        
+			} 
+	d.setCallback(null);   
+	}
+
 
 }

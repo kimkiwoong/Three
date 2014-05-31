@@ -7,9 +7,9 @@ public class SIN_RARE_KIMYOUSIN extends CardInterface{
 
 	
 	public SIN_RARE_KIMYOUSIN(){
-		this.SetHp(1);
+		this.SetHp(15);
 		this.SetId("card_28");
-		this.SetmPower(1);
+		this.SetmPower(15);
 		this.SetNara(0);
 		this.SetMagic(false);
 		this.SetCState(0);

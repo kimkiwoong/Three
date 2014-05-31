@@ -62,25 +62,14 @@
                 android:text="Myname" />
 
             <TextView
-                android:id="@+id/UserLose1"
+                android:id="@+id/UserWinlose1"
                 style="@style/ButtonText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/UserName1"
                 android:layout_below="@+id/UserNation1"
+                android:layout_centerHorizontal="true"
                 android:layout_weight="1"
-                android:text="패" />
-
-            <TextView
-                android:id="@+id/UserWin1"
-                style="@style/ButtonText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/UserLose1"
-                android:layout_alignBottom="@+id/UserLose1"
-                android:layout_alignLeft="@+id/UserName1"
-                android:layout_weight="1"
-                android:text="승" />
+                android:text="승  패" />
            
         </RelativeLayout>
     </LinearLayout>
@@ -206,25 +195,14 @@
                 android:text="nation2" />
 
             <TextView
-                android:id="@+id/UserWin2"
+                android:id="@+id/UserWinlose2"
                 style="@style/ButtonText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/UserLose2"
-                android:layout_alignBottom="@+id/UserLose2"
-                android:layout_alignLeft="@+id/UserName2"
-                android:layout_weight="1"
-                android:text="승" />
-
-            <TextView
-                android:id="@+id/UserLose2"
-                style="@style/ButtonText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/UserName2"
                 android:layout_below="@+id/UserNation2"
+                android:layout_centerHorizontal="true"
                 android:layout_weight="1"
-                android:text="패" />
+                android:text="승  패" />
 
         </RelativeLayout>
 

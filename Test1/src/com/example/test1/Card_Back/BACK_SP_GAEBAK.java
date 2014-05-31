@@ -18,13 +18,13 @@ public class BACK_SP_GAEBAK extends CardInterface {
 
 	
 	public BACK_SP_GAEBAK(){
-		this.SetHp(1);
+		this.SetHp(19);
 		this.SetId("card_19");
-		this.SetmPower(1);
+		this.SetmPower(16);
 		this.SetNara(0);
 		this.SetMagic(true);
 		this.SetCState(0);
-		this.SetMagicName(1000);
+		this.SetMagicName(CardInterface.BACK_MAGIC1);
 	}
 		
 
