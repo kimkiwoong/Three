@@ -102,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_gb1"
                     android:padding="10dp"
-                    android:text="ready" />
+                    android:text="준비" />
 
                 <Button
                     android:id="@+id/outbutton"
@@ -111,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_gb2"
                     android:padding="10dp"
-                    android:text="Out" />
+                    android:text="나가기" />
             </LinearLayout>
         </LinearLayout>
 

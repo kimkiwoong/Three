@@ -26,6 +26,7 @@
             android:id="@+id/imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:src="@drawable/title" />
@@ -62,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
+            android:textColor="#000000"
             android:text="리소스를 로딩중입니다." />
 
         <ProgressBar
