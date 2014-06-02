@@ -54,30 +54,24 @@ public void backgroundAddSound(int id){
 	
 }
 public void backgroundPlaySound(){
-	if(m_Game_MediaPlayer.isPlaying()){
-		m_Game_MediaPlayer.stop();
-		
-	}
+	
 	m_MediaPlayer.start();
 	m_MediaPlayer.setLooping(true);
 }
 public void backgroundStopSound(){
-	m_MediaPlayer.stop();
+	m_MediaPlayer.pause();
 	m_MediaPlayer.setLooping(false);
 }
 public void gamebackgroundAddSound(int id){
 	m_Game_MediaPlayer= MediaPlayer.create(m_Activity, id);
 }
 public void gamebackgroundPlaySound(){
-	if(m_MediaPlayer.isPlaying()){
-		m_MediaPlayer.stop();
-		
-	}
+	
 	m_Game_MediaPlayer.start();
 	m_Game_MediaPlayer.setLooping(true);
 }
 	public void gamebackgroundStopSound(){
-		m_Game_MediaPlayer.stop();
+		m_Game_MediaPlayer.pause();
 		m_Game_MediaPlayer.setLooping(false);
 	}	
 	

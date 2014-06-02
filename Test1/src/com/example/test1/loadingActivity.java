@@ -138,7 +138,7 @@ public class loadingActivity extends Activity implements Runnable {
 		}
 		Intent i = new Intent(loadingActivity.this,MainActivity.class);
 		startActivity(i);
-		onDestroy();
+		finish();
 		
 	}
 

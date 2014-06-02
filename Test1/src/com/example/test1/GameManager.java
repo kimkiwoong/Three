@@ -525,11 +525,11 @@ public class GameManager {
 								Log.d(TAG, "event enemy_disconnect ");
 								JSONObject jbj = new JSONObject(temp);
 								String user_id = jbj.getString("userID");
-								turns = jbj.getString("Data");
-								GameManager.isInit=false;
 								if(user_id.equals(LoginManager.id)== false) {
 									return;
 								}
+								GameManager.isInit=false;
+								Gameover.disconnect=1;
 							} catch (JSONException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();

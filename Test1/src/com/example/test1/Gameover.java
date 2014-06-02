@@ -22,6 +22,7 @@ public class Gameover extends Activity {
 	ImageView win_image;
 	ImageView lose_image;
 	Button game_button;
+	public static int disconnect;
 	public String result;
 	public String msg[];
 	public TextView UserName, UserNation, UserWinLose;
@@ -118,6 +119,7 @@ public class Gameover extends Activity {
 				GameManager.isInit=false;
 				Intent intent = new Intent(Gameover.this,SocketIOActivity.class);
 				startActivity(intent);
+				finish();
 				
 			}
 		});

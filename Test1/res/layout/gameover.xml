@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_gb3"
             android:padding="10dp"
-            android:text="Re Game" />
+            android:text="대기방" />
     </LinearLayout>
 
     <LinearLayout

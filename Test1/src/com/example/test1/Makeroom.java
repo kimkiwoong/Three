@@ -149,7 +149,8 @@ public class Makeroom extends Activity {
 				//GameManager.socket = null;
 				Log.i("sss","disconnect");
 				Intent i = new Intent(Makeroom.this,SocketIOActivity.class);
-				startActivity(i);				
+				startActivity(i);	
+				finish();
 			}
 			
 		});
@@ -178,6 +179,7 @@ public class Makeroom extends Activity {
 				cancle.setVisibility(View.VISIBLE);
 				linearcancle.setVisibility(View.VISIBLE);
 			}
+			
 			
 		});
 		
@@ -209,6 +211,7 @@ public class Makeroom extends Activity {
 				SM.play("gamestart");
 				Intent i = new Intent(Makeroom.this,Game.class);
 				startActivity(i);
+				finish();
 				
 			}
 		}, 5000);

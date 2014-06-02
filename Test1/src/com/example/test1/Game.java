@@ -127,7 +127,7 @@ public class Game extends Activity {
 			handcard_2, handcard_3, handcard_4, handcard_5, handcard_6,
 			handcard_7;
 	public static Button[] e_handcard;
-
+	public static Button[] dialog_end;
 	public static ImageView[] handButton;
 	// //////////////turnend////////////
 	public LinearLayout turnedlayout;
@@ -438,7 +438,7 @@ public class Game extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		Log.d("start", "start");
 		setContentView(R.layout.gameview);
 		AppManager aMgr = AppManager.getInstance();
 		aMgr.setResources(getResources());
@@ -1019,7 +1019,7 @@ public class Game extends Activity {
 		GameManager.socket.emit("depense", depense);
 	}
 
-	// //////// 어택을 받았을때 수행되는 함수//////////////////
+	// //////// 어택을 받았을때 수행되는 함수////O//////////////
 	// ///////어택을 받은 카드의 정보를 depense로 쏜다./////
 	public void attack(int mybutton, int yourbutton) {
 		
@@ -1246,7 +1246,7 @@ public class Game extends Activity {
 								activitychange = true;
 								// System.exit(0);
 								
-								onDestroy();
+								finish();
 
 							}
 						}, 3000);
@@ -1359,7 +1359,7 @@ public class Game extends Activity {
 								activitychange = true;
 								// System.exit(0);
 								
-								onDestroy();
+								finish();
 
 							}
 						}, 3000);
@@ -1580,7 +1580,7 @@ public class Game extends Activity {
 					
 					// System.exit(0);
 					
-					onDestroy();
+					finish();
 				}
 			}, 3000);
 		}
@@ -1682,28 +1682,41 @@ public class Game extends Activity {
 			dialog.setContentView(R.layout.dialog_card);
 			dialog.setTitle("CardInfo");
 			ImageView img = (ImageView) dialog.findViewById(R.id.image1);
+			dialog.findViewById(R.id.dia_end).setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					removeDialog(id);
+				}
+			});
+			
 			int num;
 			if (id / 10 == 0) {
 				if (id % 10 == 0) {
-					num = search_handcard = AppManager
+					num = AppManager
 							.getInstance()
 							.getmResources()
 							.getIdentifier(attackCard.get(0).mID, "drawable",
 									"com.example.test1");
+					Log.d("image",attackCard.get(0).mID);
+					
 					img.setImageResource(num);
 				} else if (id % 10 == 1) {
-					num = search_handcard = AppManager
+					num  = AppManager
 							.getInstance()
 							.getmResources()
 							.getIdentifier(attackCard.get(1).mID, "drawable",
 									"com.example.test1");
+					Log.d("image",attackCard.get(1).mID);
 					img.setImageResource(num);
 				} else if (id % 10 == 2) {
-					num = search_handcard = AppManager
+					num = AppManager
 							.getInstance()
 							.getmResources()
 							.getIdentifier(attackCard.get(2).mID, "drawable",
 									"com.example.test1");
+					Log.d("image",attackCard.get(2).mID);
 					img.setImageResource(num);
 				}
 
@@ -1716,7 +1729,8 @@ public class Game extends Activity {
 			// Button[] handButton = new Button[7];
 			dialog.setCancelable(false);
 			handButton = new ImageView[7];
-
+			
+			
 			// Log.d(TAG, "ImageView 생성 ");
 
 			handButton[0] = (ImageView) dialog.findViewById(R.id.handcardlist1);
@@ -2084,12 +2098,6 @@ public class Game extends Activity {
 		
 	}
 	
-	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		//this.recycle();
-		super.onDestroy();
-	}
 
 	private static void recycleBitmap(ImageView iv) {        
 			Drawable d = iv.getDrawable();      

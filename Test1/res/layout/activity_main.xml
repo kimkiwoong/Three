@@ -26,14 +26,15 @@
             android:padding="6dp"
             android:orientation="vertical" >
 
-            <Button
+            <com.facebook.widget.LoginButton
                 android:id="@+id/loginbutton"
-                style="@style/ButtonText"
+               
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_gb1"
+              
+               android:layout_centerHorizontal="true"
                 android:padding="10dp"
-                android:text="Login" />
+                 />
 
         </LinearLayout>
 
@@ -64,14 +65,15 @@
                 android:text="Start"
                 android:visibility="invisible" />
 
-            <Button
+            <com.facebook.widget.LoginButton
                 android:id="@+id/logoutbutton"
-                style="@style/ButtonText"
+               
+                facebook:confirm_logout="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_gb3"
+              
                 android:padding="10dp"
-                android:text="Logout"
+                
                 android:visibility="invisible" />
         </LinearLayout>
 

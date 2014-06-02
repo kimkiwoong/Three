@@ -41,6 +41,7 @@ public class SocketIOActivity extends Activity {
 				SocketIOActivity.this,
 				Makeroom.class);
 		startActivity(i);
+		finish();
 	}
 	
 
