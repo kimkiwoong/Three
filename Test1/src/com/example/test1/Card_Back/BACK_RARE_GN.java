@@ -18,7 +18,7 @@ public class BACK_RARE_GN extends CardInterface {
 
 	
 	public BACK_RARE_GN(){
-		this.SetHp(18);
+		this.SetHp(21);
 		this.SetId("card_17");
 		this.SetmPower(12);
 		this.SetNara(0);

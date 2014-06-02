@@ -7,7 +7,7 @@ public class GO_RARE_ULJIMUN extends CardInterface{
 
 	
 	public GO_RARE_ULJIMUN(){
-		this.SetHp(13);
+		this.SetHp(16);
 		this.SetId("card_7");
 		this.SetmPower(17);
 		this.SetNara(0);

@@ -18,7 +18,7 @@ public class BACK_NORMAL_SSAU1 extends CardInterface{
 
 	
 	public BACK_NORMAL_SSAU1(){
-		this.SetHp(17);
+		this.SetHp(20);
 		this.SetId("card_14");
 		this.SetmPower(4);
 		this.SetNara(0);

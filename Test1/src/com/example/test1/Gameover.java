@@ -52,7 +52,7 @@ public class Gameover extends Activity {
 				// TODO Auto-generated method stub
 				GameManager.socket.disconnect();
 			}
-		}, 2000);
+		}, 1000);
 		
 		if(Game.UserTotalCount == 0 && Game.EnemyTotalCount == 0){
 			//내가 턴일 때

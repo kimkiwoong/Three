@@ -7,9 +7,9 @@ public class SIN_NORMAL_POJOL1 extends CardInterface{
 
 	
 	public SIN_NORMAL_POJOL1(){
-		this.SetHp(5);
+		this.SetHp(9);
 		this.SetId("card_21");
-		this.SetmPower(6);
+		this.SetmPower(5);
 		this.SetNara(0);
 		this.SetMagic(false);
 		this.SetCState(0);

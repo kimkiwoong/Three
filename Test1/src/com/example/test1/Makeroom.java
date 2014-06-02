@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -37,7 +40,9 @@ public class Makeroom extends Activity {
 	public String result;
 	public String msg1[];
 	public String msg2[];
-	
+	public static int mynum;
+	public static int Enemynum;
+	public static int mynum1;
 	public TextView UserName1, UserNation1, UserWinLose1;
 	public TextView UserName2, UserNation2, UserWinLose2;
 	
@@ -89,12 +94,15 @@ public class Makeroom extends Activity {
 			
 			if(msg1[4].equals("1")){
 				UserNation1.setText("고구려");
+				mynum=1;
 			}
 			else if(msg1[4].equals("2")){
 				UserNation1.setText("백제");
+				mynum=2;
 			}
 			else if(msg1[4].equals("3")){
 				UserNation1.setText("신라");
+				mynum=3;
 			}
 			
 		}
@@ -117,12 +125,15 @@ public class Makeroom extends Activity {
 			
 			if(msg2[4].equals("1")){
 				UserNation2.setText("고구려");
+				mynum1=1;
 			}
 			else if(msg2[4].equals("2")){
 				UserNation2.setText("백제");
+				mynum1=2;
 			}
 			else if(msg2[4].equals("3")){
 				UserNation2.setText("신라");
+				mynum1=3;
 			}
 			
 		}
@@ -151,6 +162,16 @@ public class Makeroom extends Activity {
 				SM.play("touch");
 				// TODO Auto-generated method stub
 				GameManager.socket.emit("ready", LoginManager.id);
+				JSONObject jobj = new JSONObject();
+				try {
+					jobj.put("userID", LoginManager.id);
+					jobj.put("nara", Game.myType);
+					
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				GameManager.socket.emit("nara", jobj);
 				roomout.setVisibility(View.INVISIBLE);
 				ready.setVisibility(View.INVISIBLE);
 				linearready.setVisibility(View.INVISIBLE);
@@ -235,12 +256,15 @@ public class Makeroom extends Activity {
 			
 			if(msg2[4].equals("1")){
 				UserNation2.setText("고구려");
+				
 			}
 			else if(msg2[4].equals("2")){
 				UserNation2.setText("백제");
+				
 			}
 			else if(msg2[4].equals("3")){
 				UserNation2.setText("신라");
+				
 			}
 			
 		}

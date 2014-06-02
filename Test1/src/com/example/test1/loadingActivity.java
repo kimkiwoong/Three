@@ -2,11 +2,16 @@ package com.example.test1;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -17,7 +22,7 @@ public class loadingActivity extends Activity implements Runnable {
 	public static TextView textview1;
 	
 	public ImageView title_t,title_s;	
-	
+	public ImageView title;
 	SoundManager SM;
 	public static Boolean soundgo;
 	// progress값을 저장해 두는 코드입니다
@@ -32,6 +37,8 @@ public class loadingActivity extends Activity implements Runnable {
 		
 		textview1 = (TextView) findViewById(R.id.textView1);
 		textview2 = (TextView)findViewById(R.id.textView2);
+		
+		title = (ImageView)findViewById(R.id.imageView1);
 		
 		title_t = (ImageView)findViewById(R.id.title2);
 		title_s = (ImageView)findViewById(R.id.title3);
@@ -57,7 +64,38 @@ public class loadingActivity extends Activity implements Runnable {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	public void recycle(){
+		Log.d("recycle","recycle" );
+			recycleBitmap(title);
+			recycleBitmap(title_s);
+			recycleBitmap(title_t);
+			
+	}
 	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		//this.recycle();
+		this.recycle();
+		super.onDestroy();
+	}
+
+	private static void recycleBitmap(ImageView iv) {        
+			Drawable d = iv.getDrawable();      
+			if (d instanceof BitmapDrawable) {           
+				Bitmap b = ((BitmapDrawable)d).getBitmap();       
+				b.recycle();        
+				} 
+		d.setCallback(null);   
+		}
+	private static void recycleBitmap1(Button iv) {        
+		Drawable d = iv.getBackground();      
+		if (d instanceof BitmapDrawable) {           
+			Bitmap b = ((BitmapDrawable)d).getBitmap();       
+			b.recycle();        
+			} 
+	d.setCallback(null);   
+	}
 	/**
 	 * 버튼을 누르면 thread를 시작합니다 
 	 */
@@ -100,7 +138,7 @@ public class loadingActivity extends Activity implements Runnable {
 		}
 		Intent i = new Intent(loadingActivity.this,MainActivity.class);
 		startActivity(i);
-		finish();
+		onDestroy();
 		
 	}
 

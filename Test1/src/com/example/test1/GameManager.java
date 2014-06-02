@@ -313,6 +313,29 @@ public class GameManager {
 							return;
 							
 						}
+						///////////////////////nara///////////
+						if(event.equals("naraed")){
+							
+							try {
+								JSONObject jbj = new JSONObject(temp);
+								String user_id = jbj.getString("userID");
+								
+								//if(Games.Death_danger.size() >= 3){
+									//Log.d("Add", "Games.Death_danger.size() : " + Games.Death_danger.size() );
+								//}
+								//Log.d(TAG, "GameManager json 받아온 값 " + jbj.getInt("deathcard"));
+								if(user_id.equals(LoginManager.id)== false) {
+									return;
+								}
+								makerooms.Enemynum = jbj.getInt("nara");							
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+													
+							return;
+							
+						}
 						//////////////////////////magic////////////////
 						if(event.equals("magiced")){
 							

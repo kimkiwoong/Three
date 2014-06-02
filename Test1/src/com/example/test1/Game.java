@@ -49,7 +49,9 @@ public class Game extends Activity {
 	private static String TAG_Add = "Add";
 	public static int UserTotalCount;
 	public static int EnemyTotalCount;
+	public static int backnum;
 	public static Boolean activitychange;
+
 	GameManager GM;
 	SoundManager SM;
 	public int[] UserimageNum;// R.drawble.카드 이미지의 번호
@@ -142,19 +144,13 @@ public class Game extends Activity {
 	public RelativeLayout e2_layout;
 	public RelativeLayout e3_layout;
 		
-	public TextView m1_att;
-	public TextView m1_def;
-	public TextView m2_att;
-	public TextView m2_def;
-	public TextView m3_att;
-	public TextView m3_def;
-	public TextView e1_att;
-	public TextView e1_def;
-	public TextView e2_att;
-	public TextView e2_def;
-	public TextView e3_att;
-	public TextView e3_def;
-	//////////////////////////////////////////////////
+	public TextView m1;
+	public TextView m2;
+	public TextView m3;
+
+	public TextView e1;
+	public TextView e2;
+	public TextView e3;//////////////////////////////////////////////////
 	// effect
 	public FrameLayout myCardEffect1;
 	public FrameLayout myCardEffect2;
@@ -203,7 +199,7 @@ public class Game extends Activity {
 
 			// TODO Auto-generated method stub
 			if (v.getId() == R.id.fmcard_1 && selectMycard_1 == true
-					&& !m1_att.getText().equals("")) { // 첫번째 내 공격카드 선택시
+					&& !m1.getText().equals("")) { // 첫번째 내 공격카드 선택시
 				if(attackCard.get(0).mMagic==true){
 					magicon.setVisibility(View.VISIBLE);
 					magiclayout.setVisibility(View.VISIBLE);
@@ -219,7 +215,7 @@ public class Game extends Activity {
 				myCardEffect3.setBackgroundColor(0);
 
 			} else if (v.getId() == R.id.fmcard_2 && selectMycard_2 == true
-					&& !m2_att.getText().equals("")) {// 두번째 내 공격카드 선택시
+					&& !m2.getText().equals("")) {// 두번째 내 공격카드 선택시
 				if(attackCard.get(1).mMagic==true){
 					magicon.setVisibility(View.VISIBLE);
 					magiclayout.setVisibility(View.VISIBLE);
@@ -235,7 +231,7 @@ public class Game extends Activity {
 				myCardEffect3.setBackgroundColor(0);
 
 			} else if (v.getId() == R.id.fmcard_3 && selectMycard_3 == true
-					&& !m3_att.getText().equals("")) {// 세번째 내 공격카드 선택시
+					&& !m3.getText().equals("")) {// 세번째 내 공격카드 선택시
 				if(attackCard.get(2).mMagic==true){
 					magicon.setVisibility(View.VISIBLE);
 					magiclayout.setVisibility(View.VISIBLE);
@@ -301,7 +297,14 @@ public class Game extends Activity {
 
 	// ///////attack데이터 변환///////////////
 	public void attackDataStream(int youbutton) {
+		Log.d("func", "attackDataStream");
 
+		
+		if (GameManager.isBlockAttack == true)
+			return;
+		
+		GameManager.isBlockAttack = true;
+		
 		attacks = new JSONObject();
 		try {
 			if (choiceMycard_1 == true) {
@@ -333,9 +336,7 @@ public class Game extends Activity {
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-
-		GameManager.isBlockAttack = true;
+		}		
 
 		GameManager.socket.emit("attack", attacks);
 		choiceMycard_1 = false;
@@ -357,26 +358,26 @@ public class Game extends Activity {
 			// TODO Auto-generated method stub
 			switch (v.getId()) {
 			case R.id.fycard_1:
-				if (!e1_att.getText().equals("")) {
+				if (!e1.getText().equals("")) {
 					Game.this.onCreateDialog(E_CardID1);
 					showDialog(E_CardID1);
 				}
 				break;
 			case R.id.fycard_2:
-				if (!e2_att.getText().equals("")) {
+				if (!e2.getText().equals("")) {
 					Game.this.onCreateDialog(E_CardID2);
 					showDialog(E_CardID2);
 				}
 				break;
 			case R.id.fycard_3:
-				if (!e3_att.getText().equals("")) {
+				if (!e3.getText().equals("")) {
 					Game.this.onCreateDialog(E_CardID3);
 					showDialog(E_CardID3);
 				}
 				break;
 			case R.id.fmcard_1:
 				// death_card 이면
-				if (m1_att.getText().equals("")) {
+				if (m1.getText().equals("")) {
 					// 내 차례 이면
 					if (GameManager.myTurn == 0 && My_handcard_count > 0) {
 						// Log.d(TAG, " fmcard_1 - if");
@@ -394,7 +395,7 @@ public class Game extends Activity {
 				break;
 			case R.id.fmcard_2:
 				// death_card 이면
-				if (m2_att.getText().equals("")) {
+				if (m2.getText().equals("")) {
 					// 내 차례 이면
 					if (GameManager.myTurn == 0 && My_handcard_count > 0) {
 						// Log.d(TAG, " fmcard_2 - if");
@@ -412,7 +413,7 @@ public class Game extends Activity {
 				break;
 			case R.id.fmcard_3:
 				// death_card 이면
-				if (m3_att.getText().equals("")) {
+				if (m3.getText().equals("")) {
 					// 내 차례 이면
 					if (GameManager.myTurn == 0 && My_handcard_count > 0) {
 						// Log.d(TAG, " fmcard_3 - if");
@@ -443,7 +444,7 @@ public class Game extends Activity {
 		aMgr.setResources(getResources());
 		GM = GameManager.getInstance();
 		SM = SoundManager.getInstance();
-
+		
 		// enemy hand card
 		e_handcard = new Button[7];
 
@@ -487,19 +488,13 @@ public class Game extends Activity {
 		e2_layout = (RelativeLayout)findViewById(R.id.EnemyCard2Layout);
 		e3_layout = (RelativeLayout)findViewById(R.id.EnemyCard3Layout);
 		///////////////////////////////////////////////////////////
-		m1_att = (TextView)findViewById(R.id.m1_att);
-		m1_def = (TextView)findViewById(R.id.m1_def);
-		m2_att = (TextView)findViewById(R.id.m2_att);
-		m2_def = (TextView)findViewById(R.id.m2_def);
-		m3_att = (TextView)findViewById(R.id.m3_att);
-		m3_def = (TextView)findViewById(R.id.m3_def);
+		m1 = (TextView)findViewById(R.id.m1);
+		m2 = (TextView)findViewById(R.id.m2);
+		m3 = (TextView)findViewById(R.id.m3);
 		
-		e1_att = (TextView)findViewById(R.id.e1_att);
-		e1_def = (TextView)findViewById(R.id.e1_def);
-		e2_att = (TextView)findViewById(R.id.e2_att);
-		e2_def = (TextView)findViewById(R.id.e2_def);
-		e3_att = (TextView)findViewById(R.id.e3_att);
-		e3_def = (TextView)findViewById(R.id.e3_def);
+		e1 = (TextView)findViewById(R.id.e1);
+		e2 = (TextView)findViewById(R.id.e2);
+		e3 = (TextView)findViewById(R.id.e3);
 		///////////////////////////////////////////////////////////
 		
 
@@ -598,17 +593,17 @@ public class Game extends Activity {
 				if (UserTotalCount >= 3) {
 					
 					// Death Card 존재
-					if (m1_att.getText().equals("")
-							|| m2_att.getText().equals("")
-							|| m3_att.getText().equals("")) {
+					if (m1.getText().equals("")
+							|| m2.getText().equals("")
+							|| m3.getText().equals("")) {
 						Toast.makeText(getApplicationContext(),
 								"Death Card가 존재 합니다 ", 0).show();
 						return;
 					}
 				} else {
-					if (m1_att.getText().equals("")
-							&& m2_att.getText().equals("")
-							&& m3_att.getText().equals("")) {
+					if (m1.getText().equals("")
+							&& m2.getText().equals("")
+							&& m3.getText().equals("")) {
 						Toast.makeText(getApplicationContext(),
 								"한장이상의 Card가 존재 합니다 ", 0).show();
 						return;
@@ -689,14 +684,19 @@ public class Game extends Activity {
 		case 1:
 			m_User = new Player(1);
 			m_User.initsetcard(1);
+		
+			
+
 			break;
 		case 2:
 			m_User = new Player(2);
 			m_User.initsetcard(2);
+		
 			break;
 		case 3:
 			m_User = new Player(3);
 			m_User.initsetcard(3);
+		
 			break;
 		default:
 			break;
@@ -785,18 +785,37 @@ public class Game extends Activity {
 		// String a = Integer.toString(UserimageNum[0]);
 
 		fightmycard_1.setBackgroundResource(UserimageNum[0]);
-		m1_att.setText("A:"+attackCard.get(0).mPower);
-		m1_def.setText("D:"+attackCard.get(0).mhp);
+		m1.setText("공:"+attackCard.get(0).mPower + " 방:"+attackCard.get(0).mhp);
+		
 		fightmycard_2.setBackgroundResource(UserimageNum[1]);
-		m2_att.setText("A:"+attackCard.get(1).mPower);
-		m2_def.setText("D:"+attackCard.get(1).mhp);
+		m2.setText("공:"+attackCard.get(1).mPower + " 방:"+attackCard.get(1).mhp);
+		
 		fightmycard_3.setBackgroundResource(UserimageNum[2]);
-		m3_att.setText("A:"+attackCard.get(2).mPower);
-		m3_def.setText("D:"+attackCard.get(2).mhp);
-
-		fightyoucard_1.setBackgroundResource(R.drawable.backcard);
-		fightyoucard_2.setBackgroundResource(R.drawable.backcard);
-		fightyoucard_3.setBackgroundResource(R.drawable.backcard);
+		m3.setText("공:"+attackCard.get(2).mPower + " 방:"+attackCard.get(2).mhp);
+		
+		if(Makeroom.Enemynum==1){
+			backnum = AppManager
+					.getInstance()
+					.getmResources()
+					.getIdentifier("go_back",
+							"drawable", "com.example.test1");
+		}else if(Makeroom.Enemynum==2){
+			backnum = AppManager
+					.getInstance()
+					.getmResources()
+					.getIdentifier("back_back",
+							"drawable", "com.example.test1");
+		}else if(Makeroom.Enemynum==3){
+			backnum = AppManager
+					.getInstance()
+					.getmResources()
+					.getIdentifier("sin_back",
+							"drawable", "com.example.test1");
+		}
+	
+		fightyoucard_1.setBackgroundResource(backnum);
+		fightyoucard_2.setBackgroundResource(backnum);
+		fightyoucard_3.setBackgroundResource(backnum);
 
 		handcard_1.setBackgroundResource(UserimageNum[3]);
 		handcard_2.setBackgroundResource(UserimageNum[4]);
@@ -809,13 +828,15 @@ public class Game extends Activity {
 		activitychange = false;
 
 		for (int i = 0; i < 7; i++) {
-			e_handcard[i].setBackgroundResource(R.drawable.backcard);
+			e_handcard[i].setBackgroundResource(backnum);
 		}
 
 	}
 
 	public void turned_img() {
 
+		Log.d("func", "turned_img");
+		
 		Log.d("turn", "EnemyTotalCount : " + EnemyTotalCount + " ");
 
 		for (int i = 6; i >= Enemy_handcard_count && i >= 0; i--) {
@@ -828,21 +849,21 @@ public class Game extends Activity {
 				Log.d("turn", " turned_img 받아온 값 " + Death_danger.get(i));
 				if (Death_danger.get(i) == 2 ) {
 					
-					if(e1_att.getText().equals("")){
-						fightyoucard_1.setBackgroundResource(R.drawable.backcard);
+					if(e1.getText().equals("")){
+						fightyoucard_1.setBackgroundResource(backnum);
 						fightyoucard_1.setText("");
 					}
 					
 				} else if (Death_danger.get(i) == 1 ) {
 					
-					if(e2_att.getText().equals("")){
-						fightyoucard_2.setBackgroundResource(R.drawable.backcard);
+					if(e2.getText().equals("")){
+						fightyoucard_2.setBackgroundResource(backnum);
 						fightyoucard_2.setText("");
 					};
 				} else if (Death_danger.get(i) == 0) {
 					
-					if(e3_att.getText().equals("")){
-						fightyoucard_3.setBackgroundResource(R.drawable.backcard);
+					if(e3.getText().equals("")){
+						fightyoucard_3.setBackgroundResource(backnum);
 						fightyoucard_3.setText("");
 					}
 				}
@@ -882,13 +903,13 @@ public class Game extends Activity {
 		 * Log.d(TAG,"Death_num.size() : " + Death_num.size()); for(int i = 0; i
 		 * < Death_num.size(); i++){ Log.d(TAG, " Death_num  " +
 		 * Death_num.get(i)); if(Death_num.get(i) == R.id.fycard_1 ){
-		 * fightyoucard_1.setBackgroundResource(R.drawable.backcard);
+		 * fightyoucard_1.setBackgroundResource(backnum);
 		 * fightyoucard_1.setText(""); Enemy_Deathcard1 = false; } else
 		 * if(Death_num.get(i) == R.id.fycard_2){
-		 * fightyoucard_2.setBackgroundResource(R.drawable.backcard);
+		 * fightyoucard_2.setBackgroundResource(backnum);
 		 * fightyoucard_2.setText(""); Enemy_Deathcard2 = false; } else
 		 * if(Death_num.get(i) == R.id.fycard_3){
-		 * fightyoucard_3.setBackgroundResource(R.drawable.backcard);
+		 * fightyoucard_3.setBackgroundResource(backnum);
 		 * fightyoucard_3.setText(""); Enemy_Deathcard3 = false; } }
 		 * 
 		 * Death_num.clear(); Log.d(TAG_Add, "Death_num size : " +
@@ -901,6 +922,8 @@ public class Game extends Activity {
 	}
 
 	public void Death_Change(int deathcard, int handcard) {
+		
+		Log.d("func", "Death_Change");
 
 		Log.d(TAG, "UserTotalCount " + UserTotalCount);
 
@@ -948,8 +971,8 @@ public class Game extends Activity {
 					.getIdentifier(attackCard.get(0).mID, "drawable",
 							"com.example.test1");
 			fightmycard_1.setBackgroundResource(search_handcard);
-			m1_att.setText("A:"+attackCard.get(0).mPower);
-			m1_def.setText("D:"+attackCard.get(0).mhp);
+			m1.setText("공:"+attackCard.get(0).mPower + " 방:"+attackCard.get(0).mhp);
+			
 			SM.play(attackCard.get(0).mID + "_come");
 		} else if (deathcard == 1) {
 			search_handcard = AppManager
@@ -958,8 +981,8 @@ public class Game extends Activity {
 					.getIdentifier(attackCard.get(1).mID, "drawable",
 							"com.example.test1");
 			fightmycard_2.setBackgroundResource(search_handcard);
-			m2_att.setText("A:"+attackCard.get(1).mPower);
-			m2_def.setText("D:"+attackCard.get(1).mhp);
+			m2.setText("공:"+attackCard.get(1).mPower + " 방:"+attackCard.get(1).mhp);
+			
 			SM.play(attackCard.get(1).mID + "_come");
 		} else if (deathcard == 2) {
 			search_handcard = AppManager
@@ -968,8 +991,8 @@ public class Game extends Activity {
 					.getIdentifier(attackCard.get(2).mID, "drawable",
 							"com.example.test1");
 			fightmycard_3.setBackgroundResource(search_handcard);
-			m3_att.setText("A:"+attackCard.get(2).mPower);
-			m3_def.setText("D:"+attackCard.get(2).mhp);
+			m3.setText("공:"+attackCard.get(2).mPower + " 방:"+attackCard.get(2).mhp);
+			
 			SM.play(attackCard.get(2).mID + "_come");
 		}
 
@@ -978,6 +1001,9 @@ public class Game extends Activity {
 
 	// ////////depense 데이터 ////////////
 	public void depenseDataStream(int index, int mybutton, int youbutton) {
+		
+		Log.d("func", "depenseDataStream");
+		
 		depense = new JSONObject();
 		try {
 			depense.put("userID", LoginManager.id);
@@ -996,9 +1022,10 @@ public class Game extends Activity {
 	// //////// 어택을 받았을때 수행되는 함수//////////////////
 	// ///////어택을 받은 카드의 정보를 depense로 쏜다./////
 	public void attack(int mybutton, int yourbutton) {
+		
+		Log.d("func", "attack");
 
-		if (GameManager.isBlockAttack == true)
-			return;
+		
 		// Activity Not Touch
 
 		// getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -1088,6 +1115,9 @@ public class Game extends Activity {
 	}
 
 	public void explosionStart(final Button b) {
+		
+		Log.d("func", "explosionStart");
+		
 		if (b.getId() == R.id.fmcard_1) {
 			myExplosion1.setVisibility(View.VISIBLE);
 		} else if (b.getId() == R.id.fmcard_2) {
@@ -1104,6 +1134,8 @@ public class Game extends Activity {
 	}
 
 	public void explosionEnd(final Button b) {
+		
+		Log.d("func", "explosionEnd");
 
 		if (b.getId() == R.id.fmcard_1) {
 			myExplosion1.setVisibility(View.INVISIBLE);
@@ -1126,6 +1158,8 @@ public class Game extends Activity {
 	// 내가 공격을 받았을 때 내 카드 데이터 갱신
 	public void att_changeMycardStat(final Button b, final int index) {
 
+		Log.d("func", "att_changeMycardStat");
+		
 		// Log.d(TAG,b.getId()+"");
 		attackCard.get(index).SetHp(
 				attackCard.get(index).GetHp() - GameManager.att_i);
@@ -1157,14 +1191,14 @@ public class Game extends Activity {
 			public void run() {
 				// TODO Auto-generated method stub
 				if (b.getId() == R.id.fmcard_1) {
-					m1_att.setText("A:"+attackCard.get(index).mPower);
-					m1_def.setText("D:"+attackCard.get(index).mhp);
+					m1.setText("공:"+attackCard.get(index).mPower + " 방:"+attackCard.get(index).mhp);
+					
 				} else if (b.getId() == R.id.fmcard_2) {
-					m2_att.setText("A:"+attackCard.get(index).mPower);
-					m2_def.setText("D:"+attackCard.get(index).mhp);
+					m2.setText("공:"+attackCard.get(index).mPower + " 방:"+attackCard.get(index).mhp);
+				
 				} else if (b.getId() == R.id.fmcard_3) {
-					m3_att.setText("A:"+attackCard.get(index).mPower);
-					m3_def.setText("D:"+attackCard.get(index).mhp);
+					m3.setText("공:"+attackCard.get(index).mPower + " 방:"+attackCard.get(index).mhp);
+					
 				}
 				
 
@@ -1175,14 +1209,11 @@ public class Game extends Activity {
 
 					b.setBackgroundResource(R.drawable.card_death);
 					if (b.getId() == R.id.fmcard_1) {
-						m1_att.setText("");
-						m1_def.setText("");
+						m1.setText("");
 					} else if (b.getId() == R.id.fmcard_2) {
-						m2_att.setText("");
-						m2_def.setText("");
+						m2.setText("");
 					} else if (b.getId() == R.id.fmcard_3) {
-						m3_att.setText("");
-						m3_def.setText("");
+						m3.setText("");
 					}
 					
 					UserTotalCount--;
@@ -1235,6 +1266,8 @@ public class Game extends Activity {
 
 	// 내가 공격 했을 때 내 카드 데이터 갱신
 	public void des_changeMycardStat(final Button b, final int index) {
+		
+		Log.d("func", "des_changeMycardStat");
 
 		attackCard.get(index).SetHp(
 				attackCard.get(index).GetHp() - GameManager.e_att_i);
@@ -1271,14 +1304,14 @@ public class Game extends Activity {
 			public void run() {
 				// TODO Auto-generated method stub
 				if (b.getId() == R.id.fmcard_1) {
-					m1_att.setText("A:"+attackCard.get(index).mPower);
-					m1_def.setText("D:"+attackCard.get(index).mhp);
+					m1.setText("공:"+attackCard.get(index).mPower + " 방:"+attackCard.get(index).mhp);
+				
 				} else if (b.getId() == R.id.fmcard_2) {
-					m2_att.setText("A:"+attackCard.get(index).mPower);
-					m2_def.setText("D:"+attackCard.get(index).mhp);
+					m2.setText("공:"+attackCard.get(index).mPower + " 방:"+attackCard.get(index).mhp);
+				
 				} else if (b.getId() == R.id.fmcard_3) {
-					m3_att.setText("A:"+attackCard.get(index).mPower);
-					m3_def.setText("D:"+attackCard.get(index).mhp);
+					m3.setText("공:"+attackCard.get(index).mPower + " 방:"+attackCard.get(index).mhp);
+					
 				}
 
 				if (attackCard.get(index).GetHp() <= 0) {
@@ -1287,14 +1320,11 @@ public class Game extends Activity {
 
 					b.setBackgroundResource(R.drawable.card_death);
 					if (b.getId() == R.id.fmcard_1) {
-						m1_att.setText("");
-						m1_def.setText("");
+						m1.setText("");
 					} else if (b.getId() == R.id.fmcard_2) {
-						m2_att.setText("");
-						m2_def.setText("");
+						m2.setText("");
 					} else if (b.getId() == R.id.fmcard_3) {
-						m3_att.setText("");
-						m3_def.setText("");
+						m3.setText("");
 					}
 					UserTotalCount--;
 
@@ -1338,31 +1368,35 @@ public class Game extends Activity {
 
 			}
 		}, 1000);
+		
+		
+		GameManager.isBlockAttack = false;
+		
 	}
 
 	// 여기랑
 	// 내가 공격을 받았을 때 적 카드 데이터 갱신
 	public void att_changeEnemycardStat(final Button b, final int index) {
+		
+		Log.d("func", "att_changeEnemycardStat");
 
 		// Log.d(TAG, "b % 10 -> "+ b.getId() % 10);
 		if (b.getId() == R.id.fycard_1) {
 			enemyCardEffect1.setBackgroundColor(Color.RED);
 			enemyCardEffect2.setBackgroundColor(0);
 			enemyCardEffect3.setBackgroundColor(0);
-			e1_att.setText("A:"+GameManager.att_i);
-			e1_def.setText("D:"+GameManager.hp_i);
+			e1.setText("공:"+GameManager.att_i + " 방:"+GameManager.hp_i);
 		} else if (b.getId() == R.id.fycard_2) {
 			enemyCardEffect1.setBackgroundColor(0);
 			enemyCardEffect2.setBackgroundColor(Color.RED);
 			enemyCardEffect3.setBackgroundColor(0);
-			e2_att.setText("A:"+GameManager.att_i);
-			e2_def.setText("D:"+GameManager.hp_i);
+			e2.setText("공:"+GameManager.att_i + " 방:"+GameManager.hp_i);
 		} else if (b.getId() == R.id.fycard_3) {
 			enemyCardEffect1.setBackgroundColor(0);
 			enemyCardEffect2.setBackgroundColor(0);
 			enemyCardEffect3.setBackgroundColor(Color.RED);
-			e3_att.setText("A:"+GameManager.att_i);
-			e3_def.setText("D:"+GameManager.hp_i);
+			e3.setText("공:"+GameManager.att_i + " 방:"+GameManager.hp_i);
+			
 		}
 
 		if (GameManager.hp_i - attackCard.get(index).mPower <= 0) {
@@ -1379,17 +1413,16 @@ public class Game extends Activity {
 			public void run() {
 				// TODO Auto-generated method stub
 				if (b.getId() == R.id.fycard_1) {
-		
-					e1_att.setText("A:"+GameManager.att_i);
-					e1_def.setText("D:"+(GameManager.hp_i - attackCard.get(index).mPower));
+					e1.setText("공:"+GameManager.att_i + " 방:"+(GameManager.hp_i - attackCard.get(index).mPower));
+				
 				} else if (b.getId() == R.id.fycard_2) {
 				
-					e2_att.setText("A:"+GameManager.att_i);
-					e2_def.setText("D:"+(GameManager.hp_i - attackCard.get(index).mPower));
+					e2.setText("공:"+GameManager.att_i + " 방:"+(GameManager.hp_i - attackCard.get(index).mPower));
+				
 				} else if (b.getId() == R.id.fycard_3) {
 				
-					e3_att.setText("A:"+GameManager.att_i);
-					e3_def.setText("D:"+(GameManager.hp_i - attackCard.get(index).mPower));
+					e3.setText("공:"+GameManager.att_i + " 방:"+(GameManager.hp_i - attackCard.get(index).mPower));
+				
 				}
 
 				
@@ -1400,16 +1433,13 @@ public class Game extends Activity {
 					
 
 					if (b.getId() == R.id.fycard_1) {
-						e1_att.setText("");
-						e1_def.setText("");
+						e1.setText("");
 						Enemy_Deathcard1 = true;
 					} else if (b.getId() == R.id.fycard_2) {
-						e2_att.setText("");
-						e2_def.setText("");
+						e2.setText("");
 						Enemy_Deathcard2 = true;
 					} else if (b.getId() == R.id.fycard_3) {
-						e3_att.setText("");
-						e3_def.setText("");
+						e3.setText("");
 						Enemy_Deathcard3 = true;
 					}
 
@@ -1433,18 +1463,17 @@ public class Game extends Activity {
 	// 내가 공격 했을 때 적 카드 데이터 갱신
 	public void des_changeEnemycardStat(final Button b, final int index) {
 
+		Log.d("func", "des_changeEnemycardStat");
+		
 		if (b.getId() == R.id.fycard_1) {
 	
-			e1_att.setText("A:"+GameManager.e_att_i);
-			e1_def.setText("D:"+GameManager.e_hp_i);
+			e1.setText("공:"+GameManager.e_att_i + " 방:"+GameManager.e_hp_i);
 		} else if (b.getId() == R.id.fycard_2) {
 			
-			e2_att.setText("A:"+GameManager.e_att_i);
-			e2_def.setText("D:"+GameManager.e_hp_i);
+			e2.setText("공:"+GameManager.e_att_i + " 방:"+GameManager.e_hp_i);
 		} else if (b.getId() == R.id.fycard_3) {
 			
-			e3_att.setText("A:"+GameManager.e_att_i);
-			e3_def.setText("D:"+GameManager.e_hp_i);
+			e3.setText("공:"+GameManager.e_att_i + " 방:"+GameManager.e_hp_i);
 		}
 		
 		// Log.d(TAG, "enemy attack : " + GameManager.e_att_i + "  enemy hp : "+
@@ -1462,16 +1491,16 @@ public class Game extends Activity {
 				// TODO Auto-generated method stub
 				if (b.getId() == R.id.fycard_1) {
 					
-					e1_att.setText("A:"+GameManager.e_att_i);
-					e1_def.setText("D:"+(GameManager.e_hp_i - attackCard.get(index).mPower));
+					e1.setText("공:"+GameManager.e_att_i + " 방:"+(GameManager.e_hp_i - attackCard.get(index).mPower));
+				
 				} else if (b.getId() == R.id.fycard_2) {
 				
-					e2_att.setText("A:"+GameManager.e_att_i);
-					e2_def.setText("D:"+(GameManager.e_hp_i - attackCard.get(index).mPower));
+					e2.setText("공:"+GameManager.e_att_i + " 방:"+(GameManager.e_hp_i - attackCard.get(index).mPower));
+	
 				} else if (b.getId() == R.id.fycard_3) {
 				
-					e3_att.setText("A:"+GameManager.e_att_i);
-					e3_def.setText("D:"+(GameManager.e_hp_i - attackCard.get(index).mPower));
+					e3.setText("공:"+GameManager.e_att_i + " 방:"+(GameManager.e_hp_i - attackCard.get(index).mPower));
+				
 				}
 				
 				if (GameManager.e_hp_i - attackCard.get(index).mPower <= 0) {
@@ -1480,16 +1509,13 @@ public class Game extends Activity {
 
 					b.setBackgroundResource(R.drawable.card_death);
 					if (b.getId() == R.id.fycard_1) {
-						e1_att.setText("");
-						e1_def.setText("");
+						e1.setText("");
 						Enemy_Deathcard1 = true;
 					} else if (b.getId() == R.id.fycard_2) {
-						e2_att.setText("");
-						e2_def.setText("");
+						e2.setText("");
 						Enemy_Deathcard2 = true;
 					} else if (b.getId() == R.id.fycard_3) {
-						e3_att.setText("");
-						e3_def.setText("");
+						e3.setText("");
 						Enemy_Deathcard3 = true;
 					}
 					
@@ -1508,6 +1534,8 @@ public class Game extends Activity {
 
 	public void EnemyGameover() {
 
+		
+		
 		// TODO Auto-generated method stub
 
 		if (UserTotalCount == 0 || activitychange) {
@@ -1527,11 +1555,12 @@ public class Game extends Activity {
 			return;
 
 		} else {
-
+			
 			try {
 				result = Util
 						.DownloadText("http://hsbug.hamt.co.kr/api/save_winlose?win_fb_id="
-								+ MyId + "&lose_fb_id=" + EnemyId);
+								+ Game.MyId + "&lose_fb_id=" + Game.EnemyId);
+				Log.d(TAG, "MyId : "+ Game.MyId +" EnemyId " + Game.EnemyId);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -1562,6 +1591,8 @@ public class Game extends Activity {
 
 	public void depense(int buttonid) {
 
+		Log.d("func", "depense");
+		
 		myCardEffect1.setBackgroundColor(0);
 		myCardEffect2.setBackgroundColor(0);
 		myCardEffect3.setBackgroundColor(0);
@@ -1818,23 +1849,18 @@ public class Game extends Activity {
 					m_magicImg.setVisibility(View.INVISIBLE);
 				}
 			}, 2000);
-			if(!m1_att.getText().equals("")){
+			if(!m1.getText().equals("")){
 			attackCard.get(0).SetmPower(attackCard.get(0).GetmPower()+3);
-			m1_att.setText("A: "+attackCard.get(0).mPower);
-			m1_def.setText("D: "+attackCard.get(0).mhp);
+			m1.setText("공: "+attackCard.get(0).mPower + " 방: "+attackCard.get(0).mhp);
 			
 			}
-			if(!m2_att.getText().equals("")){
+			if(!m2.getText().equals("")){
 				attackCard.get(1).SetmPower(attackCard.get(1).GetmPower()+3);
-				m2_att.setText("A: "+attackCard.get(1).mPower);
-				m2_def.setText("D: "+attackCard.get(1).mhp);
-				
+				m2.setText("공: "+attackCard.get(1).mPower + " 방: "+attackCard.get(1).mhp);				
 			}
-			if(!m3_att.getText().equals("")){
+			if(!m3.getText().equals("")){
 				attackCard.get(2).SetmPower(attackCard.get(2).GetmPower()+3);
-				m3_att.setText("A: "+attackCard.get(2).mPower);
-				m3_def.setText("D: "+attackCard.get(2).mhp);
-				
+				m3.setText("공: "+attackCard.get(2).mPower +" 방: "+attackCard.get(2).mhp);				
 			}
 			
 			
@@ -1848,7 +1874,7 @@ public class Game extends Activity {
 				public void run() {
 					// TODO Auto-generated method stub
 					m_magicImg = (ImageView)findViewById(R.id.magicImg);
-					m_magicImg.setImageResource(R.drawable.magic1);
+					m_magicImg.setImageResource(R.drawable.magic2);
 					m_magicImg.setVisibility(View.VISIBLE);
 				}
 			});
@@ -1863,22 +1889,22 @@ public class Game extends Activity {
 					m_magicImg.setVisibility(View.INVISIBLE);
 				}
 			}, 2000);
-			if(!m1_att.getText().equals("")){
-				attackCard.get(0).SetmPower(attackCard.get(0).GetHp()+3);
-				m1_att.setText("A: "+attackCard.get(0).mPower);
-				m1_def.setText("D: "+attackCard.get(0).mhp);
+			if(!m1.getText().equals("")){
+				attackCard.get(0).SetHp(attackCard.get(0).GetHp()+10);
+				m1.setText("공: "+attackCard.get(0).mPower + " 방: "+attackCard.get(0).mhp);
+			
 				
 				}
-				if(!m2_att.getText().equals("")){
-					attackCard.get(1).SetmPower(attackCard.get(1).GetHp()+3);
-					m2_att.setText("A: "+attackCard.get(1).mPower);
-					m2_def.setText("D: "+attackCard.get(1).mhp);
+				if(!m2.getText().equals("")){
+					attackCard.get(1).SetHp(attackCard.get(1).GetHp()+10);
+					m2.setText("공: "+attackCard.get(1).mPower + " 방: "+attackCard.get(1).mhp);
+			
 					
 				}
-				if(!m3_att.getText().equals("")){
-					attackCard.get(2).SetmPower(attackCard.get(2).GetHp()+3);
-					m3_att.setText("A: "+attackCard.get(2).mPower);
-					m3_def.setText("D: "+attackCard.get(2).mhp);
+				if(!m3.getText().equals("")){
+					attackCard.get(2).SetHp(attackCard.get(2).GetHp()+10);
+					m3.setText("공: "+attackCard.get(2).mPower + " 방: "+attackCard.get(2).mhp);
+			
 					
 				}
 			
@@ -1892,7 +1918,7 @@ public class Game extends Activity {
 				public void run() {
 					// TODO Auto-generated method stub
 					m_magicImg = (ImageView)findViewById(R.id.magicImg);
-					m_magicImg.setImageResource(R.drawable.magic1);
+					m_magicImg.setImageResource(R.drawable.magic3);
 					m_magicImg.setVisibility(View.VISIBLE);
 				}
 			});
@@ -1950,6 +1976,7 @@ public class Game extends Activity {
 
 				}
 			}, 2000);
+			break;
 		case CardInterface.BACK_MAGIC1:
 			handler.post(new Runnable() {
 				
@@ -1957,7 +1984,7 @@ public class Game extends Activity {
 				public void run() {
 					// TODO Auto-generated method stub
 					m_magicImg = (ImageView)findViewById(R.id.magicImg);
-					m_magicImg.setImageResource(R.drawable.magic1);
+					m_magicImg.setImageResource(R.drawable.magic2);
 					m_magicImg.setVisibility(View.VISIBLE);
 				}
 			});
@@ -1982,7 +2009,7 @@ public class Game extends Activity {
 				public void run() {
 					// TODO Auto-generated method stub
 					m_magicImg = (ImageView)findViewById(R.id.magicImg);
-					m_magicImg.setImageResource(R.drawable.magic1);
+					m_magicImg.setImageResource(R.drawable.magic3);
 					m_magicImg.setVisibility(View.VISIBLE);
 				}
 			});
@@ -1999,24 +2026,22 @@ public class Game extends Activity {
 
 				}
 			}, 2000);
-			if(!m1_att.getText().equals("")){
+			if(!m1.getText().equals("")){
 				attackCard.get(0).SetHp(attackCard.get(0).GetmPower()/2);
 				attackCard.get(0).SetmPower(attackCard.get(0).GetHp()/2);
-				m1_att.setText("A: "+attackCard.get(0).mPower);
-				m1_def.setText("D: "+attackCard.get(0).mhp);
+				m1.setText("공: "+attackCard.get(0).mPower + " 방: "+attackCard.get(0).mhp);
+			
 			}
-			if(!m2_att.getText().equals("")){
+			if(!m2.getText().equals("")){
 				attackCard.get(1).SetHp(attackCard.get(1).GetmPower()/2);
 				attackCard.get(1).SetmPower(attackCard.get(1).GetHp()/2);
-				m2_att.setText("A: "+attackCard.get(1).mPower);
-				m2_def.setText("D: "+attackCard.get(1).mhp);
+				m2.setText("공: "+attackCard.get(1).mPower + " 방: "+attackCard.get(1).mhp);
 			}
 			
-			if(!m3_att.getText().equals("")){
+			if(!m3.getText().equals("")){
 				attackCard.get(2).SetHp(attackCard.get(2).GetmPower()/2);
 				attackCard.get(2).SetmPower(attackCard.get(2).GetHp()/2);
-				m3_att.setText("A: "+attackCard.get(2).mPower);
-				m3_def.setText("D: "+attackCard.get(2).mhp);
+				m3.setText("공: "+attackCard.get(2).mPower + " 방: "+attackCard.get(2).mhp);
 				
 			}
 			break;

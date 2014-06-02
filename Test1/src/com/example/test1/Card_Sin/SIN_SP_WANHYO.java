@@ -7,9 +7,9 @@ public class SIN_SP_WANHYO extends CardInterface{
 
 	
 	public SIN_SP_WANHYO(){
-		this.SetHp(17);
+		this.SetHp(21);
 		this.SetId("card_29");
-		this.SetmPower(18);
+		this.SetmPower(17);
 		this.SetNara(0);
 		this.SetMagic(true);
 		this.SetCState(0);

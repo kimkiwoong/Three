@@ -18,7 +18,7 @@ public class BACK_SP_GAEBAK extends CardInterface {
 
 	
 	public BACK_SP_GAEBAK(){
-		this.SetHp(19);
+		this.SetHp(22);
 		this.SetId("card_19");
 		this.SetmPower(16);
 		this.SetNara(0);

@@ -7,7 +7,7 @@ public class SIN_RARE_KIMCHCH extends CardInterface{
 
 	
 	public SIN_RARE_KIMCHCH(){
-		this.SetHp(16);
+		this.SetHp(19);
 		this.SetId("card_27");
 		this.SetmPower(14);
 		this.SetNara(0);

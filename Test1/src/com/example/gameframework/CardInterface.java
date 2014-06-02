@@ -58,8 +58,8 @@ public  class CardInterface {
 	public static final int SIN_SP_KIMYOUSIN	= 	110;//신라 김유신
 	
 	public static final int GO_MAGIC1 = 1000;
-	public static final int SIN_MAGIC1 = 2000;
-	public static final int BACK_MAGIC1 = 3000;
+	public static final int SIN_MAGIC1 = 3000;
+	public static final int BACK_MAGIC1 = 2000;
 	
 	 public String mName;//
 	 public String mID;//카드번호

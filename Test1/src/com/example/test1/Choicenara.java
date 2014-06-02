@@ -3,24 +3,28 @@ package com.example.test1;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Choicenara extends Activity {
 	public static String name;
 	public String result;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		ImageView ch1;
 		ImageView ch2;
 		ImageView ch3;
+	
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		name = getPackageName();
@@ -31,6 +35,10 @@ public class Choicenara extends Activity {
 		ch1 = (ImageView) findViewById(R.id.go_back);
 		ch2 = (ImageView) findViewById(R.id.back_back);
 		ch3 = (ImageView) findViewById(R.id.sin_back);
+		
+		
+
+		
 
 		ch1.setOnClickListener(new OnClickListener() {
 
@@ -38,7 +46,9 @@ public class Choicenara extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//Toast.makeText(Choicenara.this, "go", 0).show();
-
+	
+					
+			
 				try {
 					result = Util.DownloadText("http://hsbug.hamt.co.kr/api/set_kind?m_fb_id="+ LoginManager.id + "&kind="+ "GO");
 					//Log.i(result,result);
@@ -101,5 +111,9 @@ public class Choicenara extends Activity {
 		});
 
 	}
+
+
+	
+	
 
 }
