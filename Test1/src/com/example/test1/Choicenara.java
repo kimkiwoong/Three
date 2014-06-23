@@ -80,7 +80,7 @@ public class Choicenara extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				Toast.makeText(getApplicationContext(), "back", 0).show();
+				//Toast.makeText(getApplicationContext(), "back", 0).show();
 				//Toast.makeText(, "back", 0).show();
 				Game.myType = 2;
 				Intent i = new Intent(Choicenara.this, SocketIOActivity.class);
@@ -101,8 +101,7 @@ public class Choicenara extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				Game.myType = 3;
-				
+				Game.myType = 3;				
 				Intent i = new Intent(Choicenara.this, SocketIOActivity.class);
 				startActivity(i);
 				

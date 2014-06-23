@@ -5,6 +5,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 
+import java.net.URLEncoder;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -195,7 +197,7 @@ public class MainActivity extends Activity implements Session.StatusCallback {
 													+ "&m_email="
 													+ LoginManager.email
 													+ "&m_name="
-													+ LoginManager.name);
+													+ URLEncoder.encode(LoginManager.name,"UTF-8"));
 									
 									result = result.trim();
 									//Toast.makeText(MainActivity.this, result, 0).show();		

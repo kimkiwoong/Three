@@ -444,7 +444,7 @@ public class Game extends Activity {
 		aMgr.setResources(getResources());
 		GM = GameManager.getInstance();
 		SM = SoundManager.getInstance();
-		
+		GameManager.nowActivity="game";
 		// enemy hand card
 		e_handcard = new Button[7];
 
@@ -1864,16 +1864,16 @@ public class Game extends Activity {
 				}
 			}, 2000);
 			if(!m1.getText().equals("")){
-			attackCard.get(0).SetmPower(attackCard.get(0).GetmPower()+3);
+			attackCard.get(0).SetmPower(attackCard.get(0).GetmPower()+5);
 			m1.setText("傍: "+attackCard.get(0).mPower + " 规: "+attackCard.get(0).mhp);
 			
 			}
 			if(!m2.getText().equals("")){
-				attackCard.get(1).SetmPower(attackCard.get(1).GetmPower()+3);
+				attackCard.get(1).SetmPower(attackCard.get(1).GetmPower()+5);
 				m2.setText("傍: "+attackCard.get(1).mPower + " 规: "+attackCard.get(1).mhp);				
 			}
 			if(!m3.getText().equals("")){
-				attackCard.get(2).SetmPower(attackCard.get(2).GetmPower()+3);
+				attackCard.get(2).SetmPower(attackCard.get(2).GetmPower()+5);
 				m3.setText("傍: "+attackCard.get(2).mPower +" 规: "+attackCard.get(2).mhp);				
 			}
 			
@@ -1948,6 +1948,44 @@ public class Game extends Activity {
 				}
 			}, 2000);
 		
+			if(!e1.getText().equals("")){
+				String str = e1.getText().toString();
+				String Arr[] = str.split(":");
+				for(int i = 0; i < Arr.length; i++)
+					System.out.println(Arr[i]);
+				
+				String Arr2[] = Arr[1].split(" ");
+				int attack = Integer.parseInt(Arr2[0]);
+				int depense = Integer.parseInt(Arr[2]);
+
+				e1.setText("傍:" + depense/2 + " 规:" + attack/2);
+			}
+			
+			if(!e2.getText().equals("")){
+				String str = e2.getText().toString();
+				String Arr[] = str.split(":");
+				for(int i = 0; i < Arr.length; i++)
+					System.out.println(Arr[i]);
+				
+				String Arr2[] = Arr[1].split(" ");
+				int attack = Integer.parseInt(Arr2[0]);
+				int depense = Integer.parseInt(Arr[2]);
+
+				e2.setText("傍:" + depense/2 + " 规:" +  attack/2);
+			}
+			
+			if(!e3.getText().equals("")){
+				String str = e3.getText().toString();
+				String Arr[] = str.split(":");
+				for(int i = 0; i < Arr.length; i++)
+					System.out.println(Arr[i]);
+				
+				String Arr2[] = Arr[1].split(" ");
+				int attack = Integer.parseInt(Arr2[0]);
+				int depense = Integer.parseInt(Arr[2]);
+
+				e3.setText("傍:" + depense/2 + " 规:" +  attack/2);
+			}
 			
 				
 			
@@ -1966,7 +2004,7 @@ public class Game extends Activity {
 		switch (num) {
 		case CardInterface.GO_MAGIC1:
 			
-			
+			//on
 			handler.post(new Runnable() {
 				
 				@Override
@@ -1975,11 +2013,13 @@ public class Game extends Activity {
 					m_magicImg = (ImageView)findViewById(R.id.magicImg);
 					m_magicImg.setImageResource(R.drawable.magic1);
 					m_magicImg.setVisibility(View.VISIBLE);
+					
 				}
 			});
 			
 			SM.play("card_9_magic");
 			
+			//off
 			handler1.postDelayed(new Runnable() {
 				
 				@Override
@@ -1990,6 +2030,46 @@ public class Game extends Activity {
 
 				}
 			}, 2000);
+			
+			if(!e1.getText().equals("")){
+				String str = e1.getText().toString();
+				String Arr[] = str.split(":");
+				for(int i = 0; i < Arr.length; i++)
+					System.out.println(Arr[i]);
+				
+				String Arr2[] = Arr[1].split(" ");
+				int attack = Integer.parseInt(Arr2[0]);
+				int depense = Integer.parseInt(Arr[2]);
+
+				e1.setText("傍:" + (attack+5) + " 规:" + depense);
+			}
+			
+			if(!e2.getText().equals("")){
+				String str = e2.getText().toString();
+				String Arr[] = str.split(":");
+				for(int i = 0; i < Arr.length; i++)
+					System.out.println(Arr[i]);
+				
+				String Arr2[] = Arr[1].split(" ");
+				int attack = Integer.parseInt(Arr2[0]);
+				int depense = Integer.parseInt(Arr[2]);
+
+				e2.setText("傍:" + (attack+5) + " 规:" + depense);
+			}
+			
+			if(!e3.getText().equals("")){
+				String str = e3.getText().toString();
+				String Arr[] = str.split(":");
+				for(int i = 0; i < Arr.length; i++)
+					System.out.println(Arr[i]);
+				
+				String Arr2[] = Arr[1].split(" ");
+				int attack = Integer.parseInt(Arr2[0]);
+				int depense = Integer.parseInt(Arr[2]);
+
+				e3.setText("傍:" + (attack+5) + " 规:" + depense);
+			}
+			
 			break;
 		case CardInterface.BACK_MAGIC1:
 			handler.post(new Runnable() {
@@ -2015,6 +2095,45 @@ public class Game extends Activity {
 
 				}
 			}, 2000);
+			if(!e1.getText().equals("")){
+				String str = e1.getText().toString();
+				String Arr[] = str.split(":");
+				for(int i = 0; i < Arr.length; i++)
+					System.out.println(Arr[i]);
+				
+				String Arr2[] = Arr[1].split(" ");
+				int attack = Integer.parseInt(Arr2[0]);
+				int depense = Integer.parseInt(Arr[2]);
+
+				e1.setText("傍:" + attack + " 规:" + (depense+10));
+			}
+			
+			if(!e2.getText().equals("")){
+				String str = e2.getText().toString();
+				String Arr[] = str.split(":");
+				for(int i = 0; i < Arr.length; i++)
+					System.out.println(Arr[i]);
+				
+				String Arr2[] = Arr[1].split(" ");
+				int attack = Integer.parseInt(Arr2[0]);
+				int depense = Integer.parseInt(Arr[2]);
+
+				e2.setText("傍:" + attack + " 规:" + (depense+10));
+			}
+			
+			if(!e3.getText().equals("")){
+				String str = e3.getText().toString();
+				String Arr[] = str.split(":");
+				for(int i = 0; i < Arr.length; i++)
+					System.out.println(Arr[i]);
+				
+				String Arr2[] = Arr[1].split(" ");
+				int attack = Integer.parseInt(Arr2[0]);
+				int depense = Integer.parseInt(Arr[2]);
+
+				e3.setText("傍:" + attack + " 规:" + (depense+10));
+			}
+			
 			break;
 		case CardInterface.SIN_MAGIC1:
 			handler.post(new Runnable() {
@@ -2041,20 +2160,25 @@ public class Game extends Activity {
 				}
 			}, 2000);
 			if(!m1.getText().equals("")){
+				int hp = attackCard.get(0).GetHp();
+				
 				attackCard.get(0).SetHp(attackCard.get(0).GetmPower()/2);
-				attackCard.get(0).SetmPower(attackCard.get(0).GetHp()/2);
+				attackCard.get(0).SetmPower(hp/2);
 				m1.setText("傍: "+attackCard.get(0).mPower + " 规: "+attackCard.get(0).mhp);
 			
 			}
 			if(!m2.getText().equals("")){
+				int hp1 = attackCard.get(1).GetHp();
 				attackCard.get(1).SetHp(attackCard.get(1).GetmPower()/2);
-				attackCard.get(1).SetmPower(attackCard.get(1).GetHp()/2);
+				attackCard.get(1).SetmPower(hp1/2);
 				m2.setText("傍: "+attackCard.get(1).mPower + " 规: "+attackCard.get(1).mhp);
 			}
 			
 			if(!m3.getText().equals("")){
+				int hp2 = attackCard.get(2).GetHp();
+				
 				attackCard.get(2).SetHp(attackCard.get(2).GetmPower()/2);
-				attackCard.get(2).SetmPower(attackCard.get(2).GetHp()/2);
+				attackCard.get(2).SetmPower(hp2/2);
 				m3.setText("傍: "+attackCard.get(2).mPower + " 规: "+attackCard.get(2).mhp);
 				
 			}

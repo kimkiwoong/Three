@@ -38,7 +38,7 @@ public class loadingActivity extends Activity implements Runnable {
 		textview1 = (TextView) findViewById(R.id.textView1);
 		textview2 = (TextView)findViewById(R.id.textView2);
 		
-		title = (ImageView)findViewById(R.id.imageView1);
+		title = (ImageView)findViewById(R.id.ko2_back3);
 		
 		title_t = (ImageView)findViewById(R.id.title2);
 		title_s = (ImageView)findViewById(R.id.title3);
